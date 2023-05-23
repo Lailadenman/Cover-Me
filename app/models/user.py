@@ -10,9 +10,15 @@ class User(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
+    firstName = db.Column(db.String(50), nullable=False)
+    lastName = db.Column(db.String(50), nullable=False)
+    # profPicUrl = db.Column(db.String(255), nullable=False)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    group = db.relationship("Group", secondary=add_prefix_for_prod("group_members"), back_populates="owner", cascade="all, delete-orphan")
+    group_member = db.relationship("Group_Member", back_populates="user", cascade="all, delete-orphan")
 
     @property
     def password(self):
@@ -29,5 +35,7 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'firstName': self.firstName,
+            'lastName':self.lastName
         }
