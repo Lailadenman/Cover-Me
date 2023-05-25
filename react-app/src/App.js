@@ -6,6 +6,8 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Chat from "./components/Chat"
+import GroupList from "./components/GroupList";
+import Calendar from "./components/Calendar"
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +29,12 @@ function App() {
           </Route>
           <Route path="/chat">
             <Chat />
+          </Route>
+          <Route path="/groups">
+            <GroupList />
+          </Route>
+          <Route path="/calendar">
+            <Calendar />
           </Route>
         </Switch>
       )}

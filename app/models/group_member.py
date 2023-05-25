@@ -2,7 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 
 class Group_Member(db.Model):
-    __tablename__ = 'groups'
+    __tablename__ = 'group_members'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}

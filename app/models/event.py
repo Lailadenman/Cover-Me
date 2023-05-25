@@ -1,0 +1,28 @@
+from .db import db, environment, SCHEMA, add_prefix_for_prod
+
+class Event(db.Model):
+    __tablename__ = 'event'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    description = db.Column(db.String(2000), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod("users.id")), nullable=False)
+    start_date = db.Column(db.Date, nullable=False)
+    end_date = db.Column(db.Date, nullable=False)
+    isMeeting = db.Column(db.Boolean, nullable=True)
+    isRequired = db.Column(db.Boolean, nullable=False)
+    # calendar_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("calendars.id"), nullable=False))
+
+    owner = db.relationship("User", secondary=add_prefix_for_prod(
+        "group_members"), back_populates="group")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            "name": self.name,
+            "description": self.description,
+            "owner_id": self.owner_id
+        }
