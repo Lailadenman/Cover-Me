@@ -1,8 +1,14 @@
 const LOADGROUPS = "group/LOADGROUPS"
+const LOADGROUPDETAILS = "group/LOADGROUPDETAILS"
 
 const loadGroups = (list) => ({
     type: LOADGROUPS,
     list
+})
+
+const loadGroupDetails = (group) => ({
+    type: LOADGROUPDETAILS,
+    group
 })
 
 export const getGroups = () => async (dispatch) => {
@@ -17,22 +23,41 @@ export const getGroups = () => async (dispatch) => {
     }
 }
 
-export const getGroupDetails = (name, description, owner_id) => async (dispatch) => {
-    const res = await fetch('/api/groups/',
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name,
-                description,
-                owner_id
-            }),
-        })
+export const getGroupDetails = (id) => async (dispatch) => {
+    console.log("~~~~~~~~~~~~~~~", id);
+    const res = await fetch(`/api/groups/${id}`)
+    console.log(res.url);
+    console.log("------------- HIT");
 
+    if (res.ok) {
+        const group = await res.json()
+        console.log("@@@@@@@@@@@res.ok", group)
 
+        dispatch(loadGroupDetails(group))
+    }
 }
+
+// export const createNewGroup = (name, description, owner_id) => async (dispatch) => {
+//     const res = await fetch('/api/groups/',
+//         {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify({
+//                 name,
+//                 description,
+//                 owner_id
+//             }),
+//         })
+
+//     if(res.ok){
+//         const group = await res.json()
+//         console.log(group);
+
+//         dispatch(createGroup(group))
+//     }
+// }
 
 const initialState = {};
 
@@ -49,6 +74,15 @@ export default function groupReducer(state = initialState, action) {
             console.log(newState);
 
             return newState;
+
+        case LOADGROUPDETAILS:
+            newState = { ...initialState }
+
+            console.log(action.group);
+
+            newState.groupDetails = action.group
+
+            return newState
 
         default:
             return state;

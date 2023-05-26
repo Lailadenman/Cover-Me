@@ -16,12 +16,14 @@ def getGroups():
 
     return groups
 
-@group_routes.route("/:id")
+@group_routes.route("<int:id>")
 def getGroupById(id):
-    groupQuery = Group.query.filter(Group.id == id)
-    group = groupQuery.one()
+    print(id)
+    groupQuery = Group.query.get(id)
 
-    return group.to_dict()
+    print("************* backend", groupQuery.to_dict())
+
+    return groupQuery.to_dict()
 
 @group_routes.route("/", methods=["POST"])
 def createGroup():
@@ -31,3 +33,5 @@ def createGroup():
 
     db.session.add(newGroup)
     db.session.commit()
+
+    return newGroup.to_dict()

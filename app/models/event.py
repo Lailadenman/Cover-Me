@@ -16,8 +16,7 @@ class Event(db.Model):
     isRequired = db.Column(db.Boolean, nullable=False)
     # calendar_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("calendars.id"), nullable=False))
 
-    owner = db.relationship("User", secondary=add_prefix_for_prod(
-        "group_members"), back_populates="group")
+    owner = db.relationship("User", back_populates="event")
 
     def to_dict(self):
         return {

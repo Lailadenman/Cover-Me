@@ -7,7 +7,8 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Chat from "./components/Chat"
 import GroupList from "./components/GroupList";
-import Calendar from "./components/Calendar"
+import GroupDetails from "./components/GroupDetails";
+import Calendar from "./components/Calendar";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,8 +31,11 @@ function App() {
           <Route path="/chat">
             <Chat />
           </Route>
-          <Route path="/groups">
+          <Route exact path="/groups">
             <GroupList />
+          </Route>
+          <Route path="/groups/:id">
+            <GroupDetails />
           </Route>
           <Route path="/calendar">
             <Calendar />
