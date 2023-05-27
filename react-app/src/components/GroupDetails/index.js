@@ -4,6 +4,9 @@ import { getGroupDetails } from '../../store/group';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Calendar from '../Calendar';
+import OpenModalButton from '../OpenModalButton';
+import EditGroupModal from '../EditGroupModal';
+import DeleteGroupModal from '../DeleteGroupModal';
 
 function GroupDetails() {
     const today = new Date()
@@ -40,6 +43,10 @@ function GroupDetails() {
         }
     }
 
+    const onClick = () => {
+
+    }
+
     return (
         <div>
             <h1>test</h1>
@@ -51,6 +58,16 @@ function GroupDetails() {
                         <Calendar year={year} month={month} />
                         <button onClick={handleNextMonth}><p>{">"}</p></button>
                     </div>
+                    <OpenModalButton
+                        buttonText={"Edit Group"}
+                        onItemClick={onClick}
+                        modalComponent={<EditGroupModal gName={group?.name} gDescription={group?.description} gId={group?.id}/>}
+                    />
+                    <OpenModalButton
+                        buttonText={"Delete Group"}
+                        onItemClick={onClick}
+                        modalComponent={<DeleteGroupModal id={group?.id}/>}
+                    />
                 </>
             )}
         </div>

@@ -14,14 +14,19 @@ class Event(db.Model):
     end_date = db.Column(db.Date, nullable=False)
     isMeeting = db.Column(db.Boolean, nullable=True)
     isRequired = db.Column(db.Boolean, nullable=False)
+    group_id = db.Column(db.Integer, db.ForeinKey(add_prefix_for_prod("groups.id")), nullable=False)
     # calendar_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("calendars.id"), nullable=False))
 
     owner = db.relationship("User", back_populates="event")
+    group = db.relationship("Group", back_populates="event")
 
     def to_dict(self):
         return {
             'id': self.id,
             "name": self.name,
             "description": self.description,
-            "owner_id": self.owner_id
+            "owner_id": self.owner_id,
+            "group_id": self.group_id,
+            "start_date": self.start_date,
+            "end_date": self.end_date
         }

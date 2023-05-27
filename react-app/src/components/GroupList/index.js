@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { getGroups } from '../../store/group';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import OpenModalButton from '../OpenModalButton';
+import CreateGroupModal from '../CreateGroupModal';
 
 function GroupList() {
     const dispatch = useDispatch()
@@ -23,6 +25,8 @@ function GroupList() {
 
     }
 
+    // const closeMenu = () => setShowMenu(false);
+
     return (
         <div>
             <h1>test</h1>
@@ -35,8 +39,13 @@ function GroupList() {
                 >
                     <h1>{group.name}</h1>
                 </NavLink>
-            })} 
-            <button onClick={onClick()}>New Group</button>
+            })}
+            <OpenModalButton
+                buttonText={"New Group"}
+                onItemClick={onClick}
+                modalComponent={<CreateGroupModal />}
+            />
+            {/* <button onClick={onClick()}>New Group</button> */}
         </div>
     )
 }

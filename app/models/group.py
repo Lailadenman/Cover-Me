@@ -17,6 +17,7 @@ class Group(db.Model):
         "group_members"), back_populates="group")
     group_member = db.relationship(
         "Group_Member", back_populates="group", cascade="all, delete-orphan")
+    event = db.relationship("Event", back_populates="group", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
