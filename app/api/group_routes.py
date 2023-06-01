@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
 from app.models import Group, Event, db
-from app.forms import NewGroupForm, EditGroupForm
+from app.forms import NewGroupForm, EditGroupForm, NewEventForm, EditEventForm
 
 group_routes = Blueprint('groups', __name__)
 
@@ -86,10 +86,13 @@ def getEventById(gId, id):
     return event.to_dict()
 
 @group_routes.route("<int:id>/events", methods=["POST"])
-def createGroup():
+def createEvent(id):
     form = NewEventForm()
 
-    newEvent = Event()
+    # print('*****************', form.description.data)
+    print('*****************', form.start_date.data)
+
+    newEvent = Event(description=form.description.data, owner_id=form.owner_id.data, start_date=form.start_date.data, end_date=form.end_date.data, group_id=id)
 
     db.session.add(newEvent)
     db.session.commit()
@@ -99,6 +102,33 @@ def createGroup():
 @group_routes.route("/<int:gId>/events/<int:id>", methods=["PUT"])
 def updateEvent(gId, id):
 
+    form = EditEventForm()
+
     eventQuery = Event.query.filter(Event.group_id == gId, Event.id == id)
 
     event = eventQuery.one()
+
+    event.description = form.description.data
+    event.owner_id = form.owner_id.data
+    event.start_date = form.start_date.data
+    event.end_date = form.end_date.data
+    event.group_id = form.group_id.data
+
+    db.session.commit()
+
+    return event.to_dict()
+
+@group_routes.route("<int:gId>/events/<int:id>", methods=["DELETE"])
+def deleteEvent(gId, id):
+
+    eventQuery = Event.query.filter(Event.group_id == gId, Event.id == id)
+
+    event = eventQuery.one()
+
+    eventDet = event.to_dict()
+
+    db.session.delete(event)
+
+    db.session.commit()
+
+    return eventDet

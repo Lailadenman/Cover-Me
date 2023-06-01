@@ -9,6 +9,7 @@ import Chat from "./components/Chat"
 import GroupList from "./components/GroupList";
 import GroupDetails from "./components/GroupDetails";
 import Calendar from "./components/Calendar";
+import EventDetails from "./components/EventDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,8 +35,11 @@ function App() {
           <Route exact path="/groups">
             <GroupList />
           </Route>
-          <Route path="/groups/:id">
+          <Route exact path="/groups/:id">
             <GroupDetails />
+          </Route>
+          <Route exact path="/groups/:gId/events/:eId">
+              <EventDetails />
           </Route>
           <Route path="/calendar">
             <Calendar />

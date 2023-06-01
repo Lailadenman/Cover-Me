@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, DateTimeField
 from wtforms.validators import DataRequired, Email, ValidationError
 
-class NewEventForm(FlaskForm):
+class EditEventForm(FlaskForm):
     description = StringField('description', validators=[DataRequired()])
     owner_id = IntegerField('owner_id', validators=[DataRequired()])
     start_date = DateTimeField('start_date', validators=[DataRequired()])
