@@ -76,7 +76,7 @@ export const createNewEvent = ( description, owner_id, start_date, end_date, gId
 }
 
 export const editEvent = (id, description, owner_id, start_date, end_date, gId) => async (dispatch) => {
-    const res = await fetch(`/api/groups/${gId}/event/${id}`, {
+    const res = await fetch(`/api/groups/${gId}/events/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -141,6 +141,8 @@ export default function eventReducer(state = initialState, action) {
             newState = {...state}
 
             newState[action.shift.id] = action.shift
+
+            newState.event_details = action.shift
 
             return newState
 
