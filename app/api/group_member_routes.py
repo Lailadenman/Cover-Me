@@ -1,18 +1,36 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import Group_Member
+from app.models import Group_Member, Group_Request, db
+from app.forms import GroupRequestForm
 
 group_member_routes = Blueprint('group_members', __name__)
 
-@group_member_routes.route('/:id')
-def get_group_members(id):
-    members = []
+@group_member_routes.route('/<int:id>', methods=["POST"])
+def createGroupMember(id):
+    form = GroupRequestForm
 
-    memberRel_query = Group_Member.query.filter(Group_Member.group_id == id)
+    # print("~~~~~~~~~~~~~~~~~~~~rID: ", form.id.data)
+    req = Group_Request.query.get(id)
 
-    memberRel = memberRel_query.all()
+    newMem = Group_Member(user_id=req.user_id, group_id=req.group_id)
 
-    for rel in memberRel:
-        members.append(rel.to_dict())
+    db.session.delete(req)
 
-    return members
+    db.session.add(newMem)
+    db.session.commit()
+
+    print("~~~~~~~~~~~~~~~~~~", newMem.to_dict())
+
+    return newMem.to_dict()
+
+@group_member_routes.route('/<int:id>', methods=["DELETE"])
+def deleteGroupMember(id):
+    groupMem = Group_Member.query.get(id)
+
+    groupDet = groupMem.to_dict()
+
+    db.session.delete(groupMem)
+
+    db.session.commit()
+
+    return groupDet

@@ -4,6 +4,7 @@ const CREATE_EVENT = "events/CREATE_EVENT"
 const UPDATE_EVENT = "events/UPDATE_EVENT"
 const DELETE_EVENT = "events/DELETE_EVENT"
 
+
 const loadEvents = (list) => ({
     type: LOAD_EVENTS,
     list
@@ -152,7 +153,6 @@ export default function eventReducer(state = initialState, action) {
             delete newState[action.id]
 
             return newState
-
         default:
             return state;
     }

@@ -8,6 +8,8 @@ from .models import db, User, Group, Group_Member
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.group_routes import group_routes
+from .api.group_member_routes import group_member_routes
+from .api.group_request_routes import group_request_routes
 from .seeds import seed_commands
 from .config import Config
 from .socket import socketio
@@ -31,6 +33,8 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(group_routes, url_prefix='/api/groups')
+app.register_blueprint(group_member_routes, url_prefix='/api/groupmembers')
+app.register_blueprint(group_request_routes, url_prefix='/api/grouprequests')
 db.init_app(app)
 Migrate(app, db)
 socketio.init_app(app)

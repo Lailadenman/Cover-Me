@@ -1,11 +1,19 @@
 const LOAD_GROUPS = "group/LOAD_GROUPS"
+const LOAD_GROUPS_BY_USER = "group/LOAD_GROUPS_BY_USER"
 const LOAD_GROUP_DETAILS = "group/LOAD_GROUP_DETAILS"
 const CREATE_GROUP = "group/CREATE_GROUP"
 const UPDATE_GROUP = "group/UPDATE_GROUP"
 const DELETE_GROUP = "group/DELETE_GROUP"
+const CREATE_MEMBER = "group/CREATE_MEMBER"
+// const ADD_MESSAGE = "groups/ADD_MESSAGE"
 
 const loadGroups = (list) => ({
     type: LOAD_GROUPS,
+    list
+})
+
+const loadGroupsByUser = (list) => ({
+    type: LOAD_GROUPS_BY_USER,
     list
 })
 
@@ -29,6 +37,16 @@ const deleteGroup = (id) => ({
     id
 })
 
+const createMember = (member) => ({
+    type: CREATE_MEMBER,
+    member
+})
+
+// const addMessage = (message) => ({
+//     type: ADD_MESSAGE,
+//     message
+// })
+
 export const getGroups = () => async (dispatch) => {
     const res = await fetch(`/api/groups/`)
     console.log(res.url);
@@ -41,6 +59,17 @@ export const getGroups = () => async (dispatch) => {
     }
 }
 
+export const getGroupsByUser = (id) => async (dispatch) => {
+    const res = await fetch(`/api/users/${id}/groups`)
+    console.log("groups by users hit");
+
+    if (res.ok) {
+        const groups = await res.json()
+
+        dispatch(loadGroupsByUser(groups))
+    }
+}
+
 export const getGroupDetails = (id) => async (dispatch) => {
     console.log("~~~~~~~~~~~~~~~", id);
     const res = await fetch(`/api/groups/${id}`)
@@ -50,10 +79,13 @@ export const getGroupDetails = (id) => async (dispatch) => {
     if (res.ok) {
         const group = await res.json()
         console.log("@@@@@@@@@@@res.ok", group)
+        // console.log("=================", group.members);
 
         dispatch(loadGroupDetails(group))
     }
 }
+
+
 
 export const createNewGroup = (name, description, owner_id) => async (dispatch) => {
     const res = await fetch('/api/groups/',
@@ -69,7 +101,7 @@ export const createNewGroup = (name, description, owner_id) => async (dispatch) 
             }),
         })
 
-    if(res.ok){
+    if (res.ok) {
         const group = await res.json()
         console.log(group);
 
@@ -91,9 +123,9 @@ export const editGroup = (name, description, owner_id, group_id) => async (dispa
             }),
         })
 
-        console.log("received from by store:", name, description, owner_id, group_id);
+    console.log("received from by store:", name, description, owner_id, group_id);
 
-    if(res.ok){
+    if (res.ok) {
         const group = await res.json()
         console.log(group);
 
@@ -117,6 +149,74 @@ export const deleteFromGroups = (id) => async (dispatch) => {
     }
 }
 
+export const deleteRequest = (id, gId) => async (dispatch) => {
+    const res = await fetch(`/api/grouprequests/${id}`, {
+        method: 'DELETE'
+    })
+
+    if (res.ok) {
+        const group = await res.json()
+        // console.log("@@@@@@@@@@@res.ok", group)
+
+        getGroupDetails(gId)
+    }
+}
+
+export const acceptRequest = (id, uId, gId) => async (dispatch) => {
+    console.log("hit acceptReq", id, uId, gId);
+    const res = await fetch(`/api/groupmembers/${id}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+
+    if (res.ok) {
+        const newMem = await res.json()
+
+        console.log("here's our new member", newMem);
+        getGroupDetails(gId)
+    }
+}
+
+export const joinRequest = (uId, gId) => async (dispatch) => {
+    console.log("joinRequest hit");
+    const res = await fetch(`/api/grouprequests/${uId}/${gId}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+
+    if (res.ok) {
+        const newReq = await res.json()
+        console.log("waiting for request to be added");
+        getGroupDetails(gId)
+    }
+}
+
+// Possibly treat loading messages/chats like requests and just straight up add them
+// when we fetch the group details and then for new messages use this thunk
+// export const newChat = (message, user_id, group_id) => async (dispatch) => {
+//     const res = await fetch(``, {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({
+//             user_id,
+//             group_id,
+//             message
+//         })
+//     })
+
+//     if (res.ok) {
+//         const message = res.json()
+
+//         dispatch(addMessage(message))
+//     }
+// }
+
 const initialState = {};
 
 export default function groupReducer(state = initialState, action) {
@@ -133,36 +233,47 @@ export default function groupReducer(state = initialState, action) {
 
             return newState;
 
+        case LOAD_GROUPS_BY_USER:
+            newState = { ...initialState }
+
+            newState["myGroups"] = {}
+
+            action.list.forEach((group) => {
+                newState.myGroups[group.id] = group
+            })
+
+            console.log(newState);
+
+            return newState;
         case LOAD_GROUP_DETAILS:
             newState = { ...state }
 
-            console.log(action.group);
+            console.log("Load details", action.group);
 
             newState.groupDetails = action.group
 
             return newState
 
         case CREATE_GROUP:
-            newState = {...state}
+            newState = { ...state }
 
             newState[action.group.id] = action.group
 
             return newState
 
         case UPDATE_GROUP:
-            newState = {...state}
+            newState = { ...state }
 
             newState[action.group.id] = action.group
 
             return newState
 
         case DELETE_GROUP:
-            newState = {...state}
+            newState = { ...state }
 
             delete newState[action.id]
 
             return newState
-
         default:
             return state;
     }

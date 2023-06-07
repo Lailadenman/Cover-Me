@@ -17,6 +17,8 @@ class Group(db.Model):
         "group_members"), back_populates="group")
     group_member = db.relationship(
         "Group_Member", back_populates="group", cascade="all, delete-orphan")
+    group_request = db.relationship(
+        "Group_Request", back_populates="group", cascade="all, delete-orphan")
     event = db.relationship("Event", back_populates="group", cascade="all, delete-orphan")
 
     def to_dict(self):
@@ -24,5 +26,6 @@ class Group(db.Model):
             'id': self.id,
             "name": self.name,
             "description": self.description,
-            "owner_id": self.owner_id
+            # "owner": self.owner.to_dict(),
+            "owner_id": self.owner_id,
         }

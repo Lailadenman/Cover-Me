@@ -24,6 +24,9 @@ function Navigation({ isLoaded }){
 			{sessionUser && (<li>
 				<NavLink exact to="/groups">Groups</NavLink>
 			</li>)}
+			{sessionUser && (<li>
+				<NavLink exact to="/groups/joined">My Groups</NavLink>
+			</li>)}
 		</ul>
 	);
 }

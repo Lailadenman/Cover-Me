@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import Group, Event, db
-from app.forms import NewGroupForm, EditGroupForm, NewEventForm, EditEventForm
+from app.models import Group, Group_Member, Group_Request, Event, User, db
+from app.forms import NewGroupForm, EditGroupForm, NewEventForm, EditEventForm, GroupRequestForm
 
 group_routes = Blueprint('groups', __name__)
 
@@ -23,7 +23,38 @@ def getGroupById(id):
 
     print("************* backend", groupQuery.to_dict())
 
-    return groupQuery.to_dict()
+    members = []
+
+    memberRel_query = Group_Member.query.filter(Group_Member.group_id == id)
+
+    memberRel = memberRel_query.all()
+
+    for rel in memberRel:
+        members.append(rel.to_dict())
+
+    requests = []
+
+    requestRel_query = Group_Request.query.filter(Group_Request.group_id == id)
+
+    requestRel = requestRel_query.all()
+
+    for rel in requestRel:
+        print(rel.to_dict())
+        requests.append(rel.to_dict())
+
+    group = groupQuery.to_dict()
+
+    print("<<<<<<<<<<<<<<<<<<<<owner id is", group['owner_id'])
+
+    owner = User.query.get(group['owner_id'])
+
+    group['members'] = members
+
+    group['requests'] = requests
+
+    group['owner'] = owner.firstName + " " + owner.lastName
+
+    return group
 
 @group_routes.route("/", methods=["POST"])
 def createGroup():
@@ -63,6 +94,8 @@ def deleteGroup(id):
     db.session.commit()
 
     return groupDet
+
+
 
 @group_routes.route("/<int:id>/events")
 def getEvents(id):

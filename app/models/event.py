@@ -12,12 +12,16 @@ class Event(db.Model):
         add_prefix_for_prod("users.id")), nullable=False)
     start_date = db.Column(db.String(250), nullable=False)
     end_date = db.Column(db.String(250), nullable=False)
+    isCovered = db.Column(db.Boolean, nullable=False)
+    coveredBy = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod("users.id")), nullable=True)
     # isMeeting = db.Column(db.Boolean, nullable=True)
     # isRequired = db.Column(db.Boolean, nullable=False)
     group_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("groups.id")), nullable=False)
     # calendar_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("calendars.id"), nullable=False))
 
-    owner = db.relationship("User", back_populates="event")
+    cover = db.relationship("User", back_populates="cover_event", foreign_keys='Event.coveredBy')
+    owner = db.relationship("User", back_populates="event", foreign_keys='Event.owner_id')
     group = db.relationship("Group", back_populates="event")
 
     def to_dict(self):
@@ -28,5 +32,6 @@ class Event(db.Model):
             "group_id": self.group_id,
             "start_date": self.start_date,
             "end_date": self.end_date,
-            "owner": self.owner.to_dict()
+            "owner": self.owner.to_dict(),
+            "isCovered": self.isCovered
         }

@@ -19,7 +19,9 @@ class User(db.Model, UserMixin):
 
     group = db.relationship("Group", secondary=add_prefix_for_prod("group_members"), back_populates="owner")
     group_member = db.relationship("Group_Member", back_populates="user", cascade="all, delete-orphan")
-    event = db.relationship("Event", back_populates="owner", cascade="all, delete-orphan")
+    group_request = db.relationship("Group_Request", back_populates="user", cascade="all, delete-orphan")
+    event = db.relationship("Event", back_populates="owner", cascade="all, delete-orphan", foreign_keys='Event.coveredBy')
+    cover_event = db.relationship("Event", back_populates="cover", cascade="all, delete-orphan", foreign_keys='Event.coveredBy')
 
     @property
     def password(self):

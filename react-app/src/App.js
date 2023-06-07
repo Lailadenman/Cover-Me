@@ -10,6 +10,7 @@ import GroupList from "./components/GroupList";
 import GroupDetails from "./components/GroupDetails";
 import Calendar from "./components/Calendar";
 import EventDetails from "./components/EventDetails";
+import MyGroupsPage from "./components/MyGroupsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,9 @@ function App() {
           </Route>
           <Route exact path="/groups">
             <GroupList />
+          </Route>
+          <Route exact path="/groups/joined">
+            <MyGroupsPage />
           </Route>
           <Route exact path="/groups/:id">
             <GroupDetails />
