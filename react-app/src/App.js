@@ -6,6 +6,11 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Chat from "./components/Chat"
+import GroupList from "./components/GroupList";
+import GroupDetails from "./components/GroupDetails";
+import Calendar from "./components/Calendar";
+import EventDetails from "./components/EventDetails";
+import MyGroupsPage from "./components/MyGroupsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,7 +21,9 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      <div className="navBar">
+        <Navigation isLoaded={isLoaded} />
+      </div>
       {isLoaded && (
         <Switch>
           <Route path="/login" >
@@ -27,6 +34,21 @@ function App() {
           </Route>
           <Route path="/chat">
             <Chat />
+          </Route>
+          <Route exact path="/groups">
+            <GroupList />
+          </Route>
+          <Route exact path="/groups/joined">
+            <MyGroupsPage />
+          </Route>
+          <Route exact path="/groups/:id">
+            <GroupDetails />
+          </Route>
+          <Route exact path="/groups/:gId/events/:eId">
+            <EventDetails />
+          </Route>
+          <Route path="/calendar">
+            <Calendar />
           </Route>
         </Switch>
       )}

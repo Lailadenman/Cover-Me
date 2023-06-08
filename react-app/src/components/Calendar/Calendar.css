@@ -1,0 +1,12 @@
+.calendar {
+    width: 840px;
+    height: 500px;
+}
+
+.day {
+    width: 120px;
+}
+
+.hidden {
+    display: hidden;
+}
