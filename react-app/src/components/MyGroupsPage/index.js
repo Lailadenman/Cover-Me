@@ -16,10 +16,10 @@ function MyGroupsPage() {
         setIsLoaded(true)
     }, [dispatch])
 
-    const groups = useSelector(state => state.groups)
+    const groups = useSelector(state => state?.groups?.myGroups)
     console.log(groups && groups);
 
-    const groupsArr = Object.values(groups)
+    const groupsArr = groups && Object.values(groups)
     console.log(groups && groupsArr);
 
     const onClick = () => {

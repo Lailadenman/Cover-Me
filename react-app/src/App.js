@@ -21,7 +21,9 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      <div className="navBar">
+        <Navigation isLoaded={isLoaded} />
+      </div>
       {isLoaded && (
         <Switch>
           <Route path="/login" >
@@ -43,7 +45,7 @@ function App() {
             <GroupDetails />
           </Route>
           <Route exact path="/groups/:gId/events/:eId">
-              <EventDetails />
+            <EventDetails />
           </Route>
           <Route path="/calendar">
             <Calendar />

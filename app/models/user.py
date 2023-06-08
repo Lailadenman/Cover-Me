@@ -22,6 +22,7 @@ class User(db.Model, UserMixin):
     group_request = db.relationship("Group_Request", back_populates="user", cascade="all, delete-orphan")
     event = db.relationship("Event", back_populates="owner", cascade="all, delete-orphan", foreign_keys='Event.coveredBy')
     cover_event = db.relationship("Event", back_populates="cover", cascade="all, delete-orphan", foreign_keys='Event.coveredBy')
+    message = db.relationship("Message", back_populates="user", cascade="all, delete-orphan")
 
     @property
     def password(self):

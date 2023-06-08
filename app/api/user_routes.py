@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import User, Group_Member
+from app.models import User, Group_Member, Group
 
 user_routes = Blueprint('users', __name__)
 
@@ -33,6 +33,11 @@ def getGroups(id):
     groupRel = groupRel_query.all()
 
     for rel in groupRel:
-        groups.append(rel.to_dict())
+        group = Group.query.get(rel.group_id)
+
+        # print(group.to_dict())
+        groups.append(group.to_dict())
+
+    print("##################", groups)
 
     return groups

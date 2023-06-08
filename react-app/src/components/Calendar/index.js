@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { getGroups } from '../../store/group';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import "./Calendar.css"
 
 function Calendar({ month, year, gId, eventList }) {
 
@@ -808,13 +809,13 @@ function Calendar({ month, year, gId, eventList }) {
                 <th colSpan="7" className="month">{months[date.getMonth()]} {date.getFullYear()}</th>
             </tr>
             <tr>
-                <th class="sun">Sun</th>
-                <th class="mon">Mon</th>
-                <th class="tue">Tue</th>
-                <th class="wed">Wed</th>
-                <th class="thu">Thu</th>
-                <th class="fri">Fri</th>
-                <th class="sat">Sat</th>
+                <th className="sun day">Sun</th>
+                <th className="mon day">Mon</th>
+                <th className="tue day">Tue</th>
+                <th className="wed day">Wed</th>
+                <th className="thu day">Thu</th>
+                <th className="fri day">Fri</th>
+                <th className="sat day">Sat</th>
             </tr>
             {generateCal()}
         </table>

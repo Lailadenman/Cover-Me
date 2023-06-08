@@ -11,6 +11,7 @@ import { getEvents } from '../../store/event';
 import CreateEventForm from '../CreateEventFormModal';
 import RequestModal from '../RequestModal';
 import JoinGroupModal from '../JoinGroupModal';
+import Chat from '../Chat';
 
 function GroupDetails() {
     const today = new Date()
@@ -98,40 +99,25 @@ function GroupDetails() {
             <h1>{isLoaded && group && (group?.name)}</h1>
             {isLoaded && group && (
                 <>
-                    <h1>Owner: {group?.owner}</h1>
-                    <h1>{group?.description}</h1>
-                    <div className={isMember ? "calendar" : "hidden"}>
-                        <button onClick={handlePastMonth}><p>{"<"}</p></button>
-                        <Calendar year={year} month={month} gId={id} eventList={events && eventsArr} />
-                        <button onClick={handleNextMonth}><p>{">"}</p></button>
+                    <div className='groupInfo'>
+                        <h1>Owner: {group?.owner}</h1>
+                        <h1>{group?.description}</h1>
                     </div>
+                    <Chat gId={group.id} cName={isMember ? "calendar" : "hidden"}/>
                     <div id='members'>
                         <h1>List of Members</h1>
                         {members && membersArr.map((member) => {
                             return (
-                                // <NavLink
-                                //     key={member?.id}
-                                //     to={`/groups/${id}/events/${event?.id}`}
-                                //     style={{ textDecoration: "none" }}
-                                //     className="event-link"
-                                // >
                                 <div>
                                     <h2>{member?.user?.firstName} {member?.user?.lastName}</h2>
                                 </div>
-                                // </NavLink>
                             )
                         })}
                     </div>
-                    <div id='requests' className={group.owner_id === user ? "" : "hidden"}>
+                    <div className={group.owner_id === user ? "requests" : "hidden"}>
                         <h1>List of Requests</h1>
                         {requests && requestsArr.map((request) => {
                             return (
-                                // <NavLink
-                                //     key={member?.id}
-                                //     to={`/groups/${id}/events/${event?.id}`}
-                                //     style={{ textDecoration: "none" }}
-                                //     className="event-link"
-                                // >
                                 <div>
                                     <h2>{request?.user?.firstName} {request?.user?.lastName}</h2>
                                     <OpenModalButton
@@ -145,9 +131,13 @@ function GroupDetails() {
                                         modalComponent={<RequestModal id={request?.id} gId={id} uId={request.user_id} action={"decline"} />}
                                     />
                                 </div>
-                                // </NavLink>
                             )
                         })}
+                    </div>
+                    <div className={isMember ? "calendar" : "hidden"}>
+                        <button onClick={handlePastMonth}><p>{"<"}</p></button>
+                        <Calendar year={year} month={month} gId={id} eventList={events && eventsArr} />
+                        <button onClick={handleNextMonth}><p>{">"}</p></button>
                     </div>
                     <div id='eventButton' className={isMember ? "" : "hidden"}>
                         <OpenModalButton

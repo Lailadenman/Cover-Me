@@ -9,7 +9,7 @@ function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
 
 	return (
-		<ul>
+		<ul className='navList'>
 			<li>
 				<NavLink exact to="/">Home</NavLink>
 			</li>
@@ -18,9 +18,9 @@ function Navigation({ isLoaded }){
 					<ProfileButton user={sessionUser} />
 				</li>
 			)}
-			{sessionUser && (<li>
+			{/* {sessionUser && (<li>
 				<NavLink exact to="/chat">Chat</NavLink>
-			</li>)}
+			</li>)} */}
 			{sessionUser && (<li>
 				<NavLink exact to="/groups">Groups</NavLink>
 			</li>)}

@@ -65,7 +65,7 @@ export const createNewEvent = ( description, owner_id, start_date, end_date, gId
             owner_id,
             start_date,
             end_date,
-            group_id: gId
+            group_id: gId,
         }),
     })
 

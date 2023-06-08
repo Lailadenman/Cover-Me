@@ -1,1 +1,8 @@
 /* TODO Add site wide styles */
+body {
+    background-color: #49c5b6;
+}
+
+.navBar {
+    background-color: #e8a87c;
+}

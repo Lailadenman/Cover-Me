@@ -66,6 +66,8 @@ export const getGroupsByUser = (id) => async (dispatch) => {
     if (res.ok) {
         const groups = await res.json()
 
+        console.log("##############", groups);
+
         dispatch(loadGroupsByUser(groups))
     }
 }
@@ -197,25 +199,24 @@ export const joinRequest = (uId, gId) => async (dispatch) => {
 
 // Possibly treat loading messages/chats like requests and just straight up add them
 // when we fetch the group details and then for new messages use this thunk
-// export const newChat = (message, user_id, group_id) => async (dispatch) => {
-//     const res = await fetch(``, {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//             user_id,
-//             group_id,
-//             message
-//         })
-//     })
+export const newChat = (user_id, group_id, message) => async (dispatch) => {
+    console.log("new message sent");
+    const res = await fetch(`/api/messages/${user_id}/${group_id}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            message
+        })
+    })
 
-//     if (res.ok) {
-//         const message = res.json()
-
-//         dispatch(addMessage(message))
-//     }
-// }
+    if (res.ok) {
+        const message = res.json()
+        console.log("new message saved");
+        dispatch(getGroupDetails(group_id))
+    }
+}
 
 const initialState = {};
 

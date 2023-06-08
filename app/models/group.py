@@ -20,6 +20,8 @@ class Group(db.Model):
     group_request = db.relationship(
         "Group_Request", back_populates="group", cascade="all, delete-orphan")
     event = db.relationship("Event", back_populates="group", cascade="all, delete-orphan")
+    message = db.relationship(
+        "Message", back_populates="group", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {

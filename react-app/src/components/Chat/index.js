@@ -1,13 +1,21 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { io } from 'socket.io-client'
+import { newChat } from '../../store/group';
+import "./Chat.css"
 
 let socket;
 
-function Chat() {
-    const [messages, setMessages] = useState([])
+function Chat({ gId, cName }) {
+    const groupMessages = useSelector(state => state?.groups?.groupDetails?.messages)
+    const groupMessagesArr = Object.values(groupMessages)
+    const messagesArr = groupMessagesArr.map((mess) => {
+        return { user: mess.username, msg: mess.message }
+    })
+    const [messages, setMessages] = useState([...messagesArr])
     const [chatInput, setChatInput] = useState("");
     const user = useSelector(state => state.session.user)
+    const dispatch = useDispatch()
     // const chatRoomId = useSelector(state => state.session.room.id)
 
     useEffect(() => {
@@ -23,6 +31,7 @@ function Chat() {
         // })
 
         socket.on("chat", (chat) => {
+            dispatch(newChat(user.id, gId, chat.msg))
             setMessages(messages => [...messages, chat])
         })
 
@@ -43,18 +52,20 @@ function Chat() {
 
     return (user && (
         <>
-        <h1>Tester</h1>
-            <form onSubmit={sendChat}>
-                <input
-                    value={chatInput}
-                    onChange={updateChatInput}
-                />
-                <button type="submit">Send</button>
-            </form>
-            <div>
-                {messages.map((message, ind) => (
-                    <div key={ind}>{`${message.user}: ${message.msg}`}</div>
-                ))}
+            <div className={cName}>
+                <h1>Chat</h1>
+                <div>
+                    {messages.map((message, ind) => (
+                        <div key={ind}>{`${message.user}: ${message.msg}`}</div>
+                    ))}
+                </div>
+                <form onSubmit={sendChat}>
+                    <input
+                        value={chatInput}
+                        onChange={updateChatInput}
+                    />
+                    <button type="submit">Send</button>
+                </form>
             </div>
         </>
     )
