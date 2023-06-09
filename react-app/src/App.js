@@ -11,6 +11,7 @@ import GroupDetails from "./components/GroupDetails";
 import Calendar from "./components/Calendar";
 import EventDetails from "./components/EventDetails";
 import MyGroupsPage from "./components/MyGroupsPage";
+import HomePage from "./components/HomePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ function App() {
       </div>
       {isLoaded && (
         <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
           <Route path="/login" >
             <LoginFormPage />
           </Route>
