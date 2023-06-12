@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify
 from flask_login import login_required
 from app.models import Group, Group_Member, Group_Request, Event, User, Message, db
 from app.forms import NewGroupForm, EditGroupForm, NewEventForm, EditEventForm, GroupRequestForm
+from app.aws import (upload_file_to_s3, get_unique_filename)
 
 group_routes = Blueprint('groups', __name__)
 
@@ -75,8 +76,19 @@ def getGroupById(id):
 def createGroup():
     form = NewGroupForm()
 
-    newGroup = Group(name=form.name.data,
-                     description=form.description.data, owner_id=form.owner_id.data)
+    image = form.data["groupPic"]
+    # print("&&&&&&&&&&&&&&&&&&", image.get("groupPic"))
+    # print("$$$$$$$$$$$$$$$$$$", form.name.data)
+    image.filename = get_unique_filename(image.filename)
+    upload = upload_file_to_s3(image)
+
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~", upload)
+
+    url = upload["url"]
+
+    # url = "https://res.cloudinary.com/dbiv2lwhp/image/upload/v1673416530/samples/imagecon-group.jpg"
+
+    newGroup = Group(name=form.name.data, description=form.description.data, owner_id=form.owner_id.data, groupPic=url)
 
     db.session.add(newGroup)
     db.session.commit()
@@ -100,6 +112,7 @@ def editGroup(id):
     eGroup.name = form.name.data
     eGroup.description = form.description.data
     eGroup.owner_id = form.owner_id.data
+    eGroup.groupPic = form.groupPic.data
 
     db.session.commit()
 
@@ -140,7 +153,12 @@ def getEventById(gId, id):
 
     event = eventQuery.one()
 
-    return event.to_dict()
+    retEvent = event.to_dict()
+
+    if event.isCovered:
+        retEvent["coveredBy"] = event.cover.to_dict()
+
+    return retEvent
 
 
 @group_routes.route("<int:id>/events", methods=["POST"])
@@ -173,10 +191,16 @@ def updateEvent(gId, id):
     event.start_date = form.start_date.data
     event.end_date = form.end_date.data
     event.group_id = form.group_id.data
+    event.isCovered = form.isCovered.data
+    event.coveredBy = form.coveredBy.data
 
     db.session.commit()
 
-    return event.to_dict()
+    retEvent = event.to_dict()
+
+    retEvent["coveredBy"] = event.cover.to_dict()
+
+    return retEvent
 
 
 @group_routes.route("<int:gId>/events/<int:id>", methods=["DELETE"])
@@ -193,3 +217,5 @@ def deleteEvent(gId, id):
     db.session.commit()
 
     return eventDet
+
+# @group_routes("/search")

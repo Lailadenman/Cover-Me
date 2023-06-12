@@ -11,6 +11,7 @@ class Group(db.Model):
     description = db.Column(db.String(2000), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod("users.id")), nullable=False)
+    groupPic = db.Column(db.String(2000), nullable=False)
     # calendar_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("calendars.id"), nullable=False))
 
     owner = db.relationship("User", secondary=add_prefix_for_prod(
@@ -30,4 +31,5 @@ class Group(db.Model):
             "description": self.description,
             # "owner": self.owner.to_dict(),
             "owner_id": self.owner_id,
+            "groupPic": self.groupPic
         }

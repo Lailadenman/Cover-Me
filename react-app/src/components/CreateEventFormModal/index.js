@@ -5,8 +5,11 @@ import { createNewEvent } from '../../store/event';
 import { useModal } from '../../context/Modal';
 
 function CreateEventForm({ gId }) {
-    const [start_date, setStart_Date] = useState("")
-    const [end_date, setEnd_Date] = useState("")
+    const date = new Date
+    const dateStr = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}T${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+    console.log(dateStr);
+    const [start_date, setStart_Date] = useState(dateStr)
+    const [end_date, setEnd_Date] = useState(dateStr)
     const [description, setDescription] = useState("")
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal()
@@ -54,7 +57,10 @@ function CreateEventForm({ gId }) {
                 <input
                 type='datetime-local'
                 value={start_date}
-                onChange={(e) => setStart_Date(e.target.value)}
+                onChange={(e) => {
+                    setStart_Date(e.target.value)
+                    setEnd_Date(e.target.value)
+                }}
                 required
                 />
             </label>

@@ -43,6 +43,7 @@ export const getEvents = (gId) => async (dispatch) => {
 }
 
 export const getEventDetails = (gId, id) => async (dispatch) => {
+    console.log("get event details hit");
     const res = await fetch(`/api/groups/${gId}/events/${id}`)
 
     if (res.ok) {
@@ -76,7 +77,9 @@ export const createNewEvent = ( description, owner_id, start_date, end_date, gId
     }
 }
 
-export const editEvent = (id, description, owner_id, start_date, end_date, gId) => async (dispatch) => {
+export const editEvent = (id, description, owner_id, start_date, end_date, gId, isCovered, coveredBy) => async (dispatch) => {
+    // console.log("editEvetnt thunk hit");
+    console.log(id, description, owner_id, start_date, end_date, gId, isCovered, coveredBy);
     const res = await fetch(`/api/groups/${gId}/events/${id}`, {
         method: "PUT",
         headers: {
@@ -87,7 +90,9 @@ export const editEvent = (id, description, owner_id, start_date, end_date, gId) 
             owner_id,
             start_date,
             end_date,
-            group_id: gId
+            group_id: gId,
+            isCovered,
+            coveredBy
         }),
     })
 
