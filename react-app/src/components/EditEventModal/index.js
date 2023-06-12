@@ -24,7 +24,7 @@ function EditEventForm({ eId, gId, eDescription, eStart_date, eEnd_date }) {
 
         console.log("~~~~~~~~~~~~~", start);
 
-        const data = await dispatch(editEvent(eId, description, user.id, start, end, gId));
+        const data = await dispatch(editEvent(eId, description, user.id, start, end, gId, false));
 
         if (data) {
             setErrors(data);

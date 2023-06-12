@@ -32,6 +32,7 @@ function GroupDetails() {
     const events = useSelector(state => state?.events)
     const members = group?.members
     const requests = group?.requests
+    const groupPic = group?.groupPic
 
     const eventsArr = Object.values(events)
     const membersArr = members && Object.values(members)
@@ -99,6 +100,9 @@ function GroupDetails() {
             <h1>{isLoaded && group && (group?.name)}</h1>
             {isLoaded && group && (
                 <>
+                    <div>
+                        <img src={groupPic}/>
+                    </div>
                     <div className='groupInfo'>
                         <h1>Owner: {group?.owner}</h1>
                         <h1>{group?.description}</h1>

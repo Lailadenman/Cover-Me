@@ -2,9 +2,9 @@ from app.models import db, Group, environment, SCHEMA
 from sqlalchemy.sql import text
 
 def seed_groups():
-    sovg = Group(name="Sherman Oaks Vet Group", description="Vet Hospital", owner_id=5)
-    aca = Group(name="Anime Characters Association", description="Where all the anime characters meet", owner_id=6)
-    gsmh = Group(name="Grey Sloan Memorial Hospital", description="Where all the surgeons and their drama meet", owner_id=11)
+    sovg = Group(name="Sherman Oaks Vet Group", description="Vet Hospital", owner_id=5, groupPic="https://res.cloudinary.com/dbiv2lwhp/image/upload/v1673416530/samples/imagecon-group.jpg")
+    aca = Group(name="Anime Characters Association", description="Where all the anime characters meet", owner_id=6, groupPic="https://res.cloudinary.com/dbiv2lwhp/image/upload/v1673416530/samples/imagecon-group.jpg")
+    gsmh = Group(name="Grey Sloan Memorial Hospital", description="Where all the surgeons and their drama meet", owner_id=11, groupPic="https://res.cloudinary.com/dbiv2lwhp/image/upload/v1673416530/samples/imagecon-group.jpg")
 
     db.session.add(sovg)
     db.session.add(aca)

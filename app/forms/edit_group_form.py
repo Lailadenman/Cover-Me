@@ -7,3 +7,4 @@ class EditGroupForm(FlaskForm):
     description = StringField('description', validators=[DataRequired()])
     owner_id = IntegerField('owner_id', validators=[DataRequired()])
     group_id = IntegerField('group_id', validators=[DataRequired()])
+    groupPic = StringField("groupPic", validators=[DataRequired()])

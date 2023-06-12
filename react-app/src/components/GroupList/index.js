@@ -2,13 +2,19 @@ import { useEffect, useState } from 'react';
 // import { useSelector } from 'react-redux';
 import { getGroups } from '../../store/group';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import OpenModalButton from '../OpenModalButton';
 import CreateGroupModal from '../CreateGroupModal';
 
 function GroupList() {
     const dispatch = useDispatch()
     const [isLoaded, setIsLoaded] = useState(false)
+    const history = useHistory()
+    const sessionUser = useSelector(state => state?.session?.user)
+
+    if(!sessionUser) {
+        history.push('/')
+    }
 
     useEffect(() => {
         dispatch(getGroups())

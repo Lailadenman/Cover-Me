@@ -60,6 +60,7 @@ function Calendar({ month, year, gId, eventList }) {
         const yr = date[0]
         const start = (parseInt(start_time[0]) > 12 ? `${(parseInt(start_time[0]) - 12)}:${start_time[1]}pm` : parseInt(start_time[0]) < 12 ? `${parseInt(start_time[0])}:${start_time[1]}am` : `${parseInt(start_time[0])}:${start_time[1]}pm`)
         const end = (parseInt(end_time[0]) > 12 ? `${(parseInt(end_time[0]) - 12)}:${end_time[1]}pm` : parseInt(end_time[0]) < 12 ? `${parseInt(end_time[0])}:${end_time[1]}am` : `${parseInt(end_time[0])}:${end_time[1]}pm`)
+        const covered = event.isCovered
         dateArr.push({
             id: event.id,
             day: dy,
@@ -67,7 +68,8 @@ function Calendar({ month, year, gId, eventList }) {
             year: yr,
             owner: `${event.owner.firstName} ${event.owner.lastName}`,
             start,
-            end
+            end,
+            covered: event.isCovered
         })
     })
 
@@ -109,7 +111,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                     style={{ textDecoration: "none" }}
                                                     className="event-link"
                                                 >
-                                                    <div>
+                                                    <div className={date.covered ? "covered" : "not-covered"}>
                                                         <div>{date.owner}</div>
                                                         <div>{date.start} - {date.end}</div>
                                                     </div>
@@ -139,7 +141,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                     style={{ textDecoration: "none" }}
                                                     className="event-link"
                                                 >
-                                                    <div>
+                                                    <div className={date.covered ? "covered" : "not-covered"}>
                                                         <div>{date.owner}</div>
                                                         <div>{date.start} - {date.end}</div>
                                                     </div>
@@ -186,7 +188,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                             style={{ textDecoration: "none" }}
                                                             className="event-link"
                                                         >
-                                                            <div>
+                                                            <div className={date.covered ? "covered" : "not-covered"}>
                                                                 <div>{date.owner}</div>
                                                                 <div>{date.start} - {date.end}</div>
                                                             </div>
@@ -216,7 +218,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                         style={{ textDecoration: "none" }}
                                                         className="event-link"
                                                     >
-                                                        <div>
+                                                        <div className={date.covered ? "covered" : "not-covered"}>
                                                             <div>{date.owner}</div>
                                                             <div>{date.start} - {date.end}</div>
                                                         </div>
@@ -248,7 +250,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                     style={{ textDecoration: "none" }}
                                                     className="event-link"
                                                 >
-                                                    <div>
+                                                    <div className={date.covered ? "covered" : "not-covered"}>
                                                         <div>{date.owner}</div>
                                                         <div>{date.start} - {date.end}</div>
                                                     </div>
@@ -293,7 +295,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                             style={{ textDecoration: "none" }}
                                                             className="event-link"
                                                         >
-                                                            <div>
+                                                            <div className={date.covered ? "covered" : "not-covered"}>
                                                                 <div>{date.owner}</div>
                                                                 <div>{date.start} - {date.end}</div>
                                                             </div>
@@ -323,7 +325,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                         style={{ textDecoration: "none" }}
                                                         className="event-link"
                                                     >
-                                                        <div>
+                                                        <div className={date.covered ? "covered" : "not-covered"}>
                                                             <div>{date.owner}</div>
                                                             <div>{date.start} - {date.end}</div>
                                                         </div>
@@ -354,7 +356,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                     style={{ textDecoration: "none" }}
                                                     className="event-link"
                                                 >
-                                                    <div>
+                                                    <div className={date.covered ? "covered" : "not-covered"}>
                                                         <div>{date.owner}</div>
                                                         <div>{date.start} - {date.end}</div>
                                                     </div>
@@ -398,7 +400,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                             style={{ textDecoration: "none" }}
                                                             className="event-link"
                                                         >
-                                                            <div>
+                                                            <div className={date.covered ? "covered" : "not-covered"}>
                                                                 <div>{date.owner}</div>
                                                                 <div>{date.start} - {date.end}</div>
                                                             </div>
@@ -428,7 +430,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                         style={{ textDecoration: "none" }}
                                                         className="event-link"
                                                     >
-                                                        <div>
+                                                        <div className={date.covered ? "covered" : "not-covered"}>
                                                             <div>{date.owner}</div>
                                                             <div>{date.start} - {date.end}</div>
                                                         </div>
@@ -459,7 +461,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                     style={{ textDecoration: "none" }}
                                                     className="event-link"
                                                 >
-                                                    <div>
+                                                    <div className={date.covered ? "covered" : "not-covered"}>
                                                         <div>{date.owner}</div>
                                                         <div>{date.start} - {date.end}</div>
                                                     </div>
@@ -503,7 +505,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                             style={{ textDecoration: "none" }}
                                                             className="event-link"
                                                         >
-                                                            <div>
+                                                            <div className={date.covered ? "covered" : "not-covered"}>
                                                                 <div>{date.owner}</div>
                                                                 <div>{date.start} - {date.end}</div>
                                                             </div>
@@ -533,7 +535,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                         style={{ textDecoration: "none" }}
                                                         className="event-link"
                                                     >
-                                                        <div>
+                                                        <div className={date.covered ? "covered" : "not-covered"}>
                                                             <div>{date.owner}</div>
                                                             <div>{date.start} - {date.end}</div>
                                                         </div>
@@ -564,7 +566,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                     style={{ textDecoration: "none" }}
                                                     className="event-link"
                                                 >
-                                                    <div>
+                                                    <div className={date.covered ? "covered" : "not-covered"}>
                                                         <div>{date.owner}</div>
                                                         <div>{date.start} - {date.end}</div>
                                                     </div>
@@ -608,7 +610,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                             style={{ textDecoration: "none" }}
                                                             className="event-link"
                                                         >
-                                                            <div>
+                                                            <div className={date.covered ? "covered" : "not-covered"}>
                                                                 <div>{date.owner}</div>
                                                                 <div>{date.start} - {date.end}</div>
                                                             </div>
@@ -638,7 +640,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                         style={{ textDecoration: "none" }}
                                                         className="event-link"
                                                     >
-                                                        <div>
+                                                        <div className={date.covered ? "covered" : "not-covered"}>
                                                             <div>{date.owner}</div>
                                                             <div>{date.start} - {date.end}</div>
                                                         </div>
@@ -669,7 +671,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                     style={{ textDecoration: "none" }}
                                                     className="event-link"
                                                 >
-                                                    <div>
+                                                    <div className={date.covered ? "covered" : "not-covered"}>
                                                         <div>{date.owner}</div>
                                                         <div>{date.start} - {date.end}</div>
                                                     </div>
@@ -715,7 +717,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                             style={{ textDecoration: "none" }}
                                                             className="event-link"
                                                         >
-                                                            <div>
+                                                            <div className={date.covered ? "covered" : "not-covered"}>
                                                                 <div>{date.owner}</div>
                                                                 <div>{date.start} - {date.end}</div>
                                                             </div>
@@ -745,7 +747,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                         style={{ textDecoration: "none" }}
                                                         className="event-link"
                                                     >
-                                                        <div>
+                                                        <div className={date.covered ? "covered" : "not-covered"}>
                                                             <div>{date.owner}</div>
                                                             <div>{date.start} - {date.end}</div>
                                                         </div>
@@ -778,7 +780,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                     style={{ textDecoration: "none" }}
                                                     className="event-link"
                                                 >
-                                                    <div>
+                                                    <div className={date.covered ? "covered" : "not-covered"}>
                                                         <div>{date.owner}</div>
                                                         <div>{date.start} - {date.end}</div>
                                                     </div>

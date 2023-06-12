@@ -10,3 +10,11 @@
 .hidden {
     display: hidden;
 }
+
+.covered {
+    background-color: green;
+}
+
+.not-covered {
+    background-color: red;
+}
