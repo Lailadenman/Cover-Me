@@ -21,10 +21,12 @@ function DeleteGroupModal({ id }) {
     }
 
     return (
-        <div>
-            <h1>Delete?</h1>
-            <button onClick={handleYes}>Yes</button>
-            <button onClick={handleNo}>No</button>
+        <div className="modal">
+            <h1>Are you sure you want to delete this group?</h1>
+            <div className="modal-buttons">
+                <button onClick={handleYes}>Yes</button>
+                <button onClick={handleNo}>No</button>
+            </div>
         </div>
 
     )

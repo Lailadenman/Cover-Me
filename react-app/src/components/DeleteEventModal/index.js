@@ -22,10 +22,12 @@ function DeleteEventModal({ id, gId }) {
     }
 
     return (
-        <div>
+        <div className='modal'>
             <h1>Delete?</h1>
-            <button onClick={handleYes}>Yes</button>
-            <button onClick={handleNo}>No</button>
+            <div className="modal-buttons">
+                <button onClick={handleYes}>Yes</button>
+                <button onClick={handleNo}>No</button>
+            </div>
         </div>
 
     )

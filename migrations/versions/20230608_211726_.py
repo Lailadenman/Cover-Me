@@ -37,7 +37,7 @@ def upgrade():
     sa.Column('name', sa.String(length=100), nullable=False),
     sa.Column('description', sa.String(length=2000), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=False),
-    sa.Column('groupPic', sa.String(length=2000), nullable=False),
+    # sa.Column('groupPic', sa.String(length=2000), nullable=False),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')

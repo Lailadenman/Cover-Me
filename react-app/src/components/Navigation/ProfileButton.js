@@ -4,7 +4,7 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -43,17 +43,21 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
+      {/* <button onClick={openMenu}>
         <i className="fas fa-user-circle" />
-      </button>
-      <ul className={ulClassName} ref={ulRef}>
+      </button> */}
+      <ul className="user-list">
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={handleLogout}>Log Out</button>
+            <li className="info">Your Info</li>
+            <li className="user-info">{user.username}</li>
+            <li className="user-info">{user.email}</li>
+            <li className="user-info">
+              <NavLink exact to="/groups/joined">My Groups</NavLink>
             </li>
+            {/* <li className="user-info">
+              <button onClick={handleLogout}>Log Out</button>
+            </li> */}
           </>
         ) : (
           <>

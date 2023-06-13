@@ -32,13 +32,15 @@ function CoverShiftModal({ startDate, endDate, startTime, endTime }) {
     }
 
     return (
-        <div>
+        <div className='modal'>
             <h1>Would you like to cover this shift?</h1>
             <h2>Start: {startDate} {startTime}</h2>
             <h2>End: {endDate} {endTime}</h2>
-            <button onClick={handleYes}>Yes</button>
-            <button onClick={handleNo}>No</button>
+            <div className='modal-buttons'>
+                <button onClick={handleYes}>Yes</button>
+                <button onClick={handleNo}>No</button>
+            </div>
         </div>
     )
 }
- export default CoverShiftModal
+export default CoverShiftModal

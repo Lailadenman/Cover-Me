@@ -1,0 +1,14 @@
+.group-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 50px;
+    /* text-decoration: underline; */
+}
+
+.group-link:hover {
+    text-decoration: underline;
+}

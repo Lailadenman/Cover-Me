@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import OpenModalButton from '../OpenModalButton';
 import CreateGroupModal from '../CreateGroupModal';
+import "./GroupList.css"
 
 function GroupList() {
     const dispatch = useDispatch()
@@ -12,7 +13,7 @@ function GroupList() {
     const history = useHistory()
     const sessionUser = useSelector(state => state?.session?.user)
 
-    if(!sessionUser) {
+    if (!sessionUser) {
         history.push('/')
     }
 
@@ -34,8 +35,10 @@ function GroupList() {
     // const closeMenu = () => setShowMenu(false);
 
     return (
-        <div>
-            <h1>test</h1>
+        <div className='group-page'>
+            <div className='head'>
+                <h1>Groups</h1>
+            </div>
             {groups && groupsArr.map((group) => {
                 return <NavLink
                     key={group?.id}
@@ -43,11 +46,11 @@ function GroupList() {
                     style={{ textDecoration: "none" }}
                     className="group-link"
                 >
-                    <h1>{group.name}</h1>
+                    <h2>{group.name}</h2>
                 </NavLink>
             })}
             <OpenModalButton
-                buttonText={"New Group"}
+                buttonText={"Create a New Group"}
                 onItemClick={onClick}
                 modalComponent={<CreateGroupModal />}
             />

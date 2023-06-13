@@ -46,7 +46,7 @@ function JoinGroupModal({ gId, uId }) {
         </div>)
     } else if(isRequested) {
         component = (<div>
-            <h1>Your request has been sent. Please wait for the group owner to accept.</h1>
+            <h1>Your request has been sent already. Please wait for the group owner to accept.</h1>
             <button onClick={onClose}>close</button>
         </div>)
     } else {

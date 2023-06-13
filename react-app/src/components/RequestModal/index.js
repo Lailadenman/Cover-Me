@@ -29,10 +29,12 @@ function RequestModal({ id, gId, uId, action }) {
     }
 
     return (
-        <div>
+        <div className="modal">
             <h1>Are you sure you would like to {action} this user?</h1>
-            <button onClick={handleYes}>Yes</button>
-            <button onClick={handleNo}>No</button>
+            <div className="modal-buttons">
+                <button onClick={handleYes}>Yes</button>
+                <button onClick={handleNo}>No</button>
+            </div>
         </div>
 
     )

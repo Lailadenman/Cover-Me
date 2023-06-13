@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import OpenModalButton from '../OpenModalButton';
 import CreateGroupModal from '../CreateGroupModal';
+import "./MyGroupsPage.css"
 
 function MyGroupsPage() {
     const dispatch = useDispatch()
@@ -29,8 +30,10 @@ function MyGroupsPage() {
     // const closeMenu = () => setShowMenu(false);
 
     return (
-        <div>
-            <h1>My Groups</h1>
+        <div className='my-groups-page'>
+            <div className='head'>
+                <h1>My Groups</h1>
+            </div>
             {groups && groupsArr.map((group) => {
                 return <NavLink
                     key={group?.id}
@@ -38,7 +41,7 @@ function MyGroupsPage() {
                     style={{ textDecoration: "none" }}
                     className="group-link"
                 >
-                    <h1>{group.name}</h1>
+                    <h2>{group.name}</h2>
                 </NavLink>
             })}
             <OpenModalButton
