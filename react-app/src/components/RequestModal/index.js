@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux"
 import { useModal } from "../../context/Modal";
-import { deleteFromGroups, acceptRequest, deleteRequest } from "../../store/group";
+import { deleteFromGroups, acceptRequest, deleteRequest, getGroupDetails } from "../../store/group";
 import { useHistory } from "react-router-dom";
 
 function RequestModal({ id, gId, uId, action }) {
@@ -12,11 +12,15 @@ function RequestModal({ id, gId, uId, action }) {
         if (action === "accept") {
             dispatch(acceptRequest(id, uId, gId))
 
+            dispatch(getGroupDetails(gId))
+
             history.push(`/groups/${gId}`)
 
             closeModal()
         } else {
             dispatch(deleteRequest(id, gId))
+
+            dispatch(getGroupDetails(gId))
 
             history.push(`/groups/${gId}`)
 
