@@ -6,6 +6,7 @@ import EditEventForm from "../EditEventModal";
 import OpenModalButton from '../OpenModalButton';
 import DeleteEventModal from "../DeleteEventModal";
 import CoverShiftModal from "../CoverShiftModal";
+import "./EventDetails.css"
 
 function EventDetails() {
     const { gId, eId } = useParams()
@@ -49,10 +50,10 @@ function EventDetails() {
     }
 
     return (<>
-        <button onClick={handleBack}>Back to your group</button>
-        <h1>Event Details</h1>
+        <button className="back-button" onClick={handleBack}>Back to your group</button>
         {isLoaded && event && (
             <div className="event-details">
+                <h1>Event Details</h1>
                 <div className="event-info">
                     <h2>Poster: {event?.owner?.firstName} {event?.owner?.lastName}</h2>
                     <h3>Start Time: {`${startDate} ${start}`}</h3>

@@ -1,6 +1,18 @@
 .calendar {
-    width: 840px;
-    height: 500px;
+    width: 900px;
+    height: 600px;
+}
+
+.month-label {
+    height: 20px;
+}
+
+.day-label {
+    height: 20px;
+}
+
+.week-row {
+    height: 110px;
 }
 
 .day {
@@ -17,4 +29,13 @@
 
 .not-covered {
     background-color: red;
+}
+
+.shifts {
+    overflow-y: auto;
+    height: 80px;
+}
+
+.shifts::-webkit-scrollbar {
+    display: none;
 }

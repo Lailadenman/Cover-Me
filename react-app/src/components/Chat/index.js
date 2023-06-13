@@ -6,7 +6,7 @@ import "./Chat.css"
 
 let socket;
 
-function Chat({ gId, cName }) {
+function Chat({ gId, cName, close }) {
     const groupMessages = useSelector(state => state?.groups?.groupDetails?.messages)
     const groupMessagesArr = Object.values(groupMessages)
     const messagesArr = groupMessagesArr.map((mess) => {
@@ -46,26 +46,33 @@ function Chat({ gId, cName }) {
     const sendChat = (e) => {
         e.preventDefault()
 
-        socket.emit("chat", { user: user.username, msg: chatInput });
-        setChatInput("")
+        if (chatInput.length > 0) {
+            socket.emit("chat", { user: user.username, msg: chatInput });
+            setChatInput("")
+        }
     }
 
     return (user && (
         <>
             <div className={cName}>
-                <h1>Chat</h1>
                 <div>
+                    <h1 className='chat-title'>Chat</h1>
+                </div>
+                <div className='messages'>
                     {messages.map((message, ind) => (
                         <div key={ind}>{`${message.user}: ${message.msg}`}</div>
                     ))}
                 </div>
-                <form onSubmit={sendChat}>
-                    <input
-                        value={chatInput}
-                        onChange={updateChatInput}
-                    />
-                    <button type="submit">Send</button>
-                </form>
+                <div className='button-sect'>
+                    <form onSubmit={sendChat}>
+                        <input
+                            value={chatInput}
+                            onChange={updateChatInput}
+                        />
+                        <button className="send-button" type="submit">Send</button>
+                    </form>
+                    <button onClick={close}>Close Chat</button>
+                </div>
             </div>
         </>
     )

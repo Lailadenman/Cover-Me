@@ -60,13 +60,12 @@ function Calendar({ month, year, gId, eventList }) {
         const yr = date[0]
         const start = (parseInt(start_time[0]) > 12 ? `${(parseInt(start_time[0]) - 12)}:${start_time[1]}pm` : parseInt(start_time[0]) < 12 ? `${parseInt(start_time[0])}:${start_time[1]}am` : `${parseInt(start_time[0])}:${start_time[1]}pm`)
         const end = (parseInt(end_time[0]) > 12 ? `${(parseInt(end_time[0]) - 12)}:${end_time[1]}pm` : parseInt(end_time[0]) < 12 ? `${parseInt(end_time[0])}:${end_time[1]}am` : `${parseInt(end_time[0])}:${end_time[1]}pm`)
-        const covered = event.isCovered
         dateArr.push({
             id: event.id,
             day: dy,
             month: mon,
             year: yr,
-            owner: `${event.owner.firstName} ${event.owner.lastName}`,
+            owner: `${event.owner.firstName} ${event.owner.lastName.slice(0, 1)}.`,
             start,
             end,
             covered: event.isCovered
@@ -96,29 +95,31 @@ function Calendar({ month, year, gId, eventList }) {
                     // console.log("Starting i:", i);
 
                     if (i <= 22) {
-                        days.push(<tr>
+                        days.push(<tr className='week-row'>
                             {dotw.map((day) => {
                                 j++
                                 const counter = i + j - 1
                                 return <td class={day}>
                                     {i + j - 1}
-                                    {dateArr.map((date) => {
-                                        if (parseInt(date.day) === counter) {
-                                            return (
-                                                <NavLink
-                                                    key={date.id}
-                                                    to={`/groups/${gId}/events/${date.id}`}
-                                                    style={{ textDecoration: "none" }}
-                                                    className="event-link"
-                                                >
-                                                    <div className={date.covered ? "covered" : "not-covered"}>
-                                                        <div>{date.owner}</div>
-                                                        <div>{date.start} - {date.end}</div>
-                                                    </div>
-                                                </NavLink>)
-                                        }
-                                        return ""
-                                    })}
+                                    <div className='shifts'>
+                                        {dateArr.map((date) => {
+                                            if (parseInt(date.day) === counter) {
+                                                return (
+                                                    <NavLink
+                                                        key={date.id}
+                                                        to={`/groups/${gId}/events/${date.id}`}
+                                                        style={{ textDecoration: "none" }}
+                                                        className="event-link"
+                                                    >
+                                                        <div className={date.covered ? "covered" : "not-covered"}>
+                                                            <div>{date.owner}</div>
+                                                            <div>{date.start} - {date.end}</div>
+                                                        </div>
+                                                    </NavLink>)
+                                            }
+                                            return ""
+                                        })}
+                                    </div>
                                 </td>
                             })}
                         </tr>)
@@ -126,30 +127,32 @@ function Calendar({ month, year, gId, eventList }) {
                         i = i + 6
                         // console.log("ending i:", i);
                     } else {
-                        days.push(<tr>
+                        days.push(<tr className='week-row'>
                             {dotw.slice(0, length - i + 1).map((day) => {
                                 j++
                                 const counter = i + j - 1
                                 return <td class={day}>
                                     {i + j - 1}
-                                    {dateArr.map((date) => {
-                                        if (parseInt(date.day) === counter) {
-                                            return (
-                                                <NavLink
-                                                    key={date.id}
-                                                    to={`/groups/${gId}/events/${date.id}`}
-                                                    style={{ textDecoration: "none" }}
-                                                    className="event-link"
-                                                >
-                                                    <div className={date.covered ? "covered" : "not-covered"}>
-                                                        <div>{date.owner}</div>
-                                                        <div>{date.start} - {date.end}</div>
-                                                    </div>
-                                                </NavLink>
-                                            )
-                                        }
-                                        return ""
-                                    })}
+                                    <div className='shifts'>
+                                        {dateArr.map((date) => {
+                                            if (parseInt(date.day) === counter) {
+                                                return (
+                                                    <NavLink
+                                                        key={date.id}
+                                                        to={`/groups/${gId}/events/${date.id}`}
+                                                        style={{ textDecoration: "none" }}
+                                                        className="event-link"
+                                                    >
+                                                        <div className={date.covered ? "covered" : "not-covered"}>
+                                                            <div>{date.owner}</div>
+                                                            <div>{date.start} - {date.end}</div>
+                                                        </div>
+                                                    </NavLink>
+                                                )
+                                            }
+                                            return ""
+                                        })}
+                                    </div>
                                 </td>
                             })}
                             {length - i + 1 < 7 ? dotw.slice(length - i + 1).map(() => { (<td class="noday">&nbsp;</td>) }) : ""}
@@ -170,7 +173,7 @@ function Calendar({ month, year, gId, eventList }) {
                     if (i <= 22) {
                         if (i === 1) {
                             days.push(
-                                <tr>
+                                <tr className='week-row'>
                                     {dotw.slice(0, 1).map(() => {
                                         return (<td class="noday">&nbsp;</td>)
                                     })}
@@ -179,6 +182,39 @@ function Calendar({ month, year, gId, eventList }) {
                                         const counter = i + j - 1
                                         return <td class={day}>
                                             {i + j - 1}
+                                            <div className='shifts'>
+                                                {dateArr.map((date) => {
+                                                    if (parseInt(date.day) === counter) {
+                                                        return (
+                                                            <NavLink
+                                                                key={date.id}
+                                                                to={`/groups/${gId}/events/${date.id}`}
+                                                                style={{ textDecoration: "none" }}
+                                                                className="event-link"
+                                                            >
+                                                                <div className={date.covered ? "covered" : "not-covered"}>
+                                                                    <div>{date.owner}</div>
+                                                                    <div>{date.start} - {date.end}</div>
+                                                                </div>
+                                                            </NavLink>
+                                                        )
+                                                    }
+                                                    return ""
+                                                })}
+                                            </div>
+                                        </td>
+                                    })}
+                                </tr>
+                            )
+                        }
+                        days.push(
+                            <tr className='week-row'>
+                                {dotw.map((day) => {
+                                    j++
+                                    const counter = i + j - 1
+                                    return <td class={day}>
+                                        {i + j - 1}
+                                        <div className='shifts'>
                                             {dateArr.map((date) => {
                                                 if (parseInt(date.day) === counter) {
                                                     return (
@@ -197,18 +233,22 @@ function Calendar({ month, year, gId, eventList }) {
                                                 }
                                                 return ""
                                             })}
-                                        </td>
-                                    })}
-                                </tr>
-                            )
-                        }
-                        days.push(
-                            <tr>
-                                {dotw.map((day) => {
-                                    j++
-                                    const counter = i + j - 1
-                                    return <td class={day}>
-                                        {i + j - 1}
+                                        </div>
+                                    </td>
+                                })}
+                            </tr>
+                        )
+
+                        i = i + j - 1
+                        // console.log("ending i:", i);
+                    } else {
+                        days.push(<tr className='week-row'>
+                            {dotw.slice(0, length - i + 1).map((day) => {
+                                j++
+                                const counter = i + j - 1
+                                return <td class={day}>
+                                    {i + j - 1}
+                                    <div className='shifts'>
                                         {dateArr.map((date) => {
                                             if (parseInt(date.day) === counter) {
                                                 return (
@@ -227,38 +267,7 @@ function Calendar({ month, year, gId, eventList }) {
                                             }
                                             return ""
                                         })}
-                                    </td>
-                                })}
-                            </tr>
-                        )
-
-                        i = i + j - 1
-                        // console.log("ending i:", i);
-                    } else {
-                        days.push(<tr>
-                            {dotw.slice(0, length - i + 1).map((day) => {
-                                j++
-                                const counter = i + j - 1
-                                return <td class={day}>
-                                    {i + j - 1}
-                                    {dateArr.map((date) => {
-                                        if (parseInt(date.day) === counter) {
-                                            return (
-                                                <NavLink
-                                                    key={date.id}
-                                                    to={`/groups/${gId}/events/${date.id}`}
-                                                    style={{ textDecoration: "none" }}
-                                                    className="event-link"
-                                                >
-                                                    <div className={date.covered ? "covered" : "not-covered"}>
-                                                        <div>{date.owner}</div>
-                                                        <div>{date.start} - {date.end}</div>
-                                                    </div>
-                                                </NavLink>
-                                            )
-                                        }
-                                        return ""
-                                    })}
+                                    </div>
                                 </td>
                             })}
                             {length - i + 1 < 7 ? dotw.slice(length - i + 1).map(() => { (<td class="noday">&nbsp;</td>) }) : ""}
@@ -277,7 +286,7 @@ function Calendar({ month, year, gId, eventList }) {
                     if (i <= 20) {
                         if (i === 1) {
                             days.push(
-                                <tr>
+                                <tr className='week-row'>
                                     {dotw.slice(0, 2).map(() => {
                                         return (<td class="noday">&nbsp;</td>)
                                     })}
@@ -286,6 +295,39 @@ function Calendar({ month, year, gId, eventList }) {
                                         const counter = i + j - 1
                                         return <td class={day}>
                                             {i + j - 1}
+                                            <div className='shifts'>
+                                                {dateArr.map((date) => {
+                                                    if (parseInt(date.day) === counter) {
+                                                        return (
+                                                            <NavLink
+                                                                key={date.id}
+                                                                to={`/groups/${gId}/events/${date.id}`}
+                                                                style={{ textDecoration: "none" }}
+                                                                className="event-link"
+                                                            >
+                                                                <div className={date.covered ? "covered" : "not-covered"}>
+                                                                    <div>{date.owner}</div>
+                                                                    <div>{date.start} - {date.end}</div>
+                                                                </div>
+                                                            </NavLink>
+                                                        )
+                                                    }
+                                                    return ""
+                                                })}
+                                            </div>
+                                        </td>
+                                    })}
+                                </tr>
+                            )
+                        }
+                        days.push(
+                            <tr className='week-row'>
+                                {dotw.map((day) => {
+                                    j++
+                                    const counter = i + j - 1
+                                    return <td class={day}>
+                                        {i + j - 1}
+                                        <div className='shifts'>
                                             {dateArr.map((date) => {
                                                 if (parseInt(date.day) === counter) {
                                                     return (
@@ -304,18 +346,21 @@ function Calendar({ month, year, gId, eventList }) {
                                                 }
                                                 return ""
                                             })}
-                                        </td>
-                                    })}
-                                </tr>
-                            )
-                        }
-                        days.push(
-                            <tr>
-                                {dotw.map((day) => {
-                                    j++
-                                    const counter = i + j - 1
-                                    return <td class={day}>
-                                        {i + j - 1}
+                                        </div>
+                                    </td>
+                                })}
+                            </tr>
+                        )
+
+                        i = i + j - 1
+                    } else {
+                        days.push(<tr className='week-row'>
+                            {dotw.slice(0, length - i + 1).map((day) => {
+                                j++
+                                const counter = i + j - 1
+                                return <td class={day}>
+                                    {i + j - 1}
+                                    <div className='shifts'>
                                         {dateArr.map((date) => {
                                             if (parseInt(date.day) === counter) {
                                                 return (
@@ -334,37 +379,7 @@ function Calendar({ month, year, gId, eventList }) {
                                             }
                                             return ""
                                         })}
-                                    </td>
-                                })}
-                            </tr>
-                        )
-
-                        i = i + j - 1
-                    } else {
-                        days.push(<tr>
-                            {dotw.slice(0, length - i + 1).map((day) => {
-                                j++
-                                const counter = i + j - 1
-                                return <td class={day}>
-                                    {i + j - 1}
-                                    {dateArr.map((date) => {
-                                        if (parseInt(date.day) === counter) {
-                                            return (
-                                                <NavLink
-                                                    key={date.id}
-                                                    to={`/groups/${gId}/events/${date.id}`}
-                                                    style={{ textDecoration: "none" }}
-                                                    className="event-link"
-                                                >
-                                                    <div className={date.covered ? "covered" : "not-covered"}>
-                                                        <div>{date.owner}</div>
-                                                        <div>{date.start} - {date.end}</div>
-                                                    </div>
-                                                </NavLink>
-                                            )
-                                        }
-                                        return ""
-                                    })}
+                                    </div>
                                 </td>
                             })}
                             {length - i + 1 < 7 ? dotw.slice(length - i + 1).map(() => { (<td class="noday">&nbsp;</td>) }) : ""}
@@ -382,7 +397,7 @@ function Calendar({ month, year, gId, eventList }) {
                     if (i <= 19) {
                         if (i === 1) {
                             days.push(
-                                <tr>
+                                <tr className='week-row'>
                                     {dotw.slice(0, 3).map(() => {
                                         return (<td class="noday">&nbsp;</td>)
                                     })}
@@ -391,6 +406,39 @@ function Calendar({ month, year, gId, eventList }) {
                                         const counter = i + j - 1
                                         return <td class={day}>
                                             {i + j - 1}
+                                            <div className='shifts'>
+                                                {dateArr.map((date) => {
+                                                    if (parseInt(date.day) === counter) {
+                                                        return (
+                                                            <NavLink
+                                                                key={date.id}
+                                                                to={`/groups/${gId}/events/${date.id}`}
+                                                                style={{ textDecoration: "none" }}
+                                                                className="event-link"
+                                                            >
+                                                                <div className={date.covered ? "covered" : "not-covered"}>
+                                                                    <div>{date.owner}</div>
+                                                                    <div>{date.start} - {date.end}</div>
+                                                                </div>
+                                                            </NavLink>
+                                                        )
+                                                    }
+                                                    return ""
+                                                })}
+                                            </div>
+                                        </td>
+                                    })}
+                                </tr>
+                            )
+                        }
+                        days.push(
+                            <tr className='week-row'>
+                                {dotw.map((day) => {
+                                    j++
+                                    const counter = i + j - 1
+                                    return <td class={day}>
+                                        {i + j - 1}
+                                        <div className='shifts'>
                                             {dateArr.map((date) => {
                                                 if (parseInt(date.day) === counter) {
                                                     return (
@@ -409,18 +457,21 @@ function Calendar({ month, year, gId, eventList }) {
                                                 }
                                                 return ""
                                             })}
-                                        </td>
-                                    })}
-                                </tr>
-                            )
-                        }
-                        days.push(
-                            <tr>
-                                {dotw.map((day) => {
-                                    j++
-                                    const counter = i + j - 1
-                                    return <td class={day}>
-                                        {i + j - 1}
+                                        </div>
+                                    </td>
+                                })}
+                            </tr>
+                        )
+
+                        i = i + j - 1
+                    } else {
+                        days.push(<tr className='week-row'>
+                            {dotw.slice(0, length - i + 1).map((day) => {
+                                j++
+                                const counter = i + j - 1
+                                return <td class={day}>
+                                    {i + j - 1}
+                                    <div className='shifts'>
                                         {dateArr.map((date) => {
                                             if (parseInt(date.day) === counter) {
                                                 return (
@@ -439,37 +490,7 @@ function Calendar({ month, year, gId, eventList }) {
                                             }
                                             return ""
                                         })}
-                                    </td>
-                                })}
-                            </tr>
-                        )
-
-                        i = i + j - 1
-                    } else {
-                        days.push(<tr>
-                            {dotw.slice(0, length - i + 1).map((day) => {
-                                j++
-                                const counter = i + j - 1
-                                return <td class={day}>
-                                    {i + j - 1}
-                                    {dateArr.map((date) => {
-                                        if (parseInt(date.day) === counter) {
-                                            return (
-                                                <NavLink
-                                                    key={date.id}
-                                                    to={`/groups/${gId}/events/${date.id}`}
-                                                    style={{ textDecoration: "none" }}
-                                                    className="event-link"
-                                                >
-                                                    <div className={date.covered ? "covered" : "not-covered"}>
-                                                        <div>{date.owner}</div>
-                                                        <div>{date.start} - {date.end}</div>
-                                                    </div>
-                                                </NavLink>
-                                            )
-                                        }
-                                        return ""
-                                    })}
+                                    </div>
                                 </td>
                             })}
                             {length - i + 1 < 7 ? dotw.slice(length - i + 1).map(() => { (<td class="noday">&nbsp;</td>) }) : ""}
@@ -487,7 +508,7 @@ function Calendar({ month, year, gId, eventList }) {
                     if (i <= 18) {
                         if (i === 1) {
                             days.push(
-                                <tr>
+                                <tr className='week-row'>
                                     {dotw.slice(0, 4).map(() => {
                                         return (<td class="noday">&nbsp;</td>)
                                     })}
@@ -496,6 +517,39 @@ function Calendar({ month, year, gId, eventList }) {
                                         const counter = i + j - 1
                                         return <td class={day}>
                                             {i + j - 1}
+                                            <div className='shifts'>
+                                                {dateArr.map((date) => {
+                                                    if (parseInt(date.day) === counter) {
+                                                        return (
+                                                            <NavLink
+                                                                key={date.id}
+                                                                to={`/groups/${gId}/events/${date.id}`}
+                                                                style={{ textDecoration: "none" }}
+                                                                className="event-link"
+                                                            >
+                                                                <div className={date.covered ? "covered" : "not-covered"}>
+                                                                    <div>{date.owner}</div>
+                                                                    <div>{date.start} - {date.end}</div>
+                                                                </div>
+                                                            </NavLink>
+                                                        )
+                                                    }
+                                                    return ""
+                                                })}
+                                            </div>
+                                        </td>
+                                    })}
+                                </tr>
+                            )
+                        }
+                        days.push(
+                            <tr className='week-row'>
+                                {dotw.map((day) => {
+                                    j++
+                                    const counter = i + j - 1
+                                    return <td class={day}>
+                                        {i + j - 1}
+                                        <div className='shifts'>
                                             {dateArr.map((date) => {
                                                 if (parseInt(date.day) === counter) {
                                                     return (
@@ -514,18 +568,21 @@ function Calendar({ month, year, gId, eventList }) {
                                                 }
                                                 return ""
                                             })}
-                                        </td>
-                                    })}
-                                </tr>
-                            )
-                        }
-                        days.push(
-                            <tr>
-                                {dotw.map((day) => {
-                                    j++
-                                    const counter = i + j - 1
-                                    return <td class={day}>
-                                        {i + j - 1}
+                                        </div>
+                                    </td>
+                                })}
+                            </tr>
+                        )
+
+                        i = i + j - 1
+                    } else {
+                        days.push(<tr className='week-row'>
+                            {dotw.slice(0, length - i + 1).map((day) => {
+                                j++
+                                const counter = i + j - 1
+                                return <td class={day}>
+                                    {i + j - 1}
+                                    <div className='shifts'>
                                         {dateArr.map((date) => {
                                             if (parseInt(date.day) === counter) {
                                                 return (
@@ -544,37 +601,7 @@ function Calendar({ month, year, gId, eventList }) {
                                             }
                                             return ""
                                         })}
-                                    </td>
-                                })}
-                            </tr>
-                        )
-
-                        i = i + j - 1
-                    } else {
-                        days.push(<tr>
-                            {dotw.slice(0, length - i + 1).map((day) => {
-                                j++
-                                const counter = i + j - 1
-                                return <td class={day}>
-                                    {i + j - 1}
-                                    {dateArr.map((date) => {
-                                        if (parseInt(date.day) === counter) {
-                                            return (
-                                                <NavLink
-                                                    key={date.id}
-                                                    to={`/groups/${gId}/events/${date.id}`}
-                                                    style={{ textDecoration: "none" }}
-                                                    className="event-link"
-                                                >
-                                                    <div className={date.covered ? "covered" : "not-covered"}>
-                                                        <div>{date.owner}</div>
-                                                        <div>{date.start} - {date.end}</div>
-                                                    </div>
-                                                </NavLink>
-                                            )
-                                        }
-                                        return ""
-                                    })}
+                                    </div>
                                 </td>
                             })}
                             {length - i + 1 < 7 ? dotw.slice(length - i + 1).map(() => { (<td class="noday">&nbsp;</td>) }) : ""}
@@ -592,7 +619,7 @@ function Calendar({ month, year, gId, eventList }) {
                     if (i <= 24) {
                         if (i === 1) {
                             days.push(
-                                <tr>
+                                <tr className='week-row'>
                                     {dotw.slice(0, 5).map(() => {
                                         return (<td class="noday">&nbsp;</td>)
                                     })}
@@ -601,6 +628,39 @@ function Calendar({ month, year, gId, eventList }) {
                                         const counter = i + j - 1
                                         return <td class={day}>
                                             {i + j - 1}
+                                            <div className='shifts'>
+                                                {dateArr.map((date) => {
+                                                    if (parseInt(date.day) === counter) {
+                                                        return (
+                                                            <NavLink
+                                                                key={date.id}
+                                                                to={`/groups/${gId}/events/${date.id}`}
+                                                                style={{ textDecoration: "none" }}
+                                                                className="event-link"
+                                                            >
+                                                                <div className={date.covered ? "covered" : "not-covered"}>
+                                                                    <div>{date.owner}</div>
+                                                                    <div>{date.start} - {date.end}</div>
+                                                                </div>
+                                                            </NavLink>
+                                                        )
+                                                    }
+                                                    return ""
+                                                })}
+                                            </div>
+                                        </td>
+                                    })}
+                                </tr>
+                            )
+                        }
+                        days.push(
+                            <tr className='week-row'>
+                                {dotw.map((day) => {
+                                    j++
+                                    const counter = i + j - 1
+                                    return <td class={day}>
+                                        {i + j - 1}
+                                        <div className='shifts'>
                                             {dateArr.map((date) => {
                                                 if (parseInt(date.day) === counter) {
                                                     return (
@@ -619,18 +679,21 @@ function Calendar({ month, year, gId, eventList }) {
                                                 }
                                                 return ""
                                             })}
-                                        </td>
-                                    })}
-                                </tr>
-                            )
-                        }
-                        days.push(
-                            <tr>
-                                {dotw.map((day) => {
-                                    j++
-                                    const counter = i + j - 1
-                                    return <td class={day}>
-                                        {i + j - 1}
+                                        </div>
+                                    </td>
+                                })}
+                            </tr>
+                        )
+
+                        i = i + j - 1
+                    } else {
+                        days.push(<tr className='week-row'>
+                            {dotw.slice(0, length - i + 1).map((day) => {
+                                j++
+                                const counter = i + j - 1
+                                return <td class={day}>
+                                    {i + j - 1}
+                                    <div className='shifts'>
                                         {dateArr.map((date) => {
                                             if (parseInt(date.day) === counter) {
                                                 return (
@@ -649,37 +712,7 @@ function Calendar({ month, year, gId, eventList }) {
                                             }
                                             return ""
                                         })}
-                                    </td>
-                                })}
-                            </tr>
-                        )
-
-                        i = i + j - 1
-                    } else {
-                        days.push(<tr>
-                            {dotw.slice(0, length - i + 1).map((day) => {
-                                j++
-                                const counter = i + j - 1
-                                return <td class={day}>
-                                    {i + j - 1}
-                                    {dateArr.map((date) => {
-                                        if (parseInt(date.day) === counter) {
-                                            return (
-                                                <NavLink
-                                                    key={date.id}
-                                                    to={`/groups/${gId}/events/${date.id}`}
-                                                    style={{ textDecoration: "none" }}
-                                                    className="event-link"
-                                                >
-                                                    <div className={date.covered ? "covered" : "not-covered"}>
-                                                        <div>{date.owner}</div>
-                                                        <div>{date.start} - {date.end}</div>
-                                                    </div>
-                                                </NavLink>
-                                            )
-                                        }
-                                        return ""
-                                    })}
+                                    </div>
                                 </td>
                             })}
                             {length - i + 1 < 7 ? dotw.slice(length - i + 1).map(() => { (<td class="noday">&nbsp;</td>) }) : ""}
@@ -699,7 +732,7 @@ function Calendar({ month, year, gId, eventList }) {
                     if (i <= 23) {
                         if (i === 1) {
                             days.push(
-                                <tr>
+                                <tr className='week-row'>
                                     {dotw.slice(0, 6).map(() => {
                                         return (<td class="noday">&nbsp;</td>)
                                     })}
@@ -708,6 +741,39 @@ function Calendar({ month, year, gId, eventList }) {
                                         const counter = i + j - 1
                                         return <td class={day}>
                                             {i + j - 1}
+                                            <div className='shifts'>
+                                                {dateArr.map((date) => {
+                                                    if (parseInt(date.day) === counter) {
+                                                        return (
+                                                            <NavLink
+                                                                key={date.id}
+                                                                to={`/groups/${gId}/events/${date.id}`}
+                                                                style={{ textDecoration: "none" }}
+                                                                className="event-link"
+                                                            >
+                                                                <div className={date.covered ? "covered" : "not-covered"}>
+                                                                    <div>{date.owner}</div>
+                                                                    <div>{date.start} - {date.end}</div>
+                                                                </div>
+                                                            </NavLink>
+                                                        )
+                                                    }
+                                                    return ""
+                                                })}
+                                            </div>
+                                        </td>
+                                    })}
+                                </tr>
+                            )
+                        }
+                        days.push(
+                            <tr className='week-row'>
+                                {dotw.map((day) => {
+                                    j++
+                                    const counter = i + j - 1
+                                    return <td class={day}>
+                                        {i + j - 1}
+                                        <div className='shifts'>
                                             {dateArr.map((date) => {
                                                 if (parseInt(date.day) === counter) {
                                                     return (
@@ -724,20 +790,25 @@ function Calendar({ month, year, gId, eventList }) {
                                                         </NavLink>
                                                     )
                                                 }
-                                                return ""
                                             })}
-                                        </td>
-                                    })}
-                                </tr>
-                            )
-                        }
-                        days.push(
-                            <tr>
-                                {dotw.map((day) => {
-                                    j++
-                                    const counter = i + j - 1
-                                    return <td class={day}>
-                                        {i + j - 1}
+                                        </div>
+                                    </td>
+                                })}
+                            </tr>
+                        )
+
+                        i = i + j - 1
+                        // console.log("ending i:", i);
+                    } else {
+                        // console.log("i checker:", i);
+                        // console.log("length checker:", length);
+                        days.push(<tr className='week-row'>
+                            {dotw.slice(0, length - i + 1).map((day) => {
+                                j++
+                                const counter = i + j - 1
+                                return <td class={day}>
+                                    {i + j - 1}
+                                    <div className='shifts'>
                                         {dateArr.map((date) => {
                                             if (parseInt(date.day) === counter) {
                                                 return (
@@ -755,39 +826,7 @@ function Calendar({ month, year, gId, eventList }) {
                                                 )
                                             }
                                         })}
-                                    </td>
-                                })}
-                            </tr>
-                        )
-
-                        i = i + j - 1
-                        // console.log("ending i:", i);
-                    } else {
-                        // console.log("i checker:", i);
-                        // console.log("length checker:", length);
-                        days.push(<tr>
-                            {dotw.slice(0, length - i + 1).map((day) => {
-                                j++
-                                const counter = i + j - 1
-                                return <td class={day}>
-                                    {i + j - 1}
-                                    {dateArr.map((date) => {
-                                        if (parseInt(date.day) === counter) {
-                                            return (
-                                                <NavLink
-                                                    key={date.id}
-                                                    to={`/groups/${gId}/events/${date.id}`}
-                                                    style={{ textDecoration: "none" }}
-                                                    className="event-link"
-                                                >
-                                                    <div className={date.covered ? "covered" : "not-covered"}>
-                                                        <div>{date.owner}</div>
-                                                        <div>{date.start} - {date.end}</div>
-                                                    </div>
-                                                </NavLink>
-                                            )
-                                        }
-                                    })}
+                                    </div>
                                 </td>
                             })}
                             {length - i + 1 < 7 ? dotw.slice(length - i + 1).map(() => { (<td class="noday">&nbsp;</td>) }) : ""}
@@ -807,10 +846,10 @@ function Calendar({ month, year, gId, eventList }) {
 
     return (
         <table border="1px solid black" cellPadding="5px" cellSpacing="0" className="calendar">
-            <tr>
+            <tr className='month-label'>
                 <th colSpan="7" className="month">{months[date.getMonth()]} {date.getFullYear()}</th>
             </tr>
-            <tr>
+            <tr className='day-label'>
                 <th className="sun day">Sun</th>
                 <th className="mon day">Mon</th>
                 <th className="tue day">Tue</th>

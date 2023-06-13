@@ -4,6 +4,10 @@ from app.models import Group, Group_Member, Group_Request, Event, User, Message,
 from app.forms import NewGroupForm, EditGroupForm, NewEventForm, EditEventForm, GroupRequestForm
 from app.aws import (upload_file_to_s3, get_unique_filename)
 
+import sys
+
+print("&&&&&&&&&&&&&&&&&&&&&&&&&", sys.getrecursionlimit())
+
 group_routes = Blueprint('groups', __name__)
 
 
@@ -76,19 +80,20 @@ def getGroupById(id):
 def createGroup():
     form = NewGroupForm()
 
-    image = form.data["groupPic"]
+    # image = form.data["groupPic"]
     # print("&&&&&&&&&&&&&&&&&&", image.get("groupPic"))
     # print("$$$$$$$$$$$$$$$$$$", form.name.data)
-    image.filename = get_unique_filename(image.filename)
-    upload = upload_file_to_s3(image)
+    # image.filename = get_unique_filename(image.filename)
+    # upload = upload_file_to_s3(image)
 
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~", upload)
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~", form.name.data)
+    print("&&&&&&&&&&&&&&&&&&&&&&&&&", form.description.data)
 
-    url = upload["url"]
+    # url = upload["url"]
 
     # url = "https://res.cloudinary.com/dbiv2lwhp/image/upload/v1673416530/samples/imagecon-group.jpg"
 
-    newGroup = Group(name=form.name.data, description=form.description.data, owner_id=form.owner_id.data, groupPic=url)
+    newGroup = Group(name=form.name.data, description=form.description.data, owner_id=form.owner_id.data)
 
     db.session.add(newGroup)
     db.session.commit()
