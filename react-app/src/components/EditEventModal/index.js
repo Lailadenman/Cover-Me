@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 // import { useSelector } from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux';
-import { createNewEvent, editEvent } from '../../store/event';
+import { createNewEvent, editEvent, getEventDetails } from '../../store/event';
 import { useModal } from '../../context/Modal';
 
 function EditEventForm({ eId, gId, eDescription, eStart_date, eEnd_date }) {
@@ -25,6 +25,8 @@ function EditEventForm({ eId, gId, eDescription, eStart_date, eEnd_date }) {
         console.log("~~~~~~~~~~~~~", start);
 
         const data = await dispatch(editEvent(eId, description, user.id, start, end, gId, false));
+
+        dispatch(getEventDetails(eId))
 
         if (data) {
             setErrors(data);
