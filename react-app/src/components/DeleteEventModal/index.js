@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux"
 import { useModal } from "../../context/Modal";
 import { deleteFromGroups } from "../../store/group";
 import { useHistory } from "react-router-dom";
-import { removeEvent } from "../../store/event";
+import { getEventDetails, removeEvent } from "../../store/event";
 
 function DeleteEventModal({ id, gId }) {
     const dispatch = useDispatch();
@@ -11,6 +11,8 @@ function DeleteEventModal({ id, gId }) {
 
     const handleYes = () => {
         dispatch(removeEvent(gId, id))
+
+        dispatch(getEventDetails(id))
 
         history.push(`/groups/${gId}`)
 
