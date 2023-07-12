@@ -8,4 +8,4 @@ class NewGroupForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
     description = StringField('description', validators=[DataRequired()])
     owner_id = IntegerField('owner_id', validators=[DataRequired()])
-    # groupPic = StringField("groupPic", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+    img_url = StringField("img_url", validators=[DataRequired()])

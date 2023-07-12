@@ -81,11 +81,13 @@ function Calendar({ month, year, gId, eventList }) {
         let length;
 
         if (year % 4 === 0 && month === 1) {
+            console.log("#########", year % 4);
             length = 29
         } else {
             length = mnthsLen[months[month]]
         }
 
+        console.log("length for this month is ", length);
         const days = []
 
         switch (day) {
