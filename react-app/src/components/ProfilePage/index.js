@@ -51,9 +51,17 @@ function ProfilePage() {
 
     console.log("first isNew", isNew);
 
+    // useEffect(() => {
+    //     setIsNew(!haveChatted)
+    // }, [haveChatted])
+
     useEffect(() => {
-        setIsNew(!haveChatted)
-    }, [haveChatted])
+        if (chatRoom && chatRoom.Message == "no rooms found") {
+            setIsNew(true)
+        } else {
+            setIsNew(false)
+        }
+    }, [chatRoom])
 
     console.log("they've talked ", isNew);
 
