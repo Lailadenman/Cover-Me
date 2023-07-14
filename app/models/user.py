@@ -24,6 +24,8 @@ class User(db.Model, UserMixin):
     event = db.relationship("Event", back_populates="owner", cascade="all, delete-orphan", foreign_keys='Event.coveredBy')
     cover_event = db.relationship("Event", back_populates="cover", cascade="all, delete-orphan", foreign_keys='Event.coveredBy')
     message = db.relationship("Message", back_populates="user", cascade="all, delete-orphan")
+    room = db.relationship("ChatRoom", back_populates="user", cascade="all, delete-orphan", foreign_keys='ChatRoom.user_id')
+    room_receiver = db.relationship("ChatRoom", back_populates="receiver", cascade="all, delete-orphan", foreign_keys='ChatRoom.receiver_id')
 
     @property
     def password(self):

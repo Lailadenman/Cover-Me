@@ -5,10 +5,10 @@ from app.forms import NewMessageForm
 
 message_routes = Blueprint('message', __name__)
 
-@message_routes.route('/<int:uId>/<int:gId>', methods=["POST"])
-def createMessage(uId, gId):
+@message_routes.route('/<int:uId>', methods=["POST"])
+def createMessage(uId):
     form = NewMessageForm()
-    mess = Message(user_id=uId, group_id=gId, message=form.message.data)
+    mess = Message(user_id=uId, group_id=form.group_id.data, room_id=form.room_id.data, message=form.message.data)
 
     db.session.add(mess)
     db.session.commit()

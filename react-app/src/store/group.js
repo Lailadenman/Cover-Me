@@ -206,13 +206,14 @@ export const joinRequest = (uId, gId) => async (dispatch) => {
 // when we fetch the group details and then for new messages use this thunk
 export const newChat = (user_id, group_id, message) => async (dispatch) => {
     console.log("new message sent");
-    const res = await fetch(`/api/messages/${user_id}/${group_id}`, {
+    const res = await fetch(`/api/messages/${user_id}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            message
+            message,
+            group_id
         })
     })
 

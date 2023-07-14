@@ -7,3 +7,4 @@ from .db import environment, SCHEMA
 from .group_request import Group_Request
 from .message import Message
 from .image import Image
+from .chatRooms import ChatRoom
