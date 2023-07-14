@@ -8,30 +8,14 @@ import { getRoomId, getRoomMessages, newPrivChat } from '../../store/chat';
 let socket;
 
 function PrivateChat({ rId }) {
-    // const groupMessages = useSelector(state => state?.groups?.groupDetails?.messages)
-    // const groupMessagesArr = Object.values(groupMessages)
-    // const messagesArr = groupMessagesArr.map((mess) => {
-    //     return { user: mess.username, msg: mess.message }
-    // })
-
-    // useEffect(() => {
-    //     dispatch(getRoomMessages(rId))
-    //     setIsLoaded(true)
-    // }, [dispatch])
-
     const privMessages = useSelector(state => state?.currRoom?.room?.chats)
-    const privMessagesArr = Object.values(privMessages)
-    const messagesArr = privMessagesArr.map((mess) => {
+    const privMessagesArr = privMessages && Object.values(privMessages)
+    const messagesArr = privMessages && privMessagesArr.map((mess) => {
         return { user: mess.username, msg: mess.message }
     })
-    const test = [...messagesArr]
-    // console.log(messagesArr);
-    const [messages, setMessages] = useState([...messagesArr])
-    // const [messages, setMessages] = useState([])
-    // const [messages, setMessages] = useState([{user: "tester", msg: "please"}])
+    const [messages, setMessages] = useState(privMessages ? [...messagesArr] : [])
     const [chatInput, setChatInput] = useState("");
     const user = useSelector(state => state?.session?.user)
-    // const chatRoomId = useSelector(state => state.session.room.id)
     const [isLoaded, setIsLoaded] = useState(false)
     const dispatch = useDispatch()
 

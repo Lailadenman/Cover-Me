@@ -46,7 +46,7 @@ export const newChatRoom = (user_id, receiver_id) => async (dispatch) => {
 export const getRoomId = (rId) => async (dispatch) => {
     const res = await fetch(`/api/users/room/${rId}`)
     console.log("id tester thunk hit");
-    // console.log(rId);
+    console.log(rId);
     // console.log(res.url);
 
     if (res.ok) {
@@ -116,6 +116,7 @@ export const getRoomMessages = (room_id) => async (dispatch) => {
 
 export const newPrivChat = (user_id, room_id, message) => async (dispatch) => {
     console.log("new message sent");
+    console.log(room_id);
     const res = await fetch(`/api/messages/${user_id}`, {
         method: "POST",
         headers: {

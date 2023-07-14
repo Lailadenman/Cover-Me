@@ -30,7 +30,7 @@ function ProfilePage() {
     let roomId = chatRoom?.id
 
     if (chatRoom && chatRoom.Message) {
-        // console.log("they have never talked");
+        console.log("they have never talked");
         haveChatted = false
         // setIsReady(true)
     } else {
@@ -46,9 +46,13 @@ function ProfilePage() {
 
     // console.log(test);
 
-    const [isNew, setIsNew] = useState(!haveChatted ? true : false)
+    const [isNew, setIsNew] = useState(true)
 
-    // console.log("they've talked ", isNew);
+    useEffect(() => {
+        setIsNew(!haveChatted)
+    }, [haveChatted])
+
+    console.log("they've talked ", isNew);
 
     // useEffect(() => {
     //     dispatch(getUserInfo(id))
@@ -77,7 +81,8 @@ function ProfilePage() {
 
     let cName = isNew ? "chat-sect hidden" : "chat-sect"
 
-    // console.log("current class is ", cName);
+    console.log(isNew);
+    console.log("current class is ", cName);
 
     return (
         <>
