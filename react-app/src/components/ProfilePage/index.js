@@ -4,6 +4,7 @@ import { getUserInfo } from "../../store/users"
 import { useParams } from "react-router-dom/cjs/react-router-dom"
 import { getRoomById, getRoomMessages, newChatRoom } from "../../store/chat"
 import PrivateChat from "../PrivateChat"
+import "./ProfilePage.css"
 
 function ProfilePage() {
     const dispatch = useDispatch()
@@ -102,9 +103,11 @@ function ProfilePage() {
 
     return (
         <>
-            {isLoaded && (<div>
-                {profUser && (<div>
-                    Profile for {profUser && profUser?.firstName}
+            {isLoaded && (<div className="prof-div">
+                {profUser && (<div className="user-info">
+                    <h1>Profile for {profUser && profUser?.firstName}</h1>
+                    <h2>Bio: {profUser && profUser?.bio}</h2>
+                    {/* <h3>{profUser && profUser?.bio}</h3> */}
                 </div>)}
                 {rRoom && (<div className={cName}>
                     <PrivateChat rId={rRoom.id} />

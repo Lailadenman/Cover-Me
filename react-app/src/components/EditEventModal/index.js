@@ -42,8 +42,9 @@ function EditEventForm({ eId, gId, eDescription, eStart_date, eEnd_date }) {
                     <li key={idx}>{error}</li>
                 ))}
             </ul>
+            <h3>Edit Your Event</h3>
             <label>
-                description
+                Description
                 <input
                     type="text"
                     value={description}

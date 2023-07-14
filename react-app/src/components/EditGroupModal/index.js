@@ -24,11 +24,13 @@ function EditGroupModal({ gName, gDescription, gId }) {
 
     return (
         <form onSubmit={handleSubmit}>
+
             <ul>
                 {errors.map((error, idx) => (
                     <li key={idx}>{error}</li>
                 ))}
             </ul>
+            <h3>Edit Your Group</h3>
             <label>
                 Name
                 <input
@@ -39,7 +41,7 @@ function EditGroupModal({ gName, gDescription, gId }) {
                 />
             </label>
             <label>
-                description
+                Description
                 <input
                     type="text"
                     value={description}

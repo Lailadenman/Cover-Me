@@ -9,7 +9,12 @@ body {
 }
 
 a:visited {
-    color: black
+    color: black;
+    text-decoration: none;
+}
+
+a {
+    color: black;
 }
 
 .modal {
