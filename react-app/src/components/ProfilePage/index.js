@@ -15,9 +15,6 @@ function ProfilePage() {
 
     useEffect(() => {
         dispatch(getRoomById(user, id))
-        dispatch(getUserInfo(id))
-        setIsLoaded(true)
-        console.log("useEffect ran");
     }, [dispatch])
 
     const chatRoom = useSelector(state => state?.currRoom?.room)
@@ -37,10 +34,10 @@ function ProfilePage() {
 
     const [isNew, setIsNew] = useState(!haveChatted)
 
-    // useEffect(() => {
-    //     dispatch(getUserInfo(id))
-    //     setIsLoaded(true)
-    // }, [dispatch])
+    useEffect(() => {
+        dispatch(getUserInfo(id))
+        setIsLoaded(true)
+    }, [dispatch])
 
     const profUser = useSelector(state => state.currUser.userProf)
 

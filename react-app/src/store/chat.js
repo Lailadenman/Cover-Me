@@ -44,10 +44,14 @@ export const newChatRoom = (user_id, receiver_id) => async (dispatch) => {
 }
 
 export const getRoomById = (user_id, receiver_id) => async (dispatch) => {
-    const res = await fetch(`api/users/${user_id}/${receiver_id}`)
+    const res = await fetch(`/api/users/${user_id}/${receiver_id}`)
+    console.log("get room by id thunk hit");
+    console.log(res.url);
 
     if(res.ok) {
         const room = res.json()
+
+        console.log("room", room);
 
         dispatch(getRoom(room))
     }

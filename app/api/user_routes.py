@@ -32,10 +32,13 @@ def getChatRoomById(uId, rId):
 
     room = roomQuery.first()
 
+    print("?????????????????", room)
+
     if (not room == None):
-        print("<<<<<<<<<<<<<<<<<<<<<<<<< It found a room")
+        print("######################### It found a room")
         return room.to_dict()
     else:
+        print("######################### Something went wrong")
         return {"Message": "no rooms found"}
 
 

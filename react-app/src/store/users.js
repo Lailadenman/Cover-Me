@@ -10,6 +10,7 @@ export const getUserInfo = (id) => async (dispatch) => {
     const res = await fetch(`/api/users/${id}`)
 
     console.log("get user thunk hit");
+    console.log(res.url);
 
     if(res.ok) {
         const user = await res.json()
