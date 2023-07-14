@@ -3,10 +3,21 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border: 1px solid black;
+    height: 80%;
 }
 
-.home-headrer {
+.home-header {
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid black;
+}
+
+.login-signup-sect {
+    border: 1px solid black;
+}
+
+.home-footer {
+    border: 1px solid black;
 }

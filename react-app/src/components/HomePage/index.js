@@ -4,6 +4,7 @@ import LoginFormPage from "../LoginFormPage";
 import { NavLink } from "react-router-dom/cjs/react-router-dom";
 import { useState } from "react";
 import SignupFormPage from "../SignupFormPage";
+import "./HomePage.css"
 
 function HomePage() {
     const dispatch = useDispatch()

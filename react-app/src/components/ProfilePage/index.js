@@ -25,15 +25,16 @@ function ProfilePage() {
 
     // console.log(isLoaded && chatRoom);
 
-    let haveChatted = true
+    let haveChatted;
 
     let roomId = chatRoom?.id
 
-    if (chatRoom && chatRoom.Message) {
+    if (chatRoom && chatRoom.Message == "no rooms found") {
         console.log("they have never talked");
         haveChatted = false
         // setIsReady(true)
     } else {
+        haveChatted = true
         // console.log(chatRoom);
         // // console.log(room?.id);
         // const testId = chatRoom.id
