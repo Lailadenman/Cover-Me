@@ -41,3 +41,6 @@ def getGroups(id):
     print("##################", groups)
 
     return groups
+
+# @user_routes.route('/<int:id>/addPic')
+# def add_pro_pic(id):

@@ -6,63 +6,63 @@ from sqlalchemy.sql import text
 def seed_users():
     # 1
     demo = User(
-        username='Demo', firstName='Demo', lastName='lition', email='demo@aa.io', password='password')
+        username='Demo', firstName='Demo', lastName='lition', bio="I'm a demo user", email='demo@aa.io', password='password')
     # 2
     marnie = User(
-        username='marnie', firstName='Marnie', lastName='Farber', email='marnie@aa.io', password='password')
+        username='marnie', firstName='Marnie', lastName='Farber', bio="My name is marnie", email='marnie@aa.io', password='password')
     # 3
     bobbie = User(
-        username='bobbie', firstName='Bobbie', lastName='Lyte', email='bobbie@aa.io', password='password')
+        username='bobbie', firstName='Bobbie', lastName='Lyte', bio="My name is bobbie", email='bobbie@aa.io', password='password')
     # 4
     Bruno = User(
-        username='B_man', firstName='Bruno', lastName='Fagundes', email='bruno@aa.io', password='password')
+        username='B_man', firstName='Bruno', lastName='Fagundes', bio="I was 3%", email='bruno@aa.io', password='password')
     # 5
     Laila = User(
-        username='Lailaaaaad', firstName='Laila', lastName='Denman', email='laila@aa.io', password='password')
+        username='Lailaaaaad', firstName='Laila', lastName='Denman', bio="I made this site", email='laila@aa.io', password='password')
     # 6
     Gojo = User(
-        username='Limitless', firstName='Gojo', lastName='Satoru', email='sixeyes@aa.io', password='password')
+        username='Limitless', firstName='Gojo', lastName='Satoru', bio="I am literally the most powerful anime character", email='sixeyes@aa.io', password='password')
     # 7
     Killua = User(
-        username='Killuax', firstName='Killua', lastName='Zoldyck', email='kilzo@aa.io', password='password')
+        username='Killuax', firstName='Killua', lastName='Zoldyck', bio="I'm literally the best assassin", email='kilzo@aa.io', password='password')
     # 8
     Sebastian = User(
-        username='black_butler', firstName='Sebastion', lastName='Michaelis', email='bbutler@aa.io', password='password')
+        username='black_butler', firstName='Sebastion', lastName='Michaelis', bio="I'm one hell of a butler", email='bbutler@aa.io', password='password')
     # 9
     Yami = User(
-        username='cpt_blk_bull', firstName='Yami', lastName='Sukehiro', email='destrutiongod@aa.io', password='password')
+        username='cpt_blk_bull', firstName='Yami', lastName='Sukehiro', bio="I'm the captain of the black bulls", email='destrutiongod@aa.io', password='password')
     # 10
     Naruto = User(
-        username='hokage_5', firstName='Naruto', lastName='Uzumaki', email='ninetails@aa.io', password='password')
+        username='hokage_5', firstName='Naruto', lastName='Uzumaki', bio="Literally the best hokage", email='ninetails@aa.io', password='password')
     # 11
     Meredith = User(
-        username='mer_1', firstName='Meredith', lastName='Grey', email='surg1@aa.io', password='password')
+        username='mer_1', firstName='Meredith', lastName='Grey', bio="Pick me, love me, choose me or whatever she said", email='surg1@aa.io', password='password')
     # 12
     Derek = User(
-        username='mcdreamy', firstName='Derek', lastName='Shepherd', email='neuro@aa.io', password='password')
+        username='mcdreamy', firstName='Derek', lastName='Shepherd', bio="Homie had no reason to die omg", email='neuro@aa.io', password='password')
     # 13
     Alex = User(
-        username='boy_wonder', firstName='Alex', lastName='Karev', email='karev@aa.io', password='password')
+        username='boy_wonder', firstName='Alex', lastName='Karev', bio="My fav character", email='karev@aa.io', password='password')
     # 14
     Cristina = User(
-        username='cardio_god', firstName='Cristina', lastName='Yang', email='cardio@aa.io', password='password')
+        username='cardio_god', firstName='Cristina', lastName='Yang', bio="She had no reason to completely leave the show omg", email='cardio@aa.io', password='password')
     # 15
     Mark = User(
-        username='mcsteamy', firstName='Mark', lastName='Sloan', email='plastics@aa.io', password='password')
+        username='mcsteamy', firstName='Mark', lastName='Sloan', bio="He was on his redemption when he died smh", email='plastics@aa.io', password='password')
     # 16
     George = User(
-        username='007', firstName='George', lastName="O'Malley", email='007@aa.io', password='password')
+        username='007', firstName='George', lastName="O'Malley", bio="LITERALLY DIED FOR NO REASON", email='007@aa.io', password='password')
 
     # Users used for requests/not in groups yet
     # 17
     Nagisa = User(
-        username='Cobra', firstName='Nagisa', lastName="Shiota", email='assassination@aa.io', password='password')
+        username='Cobra', firstName='Nagisa', lastName="Shiota", bio="Underestimated", email='assassination@aa.io', password='password')
     # 18
     Tanjiro = User(
-        username='slayer_00', firstName='Tanjiro', lastName="Kamado", email='dsc@aa.io', password='password')
+        username='slayer_00', firstName='Tanjiro', lastName="Kamado", bio="Water breather", email='dsc@aa.io', password='password')
     # 19
     Ash = User(
-        username='lynx', firstName='Aslan', lastName="Callenreese", email='bananafish@aa.io', password='password')
+        username='lynx', firstName='Aslan', lastName="Callenreese", bio="HE IS NOT DEAD", email='bananafish@aa.io', password='password')
 
 
     db.session.add(demo)

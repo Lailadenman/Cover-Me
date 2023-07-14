@@ -25,6 +25,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('firstName', sa.String(length=50), nullable=False),
     sa.Column('lastName', sa.String(length=50), nullable=False),
+    sa.Column('profPic', sa.String(length=2000), nullable=True),
+    sa.Column('bio', sa.String(length=2000), nullable=False),
     sa.Column('username', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),

@@ -12,8 +12,8 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     firstName = db.Column(db.String(50), nullable=False)
     lastName = db.Column(db.String(50), nullable=False)
-    # profPic = db.Column(db.String(2000), nullable=False)
-    # bio = db.Column(db.String(2000), nullable=False)
+    profPic = db.Column(db.String(2000), default="https://res.cloudinary.com/dbiv2lwhp/image/upload/v1689305282/autoimg_w9fhxl.jpg")
+    bio = db.Column(db.String(2000), nullable=False)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
@@ -42,6 +42,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'firstName': self.firstName,
-            'lastName':self.lastName
+            'lastName': self.lastName,
+            'profPic': self.profPic,
+            'bio': self.bio
         }
-

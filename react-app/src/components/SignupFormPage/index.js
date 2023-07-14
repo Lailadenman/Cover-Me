@@ -7,6 +7,10 @@ import './SignupForm.css';
 function SignupFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [bio, setBio] = useState("");
+  const [image, setImage] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -18,22 +22,57 @@ function SignupFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
-        const data = await dispatch(signUp(username, email, password));
-        if (data) {
-          setErrors(data)
-        }
+      const data = await dispatch(signUp(firstName, lastName, bio, image, username, email, password));
+      if (data) {
+        setErrors(data)
+      }
     } else {
-        setErrors(['Confirm Password field must be the same as the Password field']);
+      setErrors(['Confirm Password field must be the same as the Password field']);
     }
   };
 
   return (
     <>
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
+      <form action="/posts/new" method="POST" enctype="multipart/form-data" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
+        <label>
+          First Name
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Last Name
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Biography
+          <input
+            type="text"
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Profile Picture
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files[0])}
+          />
+        </label>
         <label>
           Email
           <input
@@ -70,6 +109,7 @@ function SignupFormPage() {
             required
           />
         </label>
+        <button className="cart-save-button" type="submit">Save</button>
         <button type="submit">Sign Up</button>
       </form>
     </>

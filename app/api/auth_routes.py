@@ -1,8 +1,11 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, Image, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
+from app.forms import ImageForm
 from flask_login import current_user, login_user, logout_user, login_required
+from app.aws import (upload_file_to_s3, get_unique_filename)
+
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -39,6 +42,7 @@ def login():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
+        print("^^^^^^^^^^^^^^^^^^^^^^ hit the login func")
         user = User.query.filter(User.email == form.data['email']).first()
         login_user(user)
         return user.to_dict()
@@ -65,13 +69,35 @@ def sign_up():
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            bio = form.data['bio'],
+            profPic = form.data['profPic']
         )
         db.session.add(user)
         db.session.commit()
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@auth_routes.route("/new-pImg", methods=["POST"])
+def add_url():
+    print("hit img route")
+    iForm = ImageForm()
+
+    image = iForm.data['image']
+
+    image.filename = get_unique_filename(image.filename)
+    upload = upload_file_to_s3(image)
+
+    url = upload["url"]
+
+    newImg = Image(url = url)
+
+    db.session.add(newImg)
+    db.session.commit()
+
+    print("img route return is", url)
+    return upload
 
 
 @auth_routes.route('/unauthorized')
