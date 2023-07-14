@@ -49,7 +49,23 @@ export const getRoomById = (user_id, receiver_id) => async (dispatch) => {
     console.log(res.url);
 
     if(res.ok) {
-        const room = res.json()
+        const room = await res.json()
+
+        const mesRes = await fetch(`/api/users/${room.id}/messages`)
+
+        let messages;
+
+        if (mesRes.ok) {
+            messages = await mesRes.json()
+
+            console.log("############", messages);
+
+            // dispatch(loadChats(messages))
+        }
+
+        console.log("@@@@@@@@@@@@@", messages);
+
+        room.chats = messages
 
         console.log("room", room);
 
@@ -58,7 +74,7 @@ export const getRoomById = (user_id, receiver_id) => async (dispatch) => {
 }
 
 export const getRoomMessages = (room_id) => async (dispatch) => {
-    const res = await fetch(`api/users/${room_id}/messages`)
+    const res = await fetch(`/api/users/${room_id}/messages`)
 
     if (res.ok) {
         const messages = await res.json()
@@ -83,7 +99,7 @@ export const newPrivChat = (user_id, room_id, message) => async (dispatch) => {
     if (res.ok) {
         const message = await res.json()
         console.log("new message saved");
-        dispatch(getRoomMessages(room_id))
+        getRoomMessages(room_id)
     }
 }
 
@@ -99,7 +115,7 @@ export default function roomReducer(state = initialState, action) {
 
             newState["room"] = action.room
 
-            newState.room["messages"] = {}
+            // newState.room["messages"] = {}
 
             return newState
 

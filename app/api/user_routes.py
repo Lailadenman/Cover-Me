@@ -51,7 +51,7 @@ def getUserMessages(id):
     # user = User.query.get(uId)
     # receiver = User.query.get(rId)
 
-    roomQuery = ChatRoom.get(id)
+    roomQuery = ChatRoom.query.get(id)
 
     messagesQuery = Message.query.filter(Message.room_id == roomQuery.id)
 
@@ -59,9 +59,14 @@ def getUserMessages(id):
 
     messagesArr = []
 
-    for message in messages:
-        print(message.to_dict())
-        messagesArr.append(message.to_dict())
+    # print("@@@@@@@@@@@@@@@@@@@@@@@@", messages)
+
+    # print("@@@@@@@@@@@@@@@@@@@@@@@@", messages[0].to_dict())
+
+    if not messages == None:
+        for message in messages:
+            # print("#############################", message.to_dict())
+            messagesArr.append(message.to_dict())
 
     # room = roomQuery.to_dict()
 

@@ -2,42 +2,58 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getUserInfo } from "../../store/users"
 import { useParams } from "react-router-dom/cjs/react-router-dom"
-import { getRoomById, newChatRoom } from "../../store/chat"
+import { getRoomById, getRoomMessages, newChatRoom } from "../../store/chat"
 import PrivateChat from "../PrivateChat"
 
 function ProfilePage() {
     const dispatch = useDispatch()
     const [isLoaded, setIsLoaded] = useState(false)
-    const user = useSelector(state => state.session.user.id)
+    // const [isReady, setIsReady] = useState(false)
+    const user = useSelector(state => state?.session?.user?.id)
     const { id } = useParams()
 
     console.log("user id is", id);
 
     useEffect(() => {
         dispatch(getRoomById(user, id))
+        dispatch(getUserInfo(id))
+        setIsLoaded(true)
+        console.log("useEffect ran");
     }, [dispatch])
 
     const chatRoom = useSelector(state => state?.currRoom?.room)
 
-    console.log(chatRoom && chatRoom);
+    console.log(isLoaded && chatRoom);
 
     let haveChatted = true
 
-    let room;
+    let roomId = chatRoom?.id
 
-    if(chatRoom && chatRoom.message) {
+    if(chatRoom && chatRoom.Message) {
         console.log("they have never talked");
         haveChatted = false
+        // setIsReady(true)
     } else {
-        room = chatRoom && chatRoom?.room
+        console.log(chatRoom);
+        // console.log(room?.id);
+        // const testId = chatRoom.id
+        // console.log(testId);
+        // dispatch(getRoomMessages(chatRoom && chatRoom?.id))
+        // setIsReady(true)
     }
 
-    const [isNew, setIsNew] = useState(!haveChatted)
+    const test = !haveChatted
 
-    useEffect(() => {
-        dispatch(getUserInfo(id))
-        setIsLoaded(true)
-    }, [dispatch])
+    console.log(test);
+
+    const [isNew, setIsNew] = useState(!haveChatted ? true : false)
+
+    console.log("they've talked ", isNew);
+
+    // useEffect(() => {
+    //     dispatch(getUserInfo(id))
+    //     setIsLoaded(true)
+    // }, [dispatch])
 
     const profUser = useSelector(state => state.currUser.userProf)
 
@@ -47,13 +63,17 @@ function ProfilePage() {
 
     const handleStart = () => {
         dispatch(newChatRoom(user, id))
-        // console.log(`new room is `, rm);
+        // console.log(`new room is `, rm)
         setIsNew(false)
     }
 
-    // const room = useSelector(state => state?.currRoom?.room)
+    // useEffect(() => {
+    //     setIsNew(false)
+    // }, [])
 
-    console.log(room && room);
+    const rRoom = useSelector(state => state?.currRoom?.room)
+
+    console.log(rRoom && rRoom);
 
     let cName = isNew ? "chat-sect hidden" : "chat-sect"
 
@@ -65,8 +85,8 @@ function ProfilePage() {
                 {profUser && (<div>
                     Profile for {profUser && profUser?.firstName}
                 </div>)}
-                {room && (<div className={cName}>
-                    <PrivateChat rId={room.id} />
+                {rRoom && (<div className={cName}>
+                    <PrivateChat rId={rRoom.id} />
                 </div>)}
                 {isNew ? (<button onClick={handleStart}>Start Conversation</button>) : ""}
             </div>)}

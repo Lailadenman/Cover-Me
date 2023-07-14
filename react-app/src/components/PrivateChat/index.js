@@ -13,23 +13,35 @@ function PrivateChat({ rId }) {
     // const messagesArr = groupMessagesArr.map((mess) => {
     //     return { user: mess.username, msg: mess.message }
     // })
-    const [isLoaded, setIsLoaded] = useState(false)
-    const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(getRoomMessages(rId))
-        setIsLoaded(true)
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getRoomMessages(rId))
+    //     setIsLoaded(true)
+    // }, [dispatch])
 
-    const privMessages = useSelector(state => state?.currRoom?.room?.messages)
+    const privMessages = useSelector(state => state?.currRoom?.room?.chats)
     const privMessagesArr = Object.values(privMessages)
     const messagesArr = privMessagesArr.map((mess) => {
-        return { user: mess.username, msg: mess.message}
+        return { user: mess.username, msg: mess.message }
     })
+    const test = [...messagesArr]
+    console.log(messagesArr);
     const [messages, setMessages] = useState([...messagesArr])
+    // const [messages, setMessages] = useState([])
+    // const [messages, setMessages] = useState([{user: "tester", msg: "please"}])
     const [chatInput, setChatInput] = useState("");
     const user = useSelector(state => state?.session?.user)
     // const chatRoomId = useSelector(state => state.session.room.id)
+    const [isLoaded, setIsLoaded] = useState(false)
+    const dispatch = useDispatch()
+
+    console.log(messagesArr);
+    console.log(messages);
+    console.log(test);
+
+    // useEffect(() => {
+    //     setMessages([...messagesArr])
+    // }, [messagesArr])
 
     useEffect(() => {
         socket = io();
@@ -65,7 +77,7 @@ function PrivateChat({ rId }) {
         }
     }
 
-    return (isLoaded && user && (
+    return (user && (
         <>
             <div>
                 <div>

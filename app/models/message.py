@@ -24,7 +24,7 @@ class Message(db.Model):
             "group_id": self.group_id,
             "room_id": self.room_id,
             "message": self.message,
-            "group": self.group.to_dict(),
+            # "group": self.group.to_dict(),
             "user": self.user.to_dict(),
             "username": self.user.username
         }
