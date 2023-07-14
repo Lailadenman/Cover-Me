@@ -16,7 +16,7 @@ function CreateGroupModal() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log("creategroup index.js", image)
+        // // console.log("creategroup index.js", image)
 
         const formData = new FormData()
 
@@ -27,12 +27,12 @@ function CreateGroupModal() {
             body: formData
         })
 
-        console.log("res checker");
+        // // console.log("res checker");
 
-        if(res.ok) {
+        if (res.ok) {
             let url = await res.json()
             let img_url = url.url
-            console.log("res is all good", img_url);
+            // // console.log("res is all good", img_url);
             dispatch(createNewGroup(name, description, user, img_url))
         }
 

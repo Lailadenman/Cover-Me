@@ -41,6 +41,19 @@ def getChatRoomById(uId, rId):
         print("######################### Something went wrong")
         return {"Message": "no rooms found"}
 
+@user_routes.route('/room/<int:rId>')
+@login_required
+def getChatRoomId(rId):
+    roomQuery = ChatRoom.query.get(rId)
+
+    print("????????????????? hit backend for roomID")
+
+    if (not roomQuery == None):
+        # print("######################### It found a room")
+        return roomQuery.to_dict()
+    else:
+        # print("######################### Something went wrong")
+        return {"Message": "no rooms found"}
 
 @user_routes.route('/<int:id>/messages')
 @login_required

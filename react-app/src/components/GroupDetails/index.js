@@ -46,9 +46,9 @@ function GroupDetails() {
     const membersArr = members && Object.values(members)
     const requestsArr = requests && Object.values(requests)
 
-    console.log("from group deatils", eventsArr);
+    // // console.log("from group deatils", eventsArr);
 
-    console.log(group && group?.name);
+    // // console.log(group && group?.name);
 
     const handlePastMonth = () => {
         if (month === 0) {
@@ -85,7 +85,7 @@ function GroupDetails() {
     }
 
     //     let isRequested = false
-    //     console.log("join clicked");
+    //     // console.log("join clicked");
     //     requestsArr.forEach(req => {
     //         if(req.user_id === user && req.group_id === id) {
     //             isRequested = true
@@ -164,7 +164,7 @@ function GroupDetails() {
         if (!showRequestMenu) return;
 
         const closeMenu = (e) => {
-            console.log("e.target checker", e.target.id);
+            // // console.log("e.target checker", e.target.id);
             if (!ulRef.current.contains(e.target)) {
                 setShowRequestMenu(false);
             }
@@ -193,7 +193,7 @@ function GroupDetails() {
 
     const isOwner = group?.owner_id === user
 
-    console.log("pic url ", group && group.pic);
+    // // console.log("pic url ", group && group.pic);
 
     const banner = group && group.pic
 
@@ -306,8 +306,8 @@ function GroupDetails() {
                 <h2>Owner: {group?.owner}</h2>
                 <h2>{group?.description}</h2>
                 {isRequested ? (<p>Your request to join has already been send</p>) : (<div id='joinButton' className={!isMember ? "" : "hidden"}>
-                                    <button onClick={onJoin}>Join</button>
-                                </div>)}
+                    <button onClick={onJoin}>Join</button>
+                </div>)}
             </div>)}
         </div>
     )

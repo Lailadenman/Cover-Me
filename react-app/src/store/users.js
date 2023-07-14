@@ -9,15 +9,15 @@ const getUser = (user) => ({
 export const getUserInfo = (id) => async (dispatch) => {
     const res = await fetch(`/api/users/${id}`)
 
-    console.log("get user thunk hit");
-    console.log(res.url);
+    // console.log("get user thunk hit");
+    // console.log(res.url);
 
-    if(res.ok) {
+    if (res.ok) {
         const user = await res.json()
 
         dispatch(getUser(user))
 
-        console.log("get user thunk successful", user.firstName);
+        // console.log("get user thunk successful", user.firstName);
     }
 }
 
@@ -29,7 +29,7 @@ export default function userReducer(state = initialState, action) {
         case GET_USER:
             newState = initialState
 
-            console.log("this is the store ", action.user);
+            // console.log("this is the store ", action.user);
 
             newState.userProf = action.user
 

@@ -36,27 +36,27 @@ export const getEvents = (gId) => async (dispatch) => {
     if (res.ok) {
         const list = await res.json()
 
-        console.log(list);
+        // console.log(list);
 
         dispatch(loadEvents(list))
     }
 }
 
 export const getEventDetails = (gId, id) => async (dispatch) => {
-    console.log("get event details hit");
+    // console.log("get event details hit");
     const res = await fetch(`/api/groups/${gId}/events/${id}`)
 
     if (res.ok) {
         const shift = await res.json()
 
-        // console.log();
+        // // console.log();
         dispatch(loadEventDetails(shift))
     }
 }
 
-export const createNewEvent = ( description, owner_id, start_date, end_date, gId ) => async (dispatch) => {
-    console.log("hit createNewEvent");
-    const res = await fetch(`/api/groups/${gId}/events`,  {
+export const createNewEvent = (description, owner_id, start_date, end_date, gId) => async (dispatch) => {
+    // console.log("hit createNewEvent");
+    const res = await fetch(`/api/groups/${gId}/events`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export const createNewEvent = ( description, owner_id, start_date, end_date, gId
         }),
     })
 
-    if(res.ok) {
+    if (res.ok) {
         const newEvent = await res.json()
 
         dispatch(createEvent(newEvent))
@@ -78,8 +78,8 @@ export const createNewEvent = ( description, owner_id, start_date, end_date, gId
 }
 
 export const editEvent = (id, description, owner_id, start_date, end_date, gId, isCovered, coveredBy) => async (dispatch) => {
-    // console.log("editEvetnt thunk hit");
-    console.log(id, description, owner_id, start_date, end_date, gId, isCovered, coveredBy);
+    // // console.log("editEvetnt thunk hit");
+    // console.log(id, description, owner_id, start_date, end_date, gId, isCovered, coveredBy);
     const res = await fetch(`/api/groups/${gId}/events/${id}`, {
         method: "PUT",
         headers: {
@@ -96,7 +96,7 @@ export const editEvent = (id, description, owner_id, start_date, end_date, gId, 
         }),
     })
 
-    if(res.ok) {
+    if (res.ok) {
         const editedEvent = await res.json()
 
         dispatch(updateEvent(editedEvent))
@@ -108,7 +108,7 @@ export const removeEvent = (gId, id) => async (dispatch) => {
         method: 'DELETE'
     })
 
-    if(res.ok) {
+    if (res.ok) {
         const deletedEvent = await res.json()
 
         dispatch(deleteEvent(deletedEvent.id))
@@ -130,21 +130,21 @@ export default function eventReducer(state = initialState, action) {
             return newState
 
         case LOAD_EVENT_DETAILS:
-            newState = {...state}
+            newState = { ...state }
 
             newState.event_details = action.shift
 
             return newState
 
         case CREATE_EVENT:
-            newState = {...state}
+            newState = { ...state }
 
             newState[action.shift.id] = action.shift
 
             return newState
 
         case UPDATE_EVENT:
-            newState = {...state}
+            newState = { ...state }
 
             newState[action.shift.id] = action.shift
 
@@ -153,7 +153,7 @@ export default function eventReducer(state = initialState, action) {
             return newState
 
         case DELETE_EVENT:
-            newState = {...state}
+            newState = { ...state }
 
             delete newState[action.id]
 

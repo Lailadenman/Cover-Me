@@ -12,8 +12,8 @@ const deleteRequest = (id) => ({
 })
 
 export const acceptRequest = (id, uId, gId) => async (dispatch) => {
-    console.log("hit createNewEvent");
-    const res = await fetch(`/api/group_requests`,  {
+    // console.log("hit createNewEvent");
+    const res = await fetch(`/api/group_requests`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -25,7 +25,7 @@ export const acceptRequest = (id, uId, gId) => async (dispatch) => {
         }),
     })
 
-    if(res.ok) {
+    if (res.ok) {
         const newMem = await res.json()
 
         dispatch(createMember(newMem))
@@ -37,7 +37,7 @@ export const declineRequest = (id) => async (dispatch) => {
         method: 'DELETE'
     })
 
-    if(res.ok) {
+    if (res.ok) {
         const deletedEvent = await res.json()
 
         dispatch(deleteEvent(deletedEvent.id))
@@ -59,21 +59,21 @@ export default function memberReducer(state = initialState, action) {
             return newState
 
         case LOAD_EVENT_DETAILS:
-            newState = {...state}
+            newState = { ...state }
 
             newState.event_details = action.shift
 
             return newState
 
         case CREATE_EVENT:
-            newState = {...state}
+            newState = { ...state }
 
             newState[action.shift.id] = action.shift
 
             return newState
 
         case UPDATE_EVENT:
-            newState = {...state}
+            newState = { ...state }
 
             newState[action.shift.id] = action.shift
 
@@ -82,7 +82,7 @@ export default function memberReducer(state = initialState, action) {
             return newState
 
         case DELETE_EVENT:
-            newState = {...state}
+            newState = { ...state }
 
             delete newState[action.id]
 

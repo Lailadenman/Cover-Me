@@ -20,7 +20,7 @@ const getRoom = (room) => ({
 })
 
 export const newChatRoom = (user_id, receiver_id) => async (dispatch) => {
-    console.log("new room made");
+    // console.log("new room made");
     const res = await fetch(`/api/room/${user_id}/${receiver_id}`, {
         method: "POST",
         headers: {
@@ -28,27 +28,28 @@ export const newChatRoom = (user_id, receiver_id) => async (dispatch) => {
         }
     })
 
-    console.log(res.url);
+    // console.log(res.url);
 
     if (res.ok) {
         const room = await res.json()
 
-        console.log("here is the room ", room);
+        // console.log("here is the room ", room);
 
         dispatch(getRoom(room))
 
-        console.log("after checker");
-        // console.log("new message saved");
+        // console.log("after checker");
+        // // console.log("new message saved");
         // dispatch(getGroupDetails(group_id))
     }
 }
 
-export const getRoomById = (user_id, receiver_id) => async (dispatch) => {
-    const res = await fetch(`/api/users/${user_id}/${receiver_id}`)
-    console.log("get room by id thunk hit");
-    console.log(res.url);
+export const getRoomId = (rId) => async (dispatch) => {
+    const res = await fetch(`/api/users/room/${rId}`)
+    console.log("id tester thunk hit");
+    // console.log(rId);
+    // console.log(res.url);
 
-    if(res.ok) {
+    if (res.ok) {
         const room = await res.json()
 
         const mesRes = await fetch(`/api/users/${room.id}/messages`)
@@ -58,16 +59,46 @@ export const getRoomById = (user_id, receiver_id) => async (dispatch) => {
         if (mesRes.ok) {
             messages = await mesRes.json()
 
-            console.log("############", messages);
+            // console.log("############", messages);
 
             // dispatch(loadChats(messages))
         }
 
-        console.log("@@@@@@@@@@@@@", messages);
+        // console.log("@@@@@@@@@@@@@", messages);
 
         room.chats = messages
 
-        console.log("room", room);
+        // console.log("room", room);
+
+        dispatch(getRoom(room))
+    }
+}
+
+export const getRoomById = (user_id, receiver_id) => async (dispatch) => {
+    const res = await fetch(`/api/users/${user_id}/${receiver_id}`)
+    // console.log("get room by id thunk hit");
+    // console.log(res.url);
+
+    if (res.ok) {
+        const room = await res.json()
+
+        const mesRes = await fetch(`/api/users/${room.id}/messages`)
+
+        let messages;
+
+        if (mesRes.ok) {
+            messages = await mesRes.json()
+
+            // console.log("############", messages);
+
+            // dispatch(loadChats(messages))
+        }
+
+        // console.log("@@@@@@@@@@@@@", messages);
+
+        room.chats = messages
+
+        // console.log("room", room);
 
         dispatch(getRoom(room))
     }
@@ -99,7 +130,7 @@ export const newPrivChat = (user_id, room_id, message) => async (dispatch) => {
     if (res.ok) {
         const message = await res.json()
         console.log("new message saved");
-        getRoomMessages(room_id)
+        dispatch(getRoomId(room_id))
     }
 }
 
@@ -122,7 +153,7 @@ export default function roomReducer(state = initialState, action) {
         case LOAD_CHATS:
             newState = { ...state }
 
-            // console.log("this is the store ", action.user);
+            // // console.log("this is the store ", action.user);
 
             newState.room.messages = action.messages
 

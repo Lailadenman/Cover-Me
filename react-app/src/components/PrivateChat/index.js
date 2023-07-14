@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { io } from 'socket.io-client'
 import { newChat } from '../../store/group';
 import "./PrivateChat.css"
-import { getRoomMessages, newPrivChat } from '../../store/chat';
+import { getRoomId, getRoomMessages, newPrivChat } from '../../store/chat';
 
 let socket;
 
@@ -25,7 +25,7 @@ function PrivateChat({ rId }) {
         return { user: mess.username, msg: mess.message }
     })
     const test = [...messagesArr]
-    console.log(messagesArr);
+    // console.log(messagesArr);
     const [messages, setMessages] = useState([...messagesArr])
     // const [messages, setMessages] = useState([])
     // const [messages, setMessages] = useState([{user: "tester", msg: "please"}])
@@ -35,9 +35,9 @@ function PrivateChat({ rId }) {
     const [isLoaded, setIsLoaded] = useState(false)
     const dispatch = useDispatch()
 
-    console.log(messagesArr);
-    console.log(messages);
-    console.log(test);
+    // // console.log(messagesArr);
+    // // console.log(messages);
+    // // console.log(test);
 
     // useEffect(() => {
     //     setMessages([...messagesArr])
@@ -57,6 +57,7 @@ function PrivateChat({ rId }) {
 
         socket.on("chat", (chat) => {
             dispatch(newPrivChat(user.id, rId, chat.msg))
+            // dispatch(getRoomId(rId))
             setMessages(messages => [...messages, chat])
         })
 
@@ -70,6 +71,7 @@ function PrivateChat({ rId }) {
 
     const sendChat = (e) => {
         e.preventDefault()
+        console.log("send button clicked");
 
         if (chatInput.length > 0) {
             socket.emit("chat", { user: user.username, msg: chatInput });
