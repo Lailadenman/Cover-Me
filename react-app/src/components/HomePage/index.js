@@ -23,17 +23,17 @@ function HomePage() {
 
     return (
         <div className="home">
-            <div>
+            <div className="home-header">
                 <h1>Please log in to view your groups</h1>
             </div>
 
-            <div>
+            <div className="login-signup-sect">
                 {isLogin ? (<LoginFormPage />) : (<SignupFormPage />)}
             </div>
 
-            <div>
-                <button onClick={handleSubmit}>Demo User</button>
+            <div className="home-footer">
                 {isLogin ? (<h3>Don't have an account? <button onClick={handleLogSign}>Sign Up</button></h3>) : (<h3>Already have an account? <button onClick={handleLogSign}>Log in</button></h3>)}
+                <button onClick={handleSubmit}>Demo User</button>
             </div>
         </div>
     )
