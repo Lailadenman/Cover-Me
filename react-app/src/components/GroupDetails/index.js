@@ -221,7 +221,7 @@ function GroupDetails() {
                                         Messages <i class="fa-solid fa-caret-down"></i>
                                     </button>
                                     <div className={chatClassName} ref={ulRef}>
-                                        <Chat gId={group.id} cName={isMember ? "chat-box" : "hidden"} close={closeChatMenu} />
+                                        <Chat gId={group.id} cName={isMember ? "chat-area" : "hidden"} close={closeChatMenu} />
                                         {/* <button onClick={closeChatMenu}>Close Chat</button> */}
                                     </div>
                                 </div>)}
