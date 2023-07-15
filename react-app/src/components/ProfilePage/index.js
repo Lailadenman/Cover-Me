@@ -56,12 +56,15 @@ function ProfilePage() {
     // }, [haveChatted])
 
     useEffect(() => {
-        if (chatRoom && chatRoom.Message == "no rooms found") {
-            console.log("chatRoom doesn't exist");
-            setIsNew(true)
-        } else {
-            console.log("chatRoom exists");
-            setIsNew(false)
+        if (chatRoom) {
+            if(chatRoom.Message == "no rooms found") {
+                console.log("chatRoom doesn't exist");
+                setIsNew(true)
+            } else {
+                console.log("chatRoom exists");
+                setIsNew(false)
+            }
+
         }
     }, [chatRoom])
 

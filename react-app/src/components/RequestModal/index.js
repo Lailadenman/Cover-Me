@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux"
 import { useModal } from "../../context/Modal";
 import { deleteFromGroups, acceptRequest, deleteRequest, getGroupDetails } from "../../store/group";
 import { useHistory } from "react-router-dom";
+import "./RequestModal.css"
 
 function RequestModal({ id, gId, uId, action }) {
     const dispatch = useDispatch();
