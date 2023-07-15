@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     firstName = db.Column(db.String(50), nullable=False)
     lastName = db.Column(db.String(50), nullable=False)
-    profPic = db.Column(db.String(2000), default="https://res.cloudinary.com/dbiv2lwhp/image/upload/v1689305282/autoimg_w9fhxl.jpg")
+    profPic = db.Column(db.String(2000), server_default="https://res.cloudinary.com/dbiv2lwhp/image/upload/v1689305282/autoimg_w9fhxl.jpg")
     bio = db.Column(db.String(2000), nullable=False)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
