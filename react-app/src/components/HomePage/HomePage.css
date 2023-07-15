@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 80%;
 }
 
@@ -11,13 +11,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    margin-top: 100px;
 }
 
 .login-signup-sect {
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .home-footer {
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
 }

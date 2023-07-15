@@ -29,16 +29,12 @@ function ProfilePage() {
 
     let roomId = chatRoom?.id
 
-    const [isNew, setIsNew] = useState(true)
-
     if (chatRoom && chatRoom.Message == "no rooms found") {
         console.log("they have never talked");
         haveChatted = false
-        setIsNew(true)
         // setIsReady(true)
     } else {
         haveChatted = true
-        setIsNew(false)
         // console.log(chatRoom);
         // // console.log(room?.id);
         // const testId = chatRoom.id
@@ -48,6 +44,8 @@ function ProfilePage() {
     }
 
     const test = !haveChatted
+
+    const [isNew, setIsNew] = useState(true)
 
     // console.log(test);
 
