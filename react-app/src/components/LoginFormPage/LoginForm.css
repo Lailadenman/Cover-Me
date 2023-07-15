@@ -9,3 +9,17 @@
     display: flex;
     justify-content: center;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    display: flex;
+    justify-content: space-between;
+}
+
+input {
+    margin: 5px;
+}
