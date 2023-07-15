@@ -11,6 +11,7 @@ from .api.group_routes import group_routes
 from .api.group_member_routes import group_member_routes
 from .api.group_request_routes import group_request_routes
 from .api.message_routes import message_routes
+from .api.chat_room_routes import room_routes
 from .seeds import seed_commands
 from .config import Config
 from .socket import socketio
@@ -37,6 +38,7 @@ app.register_blueprint(group_routes, url_prefix='/api/groups')
 app.register_blueprint(group_member_routes, url_prefix='/api/groupmembers')
 app.register_blueprint(group_request_routes, url_prefix='/api/grouprequests')
 app.register_blueprint(message_routes, url_prefix='/api/messages')
+app.register_blueprint(room_routes, url_prefix='/api/room')
 db.init_app(app)
 Migrate(app, db)
 socketio.init_app(app)

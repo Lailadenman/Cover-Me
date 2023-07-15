@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createNewGroup } from "../../store/group";
 
-function EditGroupModal({gName, gDescription, gId}) {
+function EditGroupModal({ gName, gDescription, gId }) {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const [name, setName] = useState(gName);
@@ -15,7 +15,7 @@ function EditGroupModal({gName, gDescription, gId}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log("new info:", name, description, user);
+        // // console.log("new info:", name, description, user);
         dispatch(editGroup(name, description, user, gId))
 
         closeModal()

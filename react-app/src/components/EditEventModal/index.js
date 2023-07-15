@@ -22,7 +22,7 @@ function EditEventForm({ eId, gId, eDescription, eStart_date, eEnd_date }) {
         const start = start_date.split("T").join(" ") + ":00"
         const end = end_date.split("T").join(" ") + ":00"
 
-        console.log("~~~~~~~~~~~~~", start);
+        // // console.log("~~~~~~~~~~~~~", start);
 
         const data = await dispatch(editEvent(eId, description, user.id, start, end, gId, false));
 
@@ -54,19 +54,19 @@ function EditEventForm({ eId, gId, eDescription, eStart_date, eEnd_date }) {
             <label>
                 Start Date
                 <input
-                type='datetime-local'
-                value={start_date}
-                onChange={(e) => setStart_Date(e.target.value)}
-                required
+                    type='datetime-local'
+                    value={start_date}
+                    onChange={(e) => setStart_Date(e.target.value)}
+                    required
                 />
             </label>
             <label>
                 End Date
                 <input
-                type='datetime-local'
-                value={end_date}
-                onChange={(e) => setEnd_Date(e.target.value)}
-                required
+                    type='datetime-local'
+                    value={end_date}
+                    onChange={(e) => setEnd_Date(e.target.value)}
+                    required
                 />
             </label>
             <button type='submit'>Submit</button>

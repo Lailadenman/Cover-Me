@@ -12,6 +12,7 @@ import Calendar from "./components/Calendar";
 import EventDetails from "./components/EventDetails";
 import MyGroupsPage from "./components/MyGroupsPage";
 import HomePage from "./components/HomePage";
+import ProfilePage from "./components/ProfilePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -53,6 +54,9 @@ function App() {
           </Route>
           <Route path="/calendar">
             <Calendar />
+          </Route>
+          <Route exact path="/profile/:id">
+            <ProfilePage />
           </Route>
         </Switch>
       )}

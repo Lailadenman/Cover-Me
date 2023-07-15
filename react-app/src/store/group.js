@@ -49,11 +49,11 @@ const createMember = (member) => ({
 
 export const getGroups = () => async (dispatch) => {
     const res = await fetch(`/api/groups/`)
-    console.log(res.url);
+    // console.log(res.url);
 
     if (res.ok) {
         const groups = await res.json()
-        console.log(groups);
+        // console.log(groups);
 
         dispatch(loadGroups(groups))
     }
@@ -61,27 +61,27 @@ export const getGroups = () => async (dispatch) => {
 
 export const getGroupsByUser = (id) => async (dispatch) => {
     const res = await fetch(`/api/users/${id}/groups`)
-    console.log("groups by users hit");
+    // console.log("groups by users hit");
 
     if (res.ok) {
         const groups = await res.json()
 
-        console.log("##############", groups);
+        // console.log("##############", groups);
 
         dispatch(loadGroupsByUser(groups))
     }
 }
 
 export const getGroupDetails = (id) => async (dispatch) => {
-    console.log("~~~~~~~~~~~~~~~", id);
+    // console.log("~~~~~~~~~~~~~~~", id);
     const res = await fetch(`/api/groups/${id}`)
-    console.log(res.url);
-    console.log("------------- HIT");
+    // console.log(res.url);
+    // console.log("------------- HIT");
 
     if (res.ok) {
         const group = await res.json()
-        console.log("@@@@@@@@@@@res.ok", group)
-        // console.log("=================", group.members);
+        // console.log("@@@@@@@@@@@res.ok", group)
+        // // console.log("=================", group.members);
 
         dispatch(loadGroupDetails(group))
     }
@@ -89,9 +89,9 @@ export const getGroupDetails = (id) => async (dispatch) => {
 
 
 
-export const createNewGroup = (name, description, owner_id) => async (dispatch) => {
-    // console.log("%%%%%%%%%%%%%%%%%%%%", groupPic.get("groupPic"));
-    console.log("^^^^^^^^^^^^^^^^^^^", name, description);
+export const createNewGroup = (name, description, owner_id, img_url) => async (dispatch) => {
+    // // console.log("%%%%%%%%%%%%%%%%%%%%", groupPic.get("groupPic"));
+    // console.log("^^^^^^^^^^^^^^^^^^^", name, description, img_url);
     const res = await fetch('/api/groups/',
         {
             method: "POST",
@@ -101,15 +101,16 @@ export const createNewGroup = (name, description, owner_id) => async (dispatch) 
             body: JSON.stringify({
                 name,
                 description,
-                owner_id
+                owner_id,
+                img_url
             }),
         })
 
-    // console.log(res.body);
+    // // console.log(res.body);
 
     if (res.ok) {
         const group = await res.json()
-        console.log(group);
+        // console.log(group);
 
         dispatch(createGroup(group))
     }
@@ -129,27 +130,27 @@ export const editGroup = (name, description, owner_id, group_id) => async (dispa
             }),
         })
 
-    console.log("received from by store:", name, description, owner_id, group_id);
+    // console.log("received from by store:", name, description, owner_id, group_id);
 
     if (res.ok) {
         const group = await res.json()
-        console.log(group);
+        // console.log(group);
 
         dispatch(updateGroup(group))
     }
 }
 
 export const deleteFromGroups = (id) => async (dispatch) => {
-    // console.log("~~~~~~~~~~~~~~~", id);
+    // // console.log("~~~~~~~~~~~~~~~", id);
     const res = await fetch(`/api/groups/${id}`, {
         method: 'DELETE'
     })
-    // console.log(res.url);
-    // console.log("------------- HIT");
+    // // console.log(res.url);
+    // // console.log("------------- HIT");
 
     if (res.ok) {
         const group = await res.json()
-        // console.log("@@@@@@@@@@@res.ok", group)
+        // // console.log("@@@@@@@@@@@res.ok", group)
 
         dispatch(deleteGroup(group.id))
     }
@@ -162,14 +163,14 @@ export const deleteRequest = (id, gId) => async (dispatch) => {
 
     if (res.ok) {
         const group = await res.json()
-        // console.log("@@@@@@@@@@@res.ok", group)
+        // // console.log("@@@@@@@@@@@res.ok", group)
 
         getGroupDetails(gId)
     }
 }
 
 export const acceptRequest = (id, uId, gId) => async (dispatch) => {
-    console.log("hit acceptReq", id, uId, gId);
+    // console.log("hit acceptReq", id, uId, gId);
     const res = await fetch(`/api/groupmembers/${id}`, {
         method: "POST",
         headers: {
@@ -180,13 +181,13 @@ export const acceptRequest = (id, uId, gId) => async (dispatch) => {
     if (res.ok) {
         const newMem = await res.json()
 
-        console.log("here's our new member", newMem);
+        // console.log("here's our new member", newMem);
         getGroupDetails(gId)
     }
 }
 
 export const joinRequest = (uId, gId) => async (dispatch) => {
-    console.log("joinRequest hit");
+    // console.log("joinRequest hit");
     const res = await fetch(`/api/grouprequests/${uId}/${gId}`, {
         method: "POST",
         headers: {
@@ -196,7 +197,7 @@ export const joinRequest = (uId, gId) => async (dispatch) => {
 
     if (res.ok) {
         const newReq = await res.json()
-        console.log("waiting for request to be added");
+        // console.log("waiting for request to be added");
         getGroupDetails(gId)
     }
 }
@@ -204,20 +205,21 @@ export const joinRequest = (uId, gId) => async (dispatch) => {
 // Possibly treat loading messages/chats like requests and just straight up add them
 // when we fetch the group details and then for new messages use this thunk
 export const newChat = (user_id, group_id, message) => async (dispatch) => {
-    console.log("new message sent");
-    const res = await fetch(`/api/messages/${user_id}/${group_id}`, {
+    // console.log("new message sent");
+    const res = await fetch(`/api/messages/${user_id}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            message
+            message,
+            group_id
         })
     })
 
     if (res.ok) {
         const message = res.json()
-        console.log("new message saved");
+        // console.log("new message saved");
         dispatch(getGroupDetails(group_id))
     }
 }
@@ -234,7 +236,7 @@ export default function groupReducer(state = initialState, action) {
                 newState[group.id] = group
             })
 
-            console.log(newState);
+            // console.log(newState);
 
             return newState;
 
@@ -247,13 +249,13 @@ export default function groupReducer(state = initialState, action) {
                 newState.myGroups[group.id] = group
             })
 
-            console.log(newState);
+            // console.log(newState);
 
             return newState;
         case LOAD_GROUP_DETAILS:
             newState = { ...state }
 
-            console.log("Load details", action.group);
+            // console.log("Load details", action.group);
 
             newState.groupDetails = action.group
 

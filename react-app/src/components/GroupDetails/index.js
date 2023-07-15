@@ -46,9 +46,9 @@ function GroupDetails() {
     const membersArr = members && Object.values(members)
     const requestsArr = requests && Object.values(requests)
 
-    console.log("from group deatils", eventsArr);
+    // // console.log("from group deatils", eventsArr);
 
-    console.log(group && group?.name);
+    // // console.log(group && group?.name);
 
     const handlePastMonth = () => {
         if (month === 0) {
@@ -85,7 +85,7 @@ function GroupDetails() {
     }
 
     //     let isRequested = false
-    //     console.log("join clicked");
+    //     // console.log("join clicked");
     //     requestsArr.forEach(req => {
     //         if(req.user_id === user && req.group_id === id) {
     //             isRequested = true
@@ -150,7 +150,7 @@ function GroupDetails() {
         if (!showMemberMenu) return;
 
         const closeMenu = (e) => {
-            if (!ulRef.current.contains(e.target)) {
+            if (ulRef.current && !ulRef.current.contains(e.target)) {
                 setShowMemberMenu(false);
             }
         };
@@ -164,6 +164,7 @@ function GroupDetails() {
         if (!showRequestMenu) return;
 
         const closeMenu = (e) => {
+            // // console.log("e.target checker", e.target.id);
             if (!ulRef.current.contains(e.target)) {
                 setShowRequestMenu(false);
             }
@@ -172,7 +173,7 @@ function GroupDetails() {
         document.addEventListener("click", closeMenu);
 
         return () => document.removeEventListener("click", closeMenu);
-    }, [showRequestMenu]);
+    }, [ulRef, showRequestMenu]);
 
     const closeChatMenu = () => {
         setShowChatMenu(false)
@@ -192,15 +193,18 @@ function GroupDetails() {
 
     const isOwner = group?.owner_id === user
 
+    // // console.log("pic url ", group && group.pic);
+
+    const banner = group && group.pic
+
     return (
         <div className='all'>
+            {/* <div className='group-header' style={{backgroundImage: `url(${banner})`}}><h1>{isLoaded && group && (group?.name)}</h1></div> */}
             <h1>{isLoaded && group && (group?.name)}</h1>
             {isMember ? (<div className='group-details'>
                 {isLoaded && group && (
                     <>
-                        {/* <div>
-                        <img src={groupPic}/>
-                    </div> */}
+                        {/* <img src={banner}></img> */}
                         <div className='left-side'>
                             <div className='dropdowns'>
                                 <div className='group-info-dropdown dropdown'>
@@ -229,8 +233,8 @@ function GroupDetails() {
                                         <h1 className='title'>List of Members</h1>
                                         {members && membersArr.map((member) => {
                                             return (
-                                                <div>
-                                                    <h2>{member?.user?.firstName} {member?.user?.lastName}</h2>
+                                                <div id='member-link-div'>
+                                                    <h2><NavLink exact to={`/profile/${member?.user?.id}`} id="member-link">{member?.user?.firstName} {member?.user?.lastName}</NavLink></h2>
                                                 </div>
                                             )
                                         })}
@@ -302,8 +306,8 @@ function GroupDetails() {
                 <h2>Owner: {group?.owner}</h2>
                 <h2>{group?.description}</h2>
                 {isRequested ? (<p>Your request to join has already been send</p>) : (<div id='joinButton' className={!isMember ? "" : "hidden"}>
-                                    <button onClick={onJoin}>Join</button>
-                                </div>)}
+                    <button onClick={onJoin}>Join</button>
+                </div>)}
             </div>)}
         </div>
     )

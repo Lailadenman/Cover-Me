@@ -8,13 +8,11 @@ class Event(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(2000), nullable=False)
-    owner_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod("users.id")), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     start_date = db.Column(db.String(250), nullable=False)
     end_date = db.Column(db.String(250), nullable=False)
     isCovered = db.Column(db.Boolean, nullable=False)
-    coveredBy = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod("users.id")), nullable=True)
+    coveredBy = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=True)
     # isMeeting = db.Column(db.Boolean, nullable=True)
     # isRequired = db.Column(db.Boolean, nullable=False)
     group_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("groups.id")), nullable=False)

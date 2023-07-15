@@ -16,22 +16,25 @@ function CreateGroupModal() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(image)
+        // // console.log("creategroup index.js", image)
 
-        // const formData = new FormData()
+        const formData = new FormData()
 
-        // formData.append("name", name)
-        // formData.append("description", description)
-        // formData.append("owner_id", user)
-        // formData.append("groupPic", image, image.name)
+        formData.append("image", image)
 
-        // for (const pair of formData.entries()) {
-        //     console.log(`@@@@@@@@@@@@@@@@@${pair[0]}, ${pair[1]}`);
-        // }
+        const res = await fetch('/api/groups/new-gImg', {
+            method: 'POST',
+            body: formData
+        })
 
-        // console.log("#############", formData.get("groupPic"));
+        // // console.log("res checker");
 
-        dispatch(createNewGroup(name, description, user))
+        if (res.ok) {
+            let url = await res.json()
+            let img_url = url.url
+            // // console.log("res is all good", img_url);
+            dispatch(createNewGroup(name, description, user, img_url))
+        }
 
         closeModal()
     }
@@ -66,15 +69,15 @@ function CreateGroupModal() {
                         />
                     </label>
                 </div>
-                {/* <label>
-                Group Picture
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => setImage(e.target.files[0])}
-                    required
-                />
-            </label> */}
+                <label>
+                    Group Picture
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setImage(e.target.files[0])}
+                        required
+                    />
+                </label>
                 <button className="cart-save-button" type="submit">Save</button>
             </form>
         </div>

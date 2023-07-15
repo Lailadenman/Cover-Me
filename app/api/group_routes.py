@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import Group, Group_Member, Group_Request, Event, User, Message, db
-from app.forms import NewGroupForm, EditGroupForm, NewEventForm, EditEventForm, GroupRequestForm
+from app.models import Group, Group_Member, Group_Request, Event, User, Message, Image, db
+from app.forms import NewGroupForm, EditGroupForm, NewEventForm, EditEventForm, GroupRequestForm, ImageForm
 from app.aws import (upload_file_to_s3, get_unique_filename)
 
 import sys
@@ -80,20 +80,9 @@ def getGroupById(id):
 def createGroup():
     form = NewGroupForm()
 
-    # image = form.data["groupPic"]
-    # print("&&&&&&&&&&&&&&&&&&", image.get("groupPic"))
-    # print("$$$$$$$$$$$$$$$$$$", form.name.data)
-    # image.filename = get_unique_filename(image.filename)
-    # upload = upload_file_to_s3(image)
-
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~", form.name.data)
-    print("&&&&&&&&&&&&&&&&&&&&&&&&&", form.description.data)
-
-    # url = upload["url"]
-
     # url = "https://res.cloudinary.com/dbiv2lwhp/image/upload/v1673416530/samples/imagecon-group.jpg"
 
-    newGroup = Group(name=form.name.data, description=form.description.data, owner_id=form.owner_id.data)
+    newGroup = Group(name=form.name.data, description=form.description.data, owner_id=form.owner_id.data, img_url=form.img_url.data)
 
     db.session.add(newGroup)
     db.session.commit()
@@ -107,6 +96,25 @@ def createGroup():
 
     return newGroup.to_dict()
 
+@group_routes.route("/new-gImg", methods=["POST"])
+def add_url():
+    print("hit img route")
+    iForm = ImageForm()
+
+    image = iForm.data['image']
+
+    image.filename = get_unique_filename(image.filename)
+    upload = upload_file_to_s3(image)
+
+    url = upload["url"]
+
+    newImg = Image(url = url)
+
+    db.session.add(newImg)
+    db.session.commit()
+
+    print("img route return is", url)
+    return upload
 
 @group_routes.route("/<int:id>", methods=["PUT"])
 def editGroup(id):

@@ -15,11 +15,11 @@ function CoverShiftModal({ startDate, endDate, startTime, endTime }) {
     const handleYes = async (e) => {
         e.preventDefault();
 
-        console.log(event && event);
+        // // console.log(event && event);
 
         const data = dispatch(editEvent(event?.id, event?.description, event?.owner_id, event?.start_date, event?.end_date, event?.group_id, true, user?.id));
 
-        console.log("yes cover hit");
+        // // console.log("yes cover hit");
         if (data) {
             setErrors(data);
         }

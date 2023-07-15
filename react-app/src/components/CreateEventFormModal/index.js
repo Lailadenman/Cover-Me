@@ -7,7 +7,7 @@ import { useModal } from '../../context/Modal';
 function CreateEventForm({ gId }) {
     const date = new Date
     const dateStr = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}T${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
-    console.log(dateStr);
+    // // console.log(dateStr);
     const [start_date, setStart_Date] = useState(dateStr)
     const [end_date, setEnd_Date] = useState(dateStr)
     const [description, setDescription] = useState("")
@@ -25,7 +25,7 @@ function CreateEventForm({ gId }) {
         const start = start_date.split("T").join(" ") + ":00"
         const end = end_date.split("T").join(" ") + ":00"
 
-        console.log("~~~~~~~~~~~~~", start);
+        // // console.log("~~~~~~~~~~~~~", start);
 
         const data = await dispatch(createNewEvent(description, user.id, start, end, gId));
 
@@ -55,22 +55,22 @@ function CreateEventForm({ gId }) {
             <label>
                 Start Date
                 <input
-                type='datetime-local'
-                value={start_date}
-                onChange={(e) => {
-                    setStart_Date(e.target.value)
-                    setEnd_Date(e.target.value)
-                }}
-                required
+                    type='datetime-local'
+                    value={start_date}
+                    onChange={(e) => {
+                        setStart_Date(e.target.value)
+                        setEnd_Date(e.target.value)
+                    }}
+                    required
                 />
             </label>
             <label>
                 End Date
                 <input
-                type='datetime-local'
-                value={end_date}
-                onChange={(e) => setEnd_Date(e.target.value)}
-                required
+                    type='datetime-local'
+                    value={end_date}
+                    onChange={(e) => setEnd_Date(e.target.value)}
+                    required
                 />
             </label>
             <button type='submit'>Submit</button>

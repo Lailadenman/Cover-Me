@@ -23,10 +23,10 @@ function GroupList() {
     }, [dispatch])
 
     const groups = useSelector(state => state.groups)
-    console.log(groups && groups);
+    // // console.log(groups && groups);
 
     const groupsArr = Object.values(groups)
-    console.log(groups && groupsArr);
+    // // console.log(groups && groupsArr);
 
     const onClick = () => {
 
