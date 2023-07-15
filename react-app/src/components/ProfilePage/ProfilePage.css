@@ -1,0 +1,17 @@
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+}
+
+h2 {
+    font-size: 36px;
+}
+
+.prof-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

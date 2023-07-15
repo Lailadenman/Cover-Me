@@ -64,9 +64,9 @@ function PrivateChat({ rId }) {
     }
 
     return (user && (
-        <>
-            <div>
-                <div>
+        <div>
+            <div className='chat-box'>
+                <div className='chat-header'>
                     <h1 className='chat-title'>Chat</h1>
                 </div>
                 <div className='messages'>
@@ -85,7 +85,7 @@ function PrivateChat({ rId }) {
                     {/* <button onClick={close}>Close Chat</button> */}
                 </div>
             </div>
-        </>
+        </div>
     )
     )
 }

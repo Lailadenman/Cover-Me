@@ -213,7 +213,7 @@ function GroupDetails() {
                                     </button>
                                     <div className={ulClassName} ref={ulRef}>
                                         <h2>Owner: {group?.owner}</h2>
-                                        <h2>{group?.description}</h2>
+                                        <h2>Description: {group?.description}</h2>
                                     </div>
                                 </div>
                                 {isMember && (<div className='chat-dropdown dropdown'>

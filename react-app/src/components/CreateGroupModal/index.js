@@ -3,6 +3,7 @@ import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createNewGroup } from "../../store/group";
+import "./CreateGroupForm.css"
 
 function CreateGroupModal() {
     const dispatch = useDispatch();
@@ -41,12 +42,13 @@ function CreateGroupModal() {
 
     return (
         <div className="new-group">
+            <h3>Create Your Group</h3>
             <form action="/posts/new" method="POST" enctype="multipart/form-data" onSubmit={handleSubmit}>
-                <ul>
+                {errors && (<ul>
                     {errors.map((error, idx) => (
                         <li key={idx}>{error}</li>
                     ))}
-                </ul>
+                </ul>)}
                 <div className="lab">
                     <label>
                         Group Name:

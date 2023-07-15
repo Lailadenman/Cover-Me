@@ -1,0 +1,17 @@
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    padding-bottom: 40px;
+    /* background-color: aqua; */
+}
+
+/* label {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 0;
+} */
+
+h3 {
+    text-align: center;
+}

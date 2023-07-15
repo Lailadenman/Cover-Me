@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createNewEvent } from '../../store/event';
 import { useModal } from '../../context/Modal';
+import "./CreateEventFormModal.css"
 
 function CreateEventForm({ gId }) {
     const date = new Date
@@ -43,8 +44,9 @@ function CreateEventForm({ gId }) {
                     <li key={idx}>{error}</li>
                 ))}
             </ul>
+            <h3>Create a Coverage Event</h3>
             <label>
-                description
+                <p>Description</p>
                 <input
                     type="text"
                     value={description}
@@ -53,7 +55,7 @@ function CreateEventForm({ gId }) {
                 />
             </label>
             <label>
-                Start Date
+                <p>Start Date</p>
                 <input
                     type='datetime-local'
                     value={start_date}
@@ -65,7 +67,7 @@ function CreateEventForm({ gId }) {
                 />
             </label>
             <label>
-                End Date
+                <p>End Date</p>
                 <input
                     type='datetime-local'
                     value={end_date}

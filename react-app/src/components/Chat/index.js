@@ -55,7 +55,7 @@ function Chat({ gId, cName, close }) {
     return (user && (
         <>
             <div className={cName}>
-                <div>
+                <div className='chat-header'>
                     <h1 className='chat-title'>Chat</h1>
                 </div>
                 <div className='messages'>
@@ -67,6 +67,7 @@ function Chat({ gId, cName, close }) {
                     <form onSubmit={sendChat}>
                         <input
                             value={chatInput}
+                            placeholder='Type a message...'
                             onChange={updateChatInput}
                         />
                         <button className="send-button" type="submit">Send</button>

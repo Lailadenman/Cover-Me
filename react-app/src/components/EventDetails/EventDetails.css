@@ -7,3 +7,17 @@
 .back-button {
     margin: 5px;
 }
+
+.event-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* .event-buttons {
+    margin: 5px;
+} */
+
+button {
+    margin: 5px;
+}
