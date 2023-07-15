@@ -76,12 +76,13 @@ export const getGroupDetails = (id) => async (dispatch) => {
     // console.log("~~~~~~~~~~~~~~~", id);
     const res = await fetch(`/api/groups/${id}`)
     // console.log(res.url);
-    // console.log("------------- HIT");
+    console.log("getGroupDetails HIT");
 
     if (res.ok) {
         const group = await res.json()
         // console.log("@@@@@@@@@@@res.ok", group)
         // // console.log("=================", group.members);
+        console.log("getGroupDetails success");
 
         dispatch(loadGroupDetails(group))
     }
@@ -146,7 +147,7 @@ export const deleteFromGroups = (id) => async (dispatch) => {
         method: 'DELETE'
     })
     // // console.log(res.url);
-    // // console.log("------------- HIT");
+    // console.log("------------- HIT");
 
     if (res.ok) {
         const group = await res.json()
@@ -161,16 +162,20 @@ export const deleteRequest = (id, gId) => async (dispatch) => {
         method: 'DELETE'
     })
 
+    console.log('deleteReq hit');
+
     if (res.ok) {
         const group = await res.json()
         // // console.log("@@@@@@@@@@@res.ok", group)
+
+        console.log('deleteReq success');
 
         getGroupDetails(gId)
     }
 }
 
 export const acceptRequest = (id, uId, gId) => async (dispatch) => {
-    // console.log("hit acceptReq", id, uId, gId);
+    console.log("hit acceptReq");
     const res = await fetch(`/api/groupmembers/${id}`, {
         method: "POST",
         headers: {
@@ -181,7 +186,7 @@ export const acceptRequest = (id, uId, gId) => async (dispatch) => {
     if (res.ok) {
         const newMem = await res.json()
 
-        // console.log("here's our new member", newMem);
+        console.log("here's our new member");
         getGroupDetails(gId)
     }
 }
