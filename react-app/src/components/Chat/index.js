@@ -58,7 +58,7 @@ function Chat({ gId, cName, close }) {
                 <div className='chat-header'>
                     <h1 className='chat-title'>Chat</h1>
                 </div>
-                <div className='messages'>
+                <div className='messages-area'>
                     {messages.map((message, ind) => (
                         <div key={ind}>{`${message.user}: ${message.msg}`}</div>
                     ))}
