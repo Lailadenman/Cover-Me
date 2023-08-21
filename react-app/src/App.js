@@ -41,7 +41,7 @@ function App() {
             <Chat />
           </Route>
           <Route exact path="/groups">
-            <GroupList />
+            <GroupList className="group-list-full-page"/>
           </Route>
           <Route exact path="/groups/joined">
             <MyGroupsPage />

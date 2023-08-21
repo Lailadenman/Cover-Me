@@ -2,6 +2,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0;
+    /* width: 100%; */
+    /* height: calc(100vh - 3px); */
+    /* I can not get the height of this to just be the full window it keeps adding a little bit */
+    /* of extra height and a scroll bar which I do no want */
 }
 
 h1 {

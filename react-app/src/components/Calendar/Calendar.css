@@ -1,10 +1,11 @@
 .calendar {
     width: 900px;
     height: 600px;
+    background-color: white;
 }
 
 .month-label {
-    height: 20px;
+    height: 40px;
 }
 
 .day-label {
@@ -25,10 +26,14 @@
 
 .covered {
     background-color: green;
+    border-radius: 5px;
+    padding: 2px;
 }
 
 .not-covered {
     background-color: red;
+    border-radius: 5px;
+    padding: 2px;
 }
 
 .shifts {

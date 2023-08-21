@@ -64,15 +64,19 @@ function Chat({ gId, cName, close }) {
                     ))}
                 </div>
                 <div className='button-sect'>
-                    <form onSubmit={sendChat}>
-                        <input
-                            value={chatInput}
-                            placeholder='Type a message...'
-                            onChange={updateChatInput}
-                        />
-                        <button className="send-button" type="submit">Send</button>
-                    </form>
-                    <button onClick={close}>Close Chat</button>
+                    <div className='chat-input-div'>
+                        <form className="chat-form" onSubmit={sendChat}>
+                            <input
+                                value={chatInput}
+                                placeholder='Type a message...'
+                                onChange={updateChatInput}
+                            />
+                            <button className="send-button" type="submit">Send</button>
+                        </form>
+                    </div>
+                    <div className='close-button-div'>
+                        <button onClick={close}>Close Chat</button>
+                    </div>
                 </div>
             </div>
         </>

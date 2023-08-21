@@ -24,3 +24,8 @@ label {
 input {
     margin: 2.5px;
 }
+
+.login-header {
+    margin: 10px;
+    margin-bottom: 20px;
+}

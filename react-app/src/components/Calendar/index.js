@@ -101,11 +101,13 @@ function Calendar({ month, year, gId, eventList }) {
                             {dotw.map((day) => {
                                 j++
                                 const counter = i + j - 1
+                                let eventsNum = 0
                                 return <td class={day}>
-                                    {i + j - 1}
+                                    {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                     <div className='shifts'>
                                         {dateArr.map((date) => {
                                             if (parseInt(date.day) === counter) {
+                                                eventsNum++;
                                                 return (
                                                     <NavLink
                                                         key={date.id}
@@ -133,11 +135,13 @@ function Calendar({ month, year, gId, eventList }) {
                             {dotw.slice(0, length - i + 1).map((day) => {
                                 j++
                                 const counter = i + j - 1
+                                let eventsNum = 0;
                                 return <td class={day}>
-                                    {i + j - 1}
+                                    {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                     <div className='shifts'>
                                         {dateArr.map((date) => {
                                             if (parseInt(date.day) === counter) {
+                                                eventsNum++
                                                 return (
                                                     <NavLink
                                                         key={date.id}
@@ -182,11 +186,13 @@ function Calendar({ month, year, gId, eventList }) {
                                     {dotw.slice(1).map((day) => {
                                         j++
                                         const counter = i + j - 1
+                                        let eventsNum = 0
                                         return <td class={day}>
-                                            {i + j - 1}
+                                            {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                             <div className='shifts'>
                                                 {dateArr.map((date) => {
                                                     if (parseInt(date.day) === counter) {
+                                                        eventsNum++
                                                         return (
                                                             <NavLink
                                                                 key={date.id}
@@ -214,11 +220,13 @@ function Calendar({ month, year, gId, eventList }) {
                                 {dotw.map((day) => {
                                     j++
                                     const counter = i + j - 1
+                                    let eventsNum = 0;
                                     return <td class={day}>
-                                        {i + j - 1}
+                                        {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                         <div className='shifts'>
                                             {dateArr.map((date) => {
                                                 if (parseInt(date.day) === counter) {
+                                                    eventsNum++
                                                     return (
                                                         <NavLink
                                                             key={date.id}
@@ -248,11 +256,13 @@ function Calendar({ month, year, gId, eventList }) {
                             {dotw.slice(0, length - i + 1).map((day) => {
                                 j++
                                 const counter = i + j - 1
+                                let eventsNum = 0;
                                 return <td class={day}>
-                                    {i + j - 1}
+                                    {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                     <div className='shifts'>
                                         {dateArr.map((date) => {
                                             if (parseInt(date.day) === counter) {
+                                                eventsNum++
                                                 return (
                                                     <NavLink
                                                         key={date.id}
@@ -295,11 +305,13 @@ function Calendar({ month, year, gId, eventList }) {
                                     {dotw.slice(2).map((day) => {
                                         j++
                                         const counter = i + j - 1
+                                        let eventsNum = 0
                                         return <td class={day}>
-                                            {i + j - 1}
+                                            {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                             <div className='shifts'>
                                                 {dateArr.map((date) => {
                                                     if (parseInt(date.day) === counter) {
+                                                        eventsNum++
                                                         return (
                                                             <NavLink
                                                                 key={date.id}
@@ -327,11 +339,13 @@ function Calendar({ month, year, gId, eventList }) {
                                 {dotw.map((day) => {
                                     j++
                                     const counter = i + j - 1
+                                    let eventsNum = 0
                                     return <td class={day}>
-                                        {i + j - 1}
+                                        {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                         <div className='shifts'>
                                             {dateArr.map((date) => {
                                                 if (parseInt(date.day) === counter) {
+                                                    eventsNum++
                                                     return (
                                                         <NavLink
                                                             key={date.id}
@@ -360,11 +374,13 @@ function Calendar({ month, year, gId, eventList }) {
                             {dotw.slice(0, length - i + 1).map((day) => {
                                 j++
                                 const counter = i + j - 1
+                                let eventsNum = 0
                                 return <td class={day}>
-                                    {i + j - 1}
+                                    {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                     <div className='shifts'>
                                         {dateArr.map((date) => {
                                             if (parseInt(date.day) === counter) {
+                                                eventsNum++
                                                 return (
                                                     <NavLink
                                                         key={date.id}
@@ -406,11 +422,13 @@ function Calendar({ month, year, gId, eventList }) {
                                     {dotw.slice(3).map((day) => {
                                         j++
                                         const counter = i + j - 1
+                                        let eventsNum = 0
                                         return <td class={day}>
-                                            {i + j - 1}
+                                            {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                             <div className='shifts'>
                                                 {dateArr.map((date) => {
                                                     if (parseInt(date.day) === counter) {
+                                                        eventsNum++
                                                         return (
                                                             <NavLink
                                                                 key={date.id}
@@ -438,11 +456,13 @@ function Calendar({ month, year, gId, eventList }) {
                                 {dotw.map((day) => {
                                     j++
                                     const counter = i + j - 1
+                                    let eventsNum = 0
                                     return <td class={day}>
-                                        {i + j - 1}
+                                        {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                         <div className='shifts'>
                                             {dateArr.map((date) => {
                                                 if (parseInt(date.day) === counter) {
+                                                    eventsNum++
                                                     return (
                                                         <NavLink
                                                             key={date.id}
@@ -471,11 +491,13 @@ function Calendar({ month, year, gId, eventList }) {
                             {dotw.slice(0, length - i + 1).map((day) => {
                                 j++
                                 const counter = i + j - 1
+                                let eventsNum = 0
                                 return <td class={day}>
-                                    {i + j - 1}
+                                    {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                     <div className='shifts'>
                                         {dateArr.map((date) => {
                                             if (parseInt(date.day) === counter) {
+                                                eventsNum++
                                                 return (
                                                     <NavLink
                                                         key={date.id}
@@ -517,11 +539,13 @@ function Calendar({ month, year, gId, eventList }) {
                                     {dotw.slice(4).map((day) => {
                                         j++
                                         const counter = i + j - 1
+                                        let eventsNum = 0
                                         return <td class={day}>
-                                            {i + j - 1}
+                                            {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                             <div className='shifts'>
                                                 {dateArr.map((date) => {
                                                     if (parseInt(date.day) === counter) {
+                                                        eventsNum++
                                                         return (
                                                             <NavLink
                                                                 key={date.id}
@@ -549,11 +573,13 @@ function Calendar({ month, year, gId, eventList }) {
                                 {dotw.map((day) => {
                                     j++
                                     const counter = i + j - 1
+                                    let eventsNum = 0
                                     return <td class={day}>
-                                        {i + j - 1}
+                                        {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                         <div className='shifts'>
                                             {dateArr.map((date) => {
                                                 if (parseInt(date.day) === counter) {
+                                                    eventsNum++
                                                     return (
                                                         <NavLink
                                                             key={date.id}
@@ -582,11 +608,13 @@ function Calendar({ month, year, gId, eventList }) {
                             {dotw.slice(0, length - i + 1).map((day) => {
                                 j++
                                 const counter = i + j - 1
+                                let eventsNum = 0
                                 return <td class={day}>
-                                    {i + j - 1}
+                                    {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                     <div className='shifts'>
                                         {dateArr.map((date) => {
                                             if (parseInt(date.day) === counter) {
+                                                eventsNum++
                                                 return (
                                                     <NavLink
                                                         key={date.id}
@@ -628,11 +656,13 @@ function Calendar({ month, year, gId, eventList }) {
                                     {dotw.slice(5).map((day) => {
                                         j++
                                         const counter = i + j - 1
+                                        let eventsNum = 0
                                         return <td class={day}>
-                                            {i + j - 1}
+                                            {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                             <div className='shifts'>
                                                 {dateArr.map((date) => {
                                                     if (parseInt(date.day) === counter) {
+                                                        eventsNum++
                                                         return (
                                                             <NavLink
                                                                 key={date.id}
@@ -660,11 +690,13 @@ function Calendar({ month, year, gId, eventList }) {
                                 {dotw.map((day) => {
                                     j++
                                     const counter = i + j - 1
+                                    let eventsNum = 0
                                     return <td class={day}>
-                                        {i + j - 1}
+                                        {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                         <div className='shifts'>
                                             {dateArr.map((date) => {
                                                 if (parseInt(date.day) === counter) {
+                                                    eventsNum++
                                                     return (
                                                         <NavLink
                                                             key={date.id}
@@ -693,11 +725,13 @@ function Calendar({ month, year, gId, eventList }) {
                             {dotw.slice(0, length - i + 1).map((day) => {
                                 j++
                                 const counter = i + j - 1
+                                let eventsNum = 0
                                 return <td class={day}>
-                                    {i + j - 1}
+                                    {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                     <div className='shifts'>
                                         {dateArr.map((date) => {
                                             if (parseInt(date.day) === counter) {
+                                                eventsNum++
                                                 return (
                                                     <NavLink
                                                         key={date.id}
@@ -741,11 +775,13 @@ function Calendar({ month, year, gId, eventList }) {
                                     {dotw.slice(6).map((day) => {
                                         j++
                                         const counter = i + j - 1
+                                        let eventsNum = 0
                                         return <td class={day}>
-                                            {i + j - 1}
+                                            {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                             <div className='shifts'>
                                                 {dateArr.map((date) => {
                                                     if (parseInt(date.day) === counter) {
+                                                        eventsNum++
                                                         return (
                                                             <NavLink
                                                                 key={date.id}
@@ -773,11 +809,13 @@ function Calendar({ month, year, gId, eventList }) {
                                 {dotw.map((day) => {
                                     j++
                                     const counter = i + j - 1
+                                    let eventsNum = 0
                                     return <td class={day}>
-                                        {i + j - 1}
+                                        {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                         <div className='shifts'>
                                             {dateArr.map((date) => {
                                                 if (parseInt(date.day) === counter) {
+                                                    eventsNum++
                                                     return (
                                                         <NavLink
                                                             key={date.id}
@@ -808,11 +846,13 @@ function Calendar({ month, year, gId, eventList }) {
                             {dotw.slice(0, length - i + 1).map((day) => {
                                 j++
                                 const counter = i + j - 1
+                                let eventsNum = 0
                                 return <td class={day}>
-                                    {i + j - 1}
+                                    {i + j - 1} {eventsNum ? eventsNum + " events" : ""}
                                     <div className='shifts'>
                                         {dateArr.map((date) => {
                                             if (parseInt(date.day) === counter) {
+                                                eventsNum++
                                                 return (
                                                     <NavLink
                                                         key={date.id}
