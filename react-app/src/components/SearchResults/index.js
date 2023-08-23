@@ -58,17 +58,18 @@ function SearchResults() {
 
     return (
         <div className='group-page'>
+            <div className='head'>
+                <h1>Search Results</h1>
+            </div>
             {/* This is the search bar is works I just need to figure out how the results will look */}
             <form className="search-form" onSubmit={sendSearch}>
                 <input
                     value={searchInput}
                     placeholder='Search Groups here...'
                     onChange={updateSearchInput}
-                /><button className="search-button" type="submit">Search</button>
+                    className='group-search-input'
+                /><button className="search-button" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
-            <div className='head'>
-                <h1>Search Results</h1>
-            </div>
             {groups && groupsArr.map((group) => {
                 return <NavLink
                     key={group?.id}

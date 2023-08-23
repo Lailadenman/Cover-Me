@@ -63,7 +63,7 @@
 .user-list {
   padding-left: 0px;
   height: 75px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   padding: 5px;
   width: 120px;
   display: flex;
