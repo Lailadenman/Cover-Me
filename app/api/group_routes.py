@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
+from sqlalchemy import func
 from app.models import Group, Group_Member, Group_Request, Event, User, Message, Image, db
-from app.forms import NewGroupForm, EditGroupForm, NewEventForm, EditEventForm, GroupRequestForm, ImageForm
+from app.forms import NewGroupForm, EditGroupForm, NewEventForm, EditEventForm, GroupRequestForm, ImageForm, SearchGroupForm
 from app.aws import (upload_file_to_s3, get_unique_filename)
 
 import sys
@@ -231,4 +232,22 @@ def deleteEvent(gId, id):
 
     return eventDet
 
-# @group_routes("/search")
+@group_routes.route("/search", methods=["POST"])
+def searchGroups():
+    results = []
+
+    form = SearchGroupForm()
+
+    keyword = form.keyword.data.lower()
+
+    searchQuery = Group.query.filter(Group.name.ilike("%" + keyword + "%"))
+
+    res = searchQuery.all()
+
+    for group in res:
+        print("**********************************", group.to_dict())
+        results.append(group.to_dict())
+
+    print(results)
+
+    return results

@@ -5,35 +5,40 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import OpenModalButton from '../OpenModalButton';
 import CreateGroupModal from '../CreateGroupModal';
-import "./GroupList.css"
+import "./SearchResults.css"
+import { useParams } from 'react-router-dom/cjs/react-router-dom';
 
-function GroupList() {
+function SearchResults() {
     const dispatch = useDispatch()
     const [isLoaded, setIsLoaded] = useState(false)
     const [searchInput, setSearchInput] = useState("")
     const history = useHistory()
     const sessionUser = useSelector(state => state?.session?.user)
+    const { input } = useParams()
+
+    console.log(input);
 
     if (!sessionUser) {
         history.push('/')
     }
 
-    useEffect(() => {
-        dispatch(getGroups())
+    useEffect(async () => {
+        console.log(input);
+        const serRes = await dispatch(searchGroupByName(input))
         setIsLoaded(true)
+
+        console.log(serRes);
     }, [dispatch])
 
-    const groups = useSelector(state => state.groups)
-    // // console.log(groups && groups);
+    const groups = useSelector(state => state?.groups)
+    console.log(groups && groups);
 
-    const groupsArr = Object.values(groups)
+    const groupsArr = isLoaded ? groups && Object.values(groups?.searchRes) : []
     // // console.log(groups && groupsArr);
 
     const onClick = () => {
 
     }
-
-    // const closeMenu = () => setShowMenu(false);
 
     const updateSearchInput = (e) => {
         setSearchInput(e.target.value)
@@ -53,18 +58,17 @@ function GroupList() {
 
     return (
         <div className='group-page'>
-            <div className='head'>
-                <h1>Groups</h1>
-            </div>
             {/* This is the search bar is works I just need to figure out how the results will look */}
             <form className="search-form" onSubmit={sendSearch}>
                 <input
                     value={searchInput}
                     placeholder='Search Groups here...'
                     onChange={updateSearchInput}
-                    className='group-search-input'
-                /><button className="search-button" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                /><button className="search-button" type="submit">Search</button>
             </form>
+            <div className='head'>
+                <h1>Search Results</h1>
+            </div>
             {groups && groupsArr.map((group) => {
                 return <NavLink
                     key={group?.id}
@@ -85,4 +89,4 @@ function GroupList() {
     )
 }
 
-export default GroupList;
+export default SearchResults;

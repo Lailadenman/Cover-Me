@@ -64,6 +64,73 @@ def seed_users():
     Ash = User(
         username='lynx', firstName='Aslan', lastName="Callenreese", bio="HE IS NOT DEAD", email='bananafish@aa.io', password='password')
 
+    # 20
+    Jonathan = User(
+        username='JT', firstName='Jonathan', lastName='Denman', email='jonathan@aa.io', password='password')
+
+    # 21
+    Michael = User(
+        username='Mykale', firstName='Michael', lastName='Guerrero', email='michael@aa.io', password='password')
+
+    # 22
+    Celeste = User(
+        username='Celeste8909', firstName='Celeste', lastName='Perez', email='Celeste@aa.io', password='password')
+
+    # 23
+    Natalie = User(
+        username='Natgirl9', firstName='Natalie', lastName='Guzman', email='Natalie@aa.io', password='password')
+
+    # 24
+    William = User(
+        username='Terminator93', firstName='William', lastName='Suzuka', email='william@aa.io', password='password')
+
+    # 25
+    Anthony = User(
+        username='AntnTony', firstName='Anthony', lastName='Chen', email='anthony@aa.io', password='password')
+
+    # 26
+    Joshua = User(
+        username='KingJosh', firstName='Joshua', lastName='Andrada', email='joshua@aa.io', password='password')
+
+    # 27
+    Ethan = User(
+        username='Docethan', firstName='Ethan', lastName='Kirk', email='Ethan@aa.io', password='password')
+
+    # 28
+    Kayla = User(
+        username='KayKay', firstName='Kayla', lastName='Woods', email='Kayla@aa.io', password='password')
+
+    # 29
+    Kailee = User(
+        username='Kalelover23', firstName='Kailee', lastName='Fox', email='Kailee@aa.io', password='password')
+
+    # 30
+    Sylvia = User(
+        username='Sylvanuser98', firstName='Sylvia', lastName='Lin', email='Sylvia@aa.io', password='password')
+
+    # 31
+    Abel = User(
+        username='AbelXO', firstName='Abel', lastName='Amaad', email='Abel@aa.io', password='password')
+
+    # 32
+    Mohammed = User(
+        username='Mohaman', firstName='Mohammed', lastName='Ali', email='mohammed@aa.io', password='password')
+
+    # 33
+    Kyle = User(
+        username='Monsterdrinker1', firstName='Kyle', lastName='Irving', email='Kyle@aa.io', password='password')
+
+    # 34
+    Cole = User(
+        username='MCole', firstName='Cole', lastName='Young', email='Cole@aa.io', password='password')
+
+    # 35
+    Kai = User(
+        username='Ninja75', firstName='Kai', lastName='Yamamoto', email='Kai@aa.io', password='password')
+
+    # 36
+    Zane = User(
+        username='Zanethemain', firstName='Zane', lastName='Boxer', email='zane@aa.io', password='password')
 
     db.session.add(demo)
     db.session.add(marnie)
@@ -84,6 +151,24 @@ def seed_users():
     db.session.add(Nagisa)
     db.session.add(Tanjiro)
     db.session.add(Ash)
+    db.session.add(Jonathan)
+    db.session.add(Michael)
+    db.session.add(Celeste)
+    db.session.add(Natalie)
+    db.session.add(William)
+    db.session.add(Anthony)
+    db.session.add(Joshua)
+    db.session.add(Ethan)
+    db.session.add(Kayla)
+    db.session.add(Kailee)
+    db.session.add(Sylvia)
+    db.session.add(Abel)
+    db.session.add(Mohammed)
+    db.session.add(Kyle)
+    db.session.add(Cole)
+    db.session.add(Kai)
+    db.session.add(Zane)
+
     db.session.commit()
 
 
@@ -95,7 +180,8 @@ def seed_users():
 # it will reset the primary keys for you as well.
 def undo_users():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM users"))
 

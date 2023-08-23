@@ -1,5 +1,5 @@
 .chat-area {
-    border: 1px solid pink;
+    /* border: 1px solid pink; */
     /* background-color: red; */
     width: 250px;
     height: 275px;
@@ -34,7 +34,7 @@
     background-color: white;
     width: 240px;
     height: 200px;
-    border: 1px solid green;
+    /* border: 1px solid green; */
     /* position: relative;
     right: 19.5px; */
     /* padding: 5px; */

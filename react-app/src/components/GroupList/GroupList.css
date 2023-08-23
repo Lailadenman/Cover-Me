@@ -17,3 +17,40 @@ h1 {
 .group-link:hover {
     text-decoration: underline;
 }
+
+.search-form {
+    /* border: 1px solid green; */
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.group-search-input {
+    width: 300px;
+    padding: 6px;
+    margin: 0px;
+    /* margin-top: 8px; */
+    font-size: 17px;
+    border: none;
+    height: 30px;
+}
+
+/* .fa-magnifying-glass {
+    height: 30px;
+} */
+
+.search-button {
+    float: right;
+    padding: 6px;
+    margin: 0px;
+    /* margin-top: 8px; */
+    /* margin-right: 16px; */
+    /* background: #ddd; */
+    font-size: 17px;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    height: 42px;
+    width: 50px;
+}
