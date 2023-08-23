@@ -13,6 +13,7 @@ import EventDetails from "./components/EventDetails";
 import MyGroupsPage from "./components/MyGroupsPage";
 import HomePage from "./components/HomePage";
 import ProfilePage from "./components/ProfilePage";
+import SearchResults from "./components/SearchResults";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ function App() {
             <Chat />
           </Route>
           <Route exact path="/groups">
-            <GroupList />
+            <GroupList className="group-list-full-page"/>
           </Route>
           <Route exact path="/groups/joined">
             <MyGroupsPage />
@@ -57,6 +58,9 @@ function App() {
           </Route>
           <Route exact path="/profile/:id">
             <ProfilePage />
+          </Route>
+          <Route exact path="/results/:input">
+            <SearchResults />
           </Route>
         </Switch>
       )}

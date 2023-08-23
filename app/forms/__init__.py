@@ -8,3 +8,4 @@ from .new_member_form import NewMemberForm
 from .group_request_form import GroupRequestForm
 from .new_message_form import NewMessageForm
 from .image_form import ImageForm
+from .search_group_form import SearchGroupForm

@@ -5,6 +5,7 @@ const CREATE_GROUP = "group/CREATE_GROUP"
 const UPDATE_GROUP = "group/UPDATE_GROUP"
 const DELETE_GROUP = "group/DELETE_GROUP"
 const CREATE_MEMBER = "group/CREATE_MEMBER"
+const SEARCH_GROUP = "group/SEARCH_GROUP"
 // const ADD_MESSAGE = "groups/ADD_MESSAGE"
 
 const loadGroups = (list) => ({
@@ -40,6 +41,11 @@ const deleteGroup = (id) => ({
 const createMember = (member) => ({
     type: CREATE_MEMBER,
     member
+})
+
+const searchGroup = (results) => ({
+    type: SEARCH_GROUP,
+    results
 })
 
 // const addMessage = (message) => ({
@@ -223,9 +229,32 @@ export const newChat = (user_id, group_id, message) => async (dispatch) => {
     })
 
     if (res.ok) {
-        const message = res.json()
+        const message = await res.json()
         // console.log("new message saved");
         dispatch(getGroupDetails(group_id))
+    }
+}
+
+export const searchGroupByName = (keyword) => async (dispatch) => {
+    console.log("search thunk hit");
+    const res = await fetch("/api/groups/search", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            keyword
+        })
+    })
+
+    if (res.ok) {
+        const results = await res.json()
+
+        console.log("search went through", results);
+
+        dispatch(searchGroup(results))
+
+        return results
     }
 }
 
@@ -284,6 +313,16 @@ export default function groupReducer(state = initialState, action) {
             newState = { ...state }
 
             delete newState[action.id]
+
+            return newState
+        case SEARCH_GROUP:
+            newState = { ...state }
+
+            newState["searchRes"] = {}
+
+            action.results.forEach((group) => {
+                newState.searchRes[group.id] = group
+            })
 
             return newState
         default:

@@ -23,13 +23,11 @@ function LoginFormPage() {
 
   return (
     <div className="login">
-      <div className="head"><h1>Log In</h1></div>
+      <div className="head"><h1 className="login-header">Log In</h1></div>
       <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
+        {errors.length > 0 ? (<ul>
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>) : ""}
         <label>
           Email
           <input
@@ -50,7 +48,7 @@ function LoginFormPage() {
         </label>
         <button type="submit">Log In</button>
       </form>
-    </div>
+    </div >
   );
 }
 

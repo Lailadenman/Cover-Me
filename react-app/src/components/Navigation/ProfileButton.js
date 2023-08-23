@@ -5,6 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { NavLink, useHistory } from "react-router-dom";
+import "./Navigation.css"
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const ulClassName = "profile-dropdowns" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
   const handleLogout = (e) => {
@@ -46,19 +47,16 @@ function ProfileButton({ user }) {
       {/* <button onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button> */}
-      <ul className="user-list">
+      <div className={"user-list"}>
         {user ? (
-          <>
-            <li className="info">Your Info</li>
-            <li className="user-info">{user.username}</li>
-            <li className="user-info">{user.email}</li>
-            <li className="user-info">
-              <NavLink exact to="/groups/joined">My Groups</NavLink>
+          <div>
+            <li className="info">Your Info:</li>
+            <li className="users-info">{user.username}</li>
+            <li className="users-info">{user.firstName} {user.lastName}</li>
+            <li className="users-info">
+              <NavLink exact to="/groups/joined">Your Groups</NavLink>
             </li>
-            {/* <li className="user-info">
-              <button onClick={handleLogout}>Log Out</button>
-            </li> */}
-          </>
+          </div>
         ) : (
           <>
             <OpenModalButton
@@ -66,7 +64,6 @@ function ProfileButton({ user }) {
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
-
             <OpenModalButton
               buttonText="Sign Up"
               onItemClick={closeMenu}
@@ -74,7 +71,7 @@ function ProfileButton({ user }) {
             />
           </>
         )}
-      </ul>
+      </div>
     </>
   );
 }

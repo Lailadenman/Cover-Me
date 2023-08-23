@@ -38,7 +38,7 @@ function CreateEventForm({ gId }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="event-form" onSubmit={handleSubmit}>
             <ul>
                 {errors.map((error, idx) => (
                     <li key={idx}>{error}</li>

@@ -1,10 +1,12 @@
 /* TODO Add site wide styles */
 body {
-    background-color: #eed6ca;
+    /* background-color: #eed6ca; */
+    background: linear-gradient(45deg, rgb(0, 0, 141), rgb(252, 133, 252));
 }
 
 .navBar {
-    background-color: #ab89aa;
+    /* background-color: #ab89aa; */
+    /* background: linear-gradient(to bottom, red, #f2e8d6, white); */
     height: 100px;
 }
 
@@ -29,3 +31,8 @@ a {
     justify-content: center;
     align-items: center;
 }
+
+/* .group-list-full-page {
+    width: 100%;
+    height: 100%;
+} */

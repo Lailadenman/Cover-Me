@@ -1,0 +1,32 @@
+.head {
+    display: flex;
+    justify-content: center;
+}
+
+.signup-form-form {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid green; */
+    align-items: center;
+}
+
+.signup-input-sect {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.name-sect {
+    display: flex;
+
+}
+
+.name-input {
+    width: 90px;
+}
+
+.signup-header {
+    margin: 10px;
+    margin-bottom: 20px;
+}

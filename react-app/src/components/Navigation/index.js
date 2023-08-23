@@ -32,7 +32,8 @@ function Navigation({ isLoaded }) {
 		return () => document.removeEventListener("click", closeMenu);
 	}, [showMenu]);
 
-	const ulClassName = "dropdown-content" + (showMenu ? " show" : "");
+	const ulClassName = "dropdown-contents" + (showMenu ? " show-contents" : "");
+	const logged = ulClassName + (sessionUser ? "" : " not-logged")
 	// const closeMenu = () => setShowMenu(false);
 
 	const closeMenu = () => setShowMenu(false);
@@ -52,11 +53,11 @@ function Navigation({ isLoaded }) {
 			<div className='coverMeLogo'>
 				<img className="logo" src='https://res.cloudinary.com/dbiv2lwhp/image/upload/v1686594262/C__2_-removebg-preview_mkzsri.png' />
 			</div>
-			<div className='dropdown'>
+			<div className='dropdowns'>
 				<button className="menu" onClick={openMenu}>
 					<i class="fa-solid fa-bars"></i>
 				</button>
-				<div id="myDropdown" className={ulClassName} ref={ulRef}>
+				<div id="myDropdown" className={logged} ref={ulRef}>
 					{isLoaded && (
 						<li>
 							<ProfileButton user={sessionUser} />
@@ -64,8 +65,8 @@ function Navigation({ isLoaded }) {
 					)}
 					{/* {sessionUser && (<li>
 						<NavLink exact to="/groups">Groups</NavLink>
-					</li>)} */}
-					{/* {sessionUser && (<li>
+					</li>)}
+					{sessionUser && (<li>
 						<NavLink exact to="/groups/joined">My Groups</NavLink>
 					</li>)} */}
 					{sessionUser && (<li className='info logout'>

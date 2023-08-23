@@ -198,117 +198,125 @@ function GroupDetails() {
     const banner = group && group.pic
 
     return (
-        <div className='all'>
-            {/* <div className='group-header' style={{backgroundImage: `url(${banner})`}}><h1>{isLoaded && group && (group?.name)}</h1></div> */}
-            <h1>{isLoaded && group && (group?.name)}</h1>
-            {isMember ? (<div className='group-details'>
-                {isLoaded && group && (
-                    <>
-                        {/* <img src={banner}></img> */}
-                        <div className='left-side'>
-                            <div className='dropdowns'>
-                                <div className='group-info-dropdown dropdown'>
-                                    <button className='dropdown-button' onClick={openMenu}>
-                                        Group info <i class="fa-solid fa-caret-down"></i>
-                                    </button>
-                                    <div className={ulClassName} ref={ulRef}>
-                                        <h2>Owner: {group?.owner}</h2>
-                                        <h2>Description: {group?.description}</h2>
+        <div className='group-details-page'>
+            <div className='all'>
+                {/* <div className='group-header' style={{backgroundImage: `url(${banner})`}}><h1>{isLoaded && group && (group?.name)}</h1></div> */}
+                <h1 className='details-header'>{isLoaded && group && (group?.name)}</h1>
+                {isMember ? (<div className='group-details'>
+                    {isLoaded && group && (
+                        <>
+                            {/* <img src={banner}></img> */}
+                            <div className='left-side'>
+                                <div className='dropdowns'>
+                                    {/* Group info drop down */}
+                                    <div className='group-info-dropdown dropdown'>
+                                        <button className='dropdown-button' onClick={openMenu}>
+                                            Group info <i class="fa-solid fa-caret-down"></i>
+                                        </button>
+                                        <div className={ulClassName} ref={ulRef}>
+                                            <h1 className='title group-title'>About This Group</h1>
+                                            <h3 className='group-info-dets'>Owner: {group?.owner}</h3>
+                                            <h3 className='group-info-dets'>Description: {group?.description}</h3>
+                                        </div>
+                                    </div>
+                                    {isMember && (<div className='chat-dropdown dropdown'>
+                                        <button className='dropdown-button' onClick={openChatMenu}>
+                                            Messages <i class="fa-solid fa-caret-down"></i>
+                                        </button>
+                                        <div className={chatClassName} ref={ulRef}>
+                                            <Chat gId={group.id} cName={isMember ? "chat-area" : "hidden"} close={closeChatMenu} />
+                                            {/* <button onClick={closeChatMenu}>Close Chat</button> */}
+                                        </div>
+                                    </div>)}
+
+                                    {/* members drop down */}
+                                    <div className='member-list-dropdown dropdown'>
+                                        <button className='dropdown-button' onClick={openMemberMenu}>
+                                            Members <i class="fa-solid fa-caret-down"></i>
+                                        </button>
+                                        <div id='members' className={memberClassName} ref={ulRef}>
+                                            <h1 className='title'>List of Members</h1>
+                                            {members && membersArr.map((member) => {
+                                                return (
+                                                    <div id='member-link-div'>
+                                                        <h4 className='member-list-link'><NavLink exact to={`/profile/${member?.user?.id}`} id="member-link">{member?.user?.firstName} {member?.user?.lastName}</NavLink></h4>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
+
+                                    {/* requests drop down */}
+                                    {isOwner && (<div className='requests-dropdown dropdown'>
+                                        <button className='dropdown-button' onClick={openRequestMenu}>
+                                            Requests <i class="fa-solid fa-caret-down"></i>
+                                        </button>
+                                        <div className={requestClassName} ref={ulRef}>
+                                            <h3 className='title request-title'>List of Requests</h3>
+                                            {requests && requestsArr.map((request) => {
+                                                return (
+                                                    <div>
+                                                        <h4 className='request-list-link'>{request?.user?.firstName} {request?.user?.lastName}</h4>
+                                                        <OpenModalButton
+                                                            buttonText={"Accept"}
+                                                            onItemClick={onClick}
+                                                            modalComponent={<RequestModal id={request?.id} gId={id} uId={request.user_id} action={"accept"} />}
+                                                        />
+                                                        <OpenModalButton
+                                                            buttonText={"Decline"}
+                                                            onItemClick={onClick}
+                                                            modalComponent={<RequestModal id={request?.id} gId={id} uId={request.user_id} action={"decline"} />}
+                                                        />
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>)}
+                                </div>
+                                <div className='buttons'>
+                                    {isMember && (<div id='eventButton' className={isMember ? "" : "hidden"}>
+                                        <OpenModalButton
+                                            buttonText={"Create Event"}
+                                            onItemClick={onClick}
+                                            modalComponent={<CreateEventForm gId={id} />}
+                                        />
+                                    </div>)}
+                                    {isRequested ? (<p>Your request has already been send</p>) : (<div id='joinButton' className={!isMember ? "" : "hidden"}>
+                                        <button onClick={onJoin}>Join</button>
+                                    </div>)}
+                                    <div id='groupButtons' className={group.owner_id === user ? "" : "hidden"}>
+                                        <OpenModalButton
+                                            buttonText={"Edit Group"}
+                                            onItemClick={onClick}
+                                            modalComponent={<EditGroupModal gName={group?.name} gDescription={group?.description} gId={id} />}
+                                        />
+                                        <OpenModalButton
+                                            buttonText={"Delete Group"}
+                                            onItemClick={onClick}
+                                            modalComponent={<DeleteGroupModal id={id} />}
+                                        />
                                     </div>
                                 </div>
-                                {isMember && (<div className='chat-dropdown dropdown'>
-                                    <button className='dropdown-button' onClick={openChatMenu}>
-                                        Messages <i class="fa-solid fa-caret-down"></i>
-                                    </button>
-                                    <div className={chatClassName} ref={ulRef}>
-                                        <Chat gId={group.id} cName={isMember ? "chat-area" : "hidden"} close={closeChatMenu} />
-                                        {/* <button onClick={closeChatMenu}>Close Chat</button> */}
-                                    </div>
-                                </div>)}
-                                <div className='member-list-dropdown dropdown'>
-                                    <button className='dropdown-button' onClick={openMemberMenu}>
-                                        Members <i class="fa-solid fa-caret-down"></i>
-                                    </button>
-                                    <div id='members' className={memberClassName} ref={ulRef}>
-                                        <h1 className='title'>List of Members</h1>
-                                        {members && membersArr.map((member) => {
-                                            return (
-                                                <div id='member-link-div'>
-                                                    <h2><NavLink exact to={`/profile/${member?.user?.id}`} id="member-link">{member?.user?.firstName} {member?.user?.lastName}</NavLink></h2>
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                </div>
-                                {isOwner && (<div className='requests-dropdown dropdown'>
-                                    <button className='dropdown-button' onClick={openRequestMenu}>
-                                        Requests <i class="fa-solid fa-caret-down"></i>
-                                    </button>
-                                    <div className={requestClassName} ref={ulRef}>
-                                        <h1 className='title'>List of Requests</h1>
-                                        {requests && requestsArr.map((request) => {
-                                            return (
-                                                <div>
-                                                    <h2>{request?.user?.firstName} {request?.user?.lastName}</h2>
-                                                    <OpenModalButton
-                                                        buttonText={"Accept"}
-                                                        onItemClick={onClick}
-                                                        modalComponent={<RequestModal id={request?.id} gId={id} uId={request.user_id} action={"accept"} />}
-                                                    />
-                                                    <OpenModalButton
-                                                        buttonText={"Decline"}
-                                                        onItemClick={onClick}
-                                                        modalComponent={<RequestModal id={request?.id} gId={id} uId={request.user_id} action={"decline"} />}
-                                                    />
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                </div>)}
                             </div>
-                            <div className='buttons'>
-                                {isMember && (<div id='eventButton' className={isMember ? "" : "hidden"}>
-                                    <OpenModalButton
-                                        buttonText={"Create Event"}
-                                        onItemClick={onClick}
-                                        modalComponent={<CreateEventForm gId={id} />}
-                                    />
-                                </div>)}
-                                {isRequested ? (<p>Your request has already been send</p>) : (<div id='joinButton' className={!isMember ? "" : "hidden"}>
-                                    <button onClick={onJoin}>Join</button>
-                                </div>)}
-                                <div id='groupButtons' className={group.owner_id === user ? "" : "hidden"}>
-                                    <OpenModalButton
-                                        buttonText={"Edit Group"}
-                                        onItemClick={onClick}
-                                        modalComponent={<EditGroupModal gName={group?.name} gDescription={group?.description} gId={id} />}
-                                    />
-                                    <OpenModalButton
-                                        buttonText={"Delete Group"}
-                                        onItemClick={onClick}
-                                        modalComponent={<DeleteGroupModal id={id} />}
-                                    />
+                            <div className='right-side'>
+                                <div className='calendar-sect'>
+                                    <div className={isMember ? "calendar-area" : "hidden"}>
+                                        <button className='cal-buttons' onClick={handlePastMonth}><p>{"<"}</p></button>
+                                        <Calendar year={year} month={month} gId={id} eventList={events && eventsArr} />
+                                        <button className='cal-buttons' onClick={handleNextMonth}><p>{">"}</p></button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className='right-side'>
-                            <div className='calendar-sect'>
-                                <div className={isMember ? "calendar-area" : "hidden"}>
-                                    <button className='cal-buttons' onClick={handlePastMonth}><p>{"<"}</p></button>
-                                    <Calendar year={year} month={month} gId={id} eventList={events && eventsArr} />
-                                    <button className='cal-buttons' onClick={handleNextMonth}><p>{">"}</p></button>
-                                </div>
-                            </div>
-                        </div>
-                    </>
-                )}
-            </div>) : (<div>
-                <h2>Owner: {group?.owner}</h2>
-                <h2>{group?.description}</h2>
-                {isRequested ? (<p>Your request to join has already been send</p>) : (<div id='joinButton' className={!isMember ? "" : "hidden"}>
-                    <button onClick={onJoin}>Join</button>
+                        </>
+                    )}
+                </div>) : (<div>
+                    <h2>Owner: {group?.owner}</h2>
+                    <h2>{group?.description}</h2>
+                    {isRequested ? (<p>Your request to join has already been send</p>) : (<div id='joinButton' className={!isMember ? "" : "hidden"}>
+                        <button onClick={onJoin}>Join</button>
+                    </div>)}
                 </div>)}
-            </div>)}
+            </div>
         </div>
     )
 }
