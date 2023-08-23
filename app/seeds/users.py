@@ -132,6 +132,10 @@ def seed_users():
     Zane = User(
         username='Zanethemain', firstName='Zane', lastName='Boxer', email='zane@aa.io', password='password')
 
+    # 37
+    Mary = User(
+        username='maryslamb', firstName='mary', lastName='lopez', email='mary@aa.io', password='password')
+
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
@@ -168,6 +172,7 @@ def seed_users():
     db.session.add(Cole)
     db.session.add(Kai)
     db.session.add(Zane)
+    db.session.add(Mary)
 
     db.session.commit()
 
