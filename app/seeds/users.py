@@ -66,75 +66,75 @@ def seed_users():
 
     # 20
     Jonathan = User(
-        username='JT', firstName='Jonathan', lastName='Denman', email='jonathan@aa.io', password='password')
+        username='JT', firstName='Jonathan', lastName='Denman', bio="I'm a demo user", email='jonathan@aa.io', password='password')
 
     # 21
     Michael = User(
-        username='Mykale', firstName='Michael', lastName='Guerrero', email='michael@aa.io', password='password')
+        username='Mykale', firstName='Michael', lastName='Guerrero', bio="I'm a demo user", email='michael@aa.io', password='password')
 
     # 22
     Celeste = User(
-        username='Celeste8909', firstName='Celeste', lastName='Perez', email='Celeste@aa.io', password='password')
+        username='Celeste8909', firstName='Celeste', lastName='Perez', bio="I'm a demo user", email='Celeste@aa.io', password='password')
 
     # 23
     Natalie = User(
-        username='Natgirl9', firstName='Natalie', lastName='Guzman', email='Natalie@aa.io', password='password')
+        username='Natgirl9', firstName='Natalie', lastName='Guzman', bio="I'm a demo user", email='Natalie@aa.io', password='password')
 
     # 24
     William = User(
-        username='Terminator93', firstName='William', lastName='Suzuka', email='william@aa.io', password='password')
+        username='Terminator93', firstName='William', lastName='Suzuka', bio="I'm a demo user", email='william@aa.io', password='password')
 
     # 25
     Anthony = User(
-        username='AntnTony', firstName='Anthony', lastName='Chen', email='anthony@aa.io', password='password')
+        username='AntnTony', firstName='Anthony', lastName='Chen', bio="I'm a demo user", email='anthony@aa.io', password='password')
 
     # 26
     Joshua = User(
-        username='KingJosh', firstName='Joshua', lastName='Andrada', email='joshua@aa.io', password='password')
+        username='KingJosh', firstName='Joshua', lastName='Andrada', bio="I'm a demo user", email='joshua@aa.io', password='password')
 
     # 27
     Ethan = User(
-        username='Docethan', firstName='Ethan', lastName='Kirk', email='Ethan@aa.io', password='password')
+        username='Docethan', firstName='Ethan', lastName='Kirk', bio="I'm a demo user", email='Ethan@aa.io', password='password')
 
     # 28
     Kayla = User(
-        username='KayKay', firstName='Kayla', lastName='Woods', email='Kayla@aa.io', password='password')
+        username='KayKay', firstName='Kayla', lastName='Woods', bio="I'm a demo user", email='Kayla@aa.io', password='password')
 
     # 29
     Kailee = User(
-        username='Kalelover23', firstName='Kailee', lastName='Fox', email='Kailee@aa.io', password='password')
+        username='Kalelover23', firstName='Kailee', lastName='Fox', bio="I'm a demo user", email='Kailee@aa.io', password='password')
 
     # 30
     Sylvia = User(
-        username='Sylvanuser98', firstName='Sylvia', lastName='Lin', email='Sylvia@aa.io', password='password')
+        username='Sylvanuser98', firstName='Sylvia', lastName='Lin', bio="I'm a demo user", email='Sylvia@aa.io', password='password')
 
     # 31
     Abel = User(
-        username='AbelXO', firstName='Abel', lastName='Amaad', email='Abel@aa.io', password='password')
+        username='AbelXO', firstName='Abel', lastName='Amaad', bio="I'm a demo user", email='Abel@aa.io', password='password')
 
     # 32
     Mohammed = User(
-        username='Mohaman', firstName='Mohammed', lastName='Ali', email='mohammed@aa.io', password='password')
+        username='Mohaman', firstName='Mohammed', lastName='Ali', bio="I'm a demo user", email='mohammed@aa.io', password='password')
 
     # 33
     Kyle = User(
-        username='Monsterdrinker1', firstName='Kyle', lastName='Irving', email='Kyle@aa.io', password='password')
+        username='Monsterdrinker1', firstName='Kyle', lastName='Irving', bio="I'm a demo user", email='Kyle@aa.io', password='password')
 
     # 34
     Cole = User(
-        username='MCole', firstName='Cole', lastName='Young', email='Cole@aa.io', password='password')
+        username='MCole', firstName='Cole', lastName='Young', bio="I'm a demo user", email='Cole@aa.io', password='password')
 
     # 35
     Kai = User(
-        username='Ninja75', firstName='Kai', lastName='Yamamoto', email='Kai@aa.io', password='password')
+        username='Ninja75', firstName='Kai', lastName='Yamamoto', bio="I'm a demo user", email='Kai@aa.io', password='password')
 
     # 36
     Zane = User(
-        username='Zanethemain', firstName='Zane', lastName='Boxer', email='zane@aa.io', password='password')
+        username='Zanethemain', firstName='Zane', lastName='Boxer', bio="I'm a demo user", email='zane@aa.io', password='password')
 
     # 37
     Mary = User(
-        username='maryslamb', firstName='mary', lastName='lopez', email='mary@aa.io', password='password')
+        username='maryslamb', firstName='mary', lastName='lopez', bio="I'm a demo user", email='mary@aa.io', password='password')
 
     db.session.add(demo)
     db.session.add(marnie)
