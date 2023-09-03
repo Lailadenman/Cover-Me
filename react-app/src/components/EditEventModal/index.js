@@ -36,7 +36,7 @@ function EditEventForm({ eId, gId, eDescription, eStart_date, eEnd_date }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className='event-form' onSubmit={handleSubmit}>
             <ul>
                 {errors.map((error, idx) => (
                     <li key={idx}>{error}</li>

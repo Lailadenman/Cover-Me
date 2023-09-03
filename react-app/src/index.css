@@ -2,6 +2,24 @@
 body {
     /* background-color: #eed6ca; */
     background: linear-gradient(45deg, rgb(0, 0, 141), rgb(252, 133, 252));
+    /* height: min-content;  */
+    /* background-size:cover; */
+    /* margin: 0; */
+    /* padding: 0; */
+    /* height: 100vh; */
+    background-repeat: no-repeat;
+    /* font-family: 'Signika', sans-serif; */
+    /* font-family: 'Abril Fatface', cursive; */
+    font-family: 'Outfit', sans-serif;
+}
+
+.app-div {
+    /* background: linear-gradient(45deg, rgb(0, 0, 141), rgb(252, 133, 252)); */
+    /* background-size: cover; */
+    /* width: 100vw; */
+    /* height: 100vh; */
+    /* background-repeat: no-repeat; */
+    /* background-size: 100% 100vh; */
 }
 
 .navBar {
@@ -30,6 +48,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+    /* font-family: 'Outfit', sans-serif; */
 }
 
 /* .group-list-full-page {

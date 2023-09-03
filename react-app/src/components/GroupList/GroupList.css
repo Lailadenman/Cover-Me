@@ -3,10 +3,16 @@
     flex-direction: column;
     align-items: center;
     margin: 0;
+    height: 100vh;
     /* width: 100%; */
-    /* height: calc(100vh - 3px); */
+    /* height: auto 0; */
     /* I can not get the height of this to just be the full window it keeps adding a little bit */
     /* of extra height and a scroll bar which I do no want */
+}
+
+body {
+    /* background-color: #eed6ca; */
+    /* background: linear-gradient(45deg, rgb(0, 0, 141), rgb(252, 133, 252)); */
 }
 
 h1 {

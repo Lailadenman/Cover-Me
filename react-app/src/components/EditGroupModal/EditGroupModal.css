@@ -1,9 +1,8 @@
-.event-form {
+.group-form {
     display: flex;
     flex-direction: column;
     padding: 5px;
     padding-bottom: 40px;
-    /* background-color: aqua; */
 }
 
 h3 {

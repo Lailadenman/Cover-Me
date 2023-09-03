@@ -3,6 +3,7 @@ import { editGroup, getGroupDetails } from "../../store/group";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createNewGroup } from "../../store/group";
+import "./EditGroupModal.css"
 
 function EditGroupModal({ gName, gDescription, gId }) {
     const dispatch = useDispatch();
@@ -23,7 +24,7 @@ function EditGroupModal({ gName, gDescription, gId }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="group-form" onSubmit={handleSubmit}>
 
             <ul>
                 {errors.map((error, idx) => (

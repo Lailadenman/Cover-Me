@@ -23,7 +23,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <div className="app-div">
       <div className="navBar">
         <Navigation isLoaded={isLoaded} />
       </div>
@@ -64,7 +64,7 @@ function App() {
           </Route>
         </Switch>
       )}
-    </>
+    </div>
   );
 }
 

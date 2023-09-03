@@ -25,7 +25,7 @@ function DeleteEventModal({ id, gId }) {
 
     return (
         <div className='modal'>
-            <h1>Delete?</h1>
+            <h2>Delete?</h2>
             <div className="modal-buttons">
                 <button onClick={handleYes}>Yes</button>
                 <button onClick={handleNo}>No</button>

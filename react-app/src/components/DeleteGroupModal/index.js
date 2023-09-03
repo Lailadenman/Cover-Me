@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux"
 import { useModal } from "../../context/Modal";
 import { deleteFromGroups } from "../../store/group";
 import { useHistory } from "react-router-dom";
+import "./DeleteGroupModal.css"
 
 function DeleteGroupModal({ id }) {
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function DeleteGroupModal({ id }) {
 
     return (
         <div className="modal">
-            <h1>Are you sure you want to delete this group?</h1>
+            <h2>Are you sure you want to delete this group?</h2>
             <div className="modal-buttons">
                 <button onClick={handleYes}>Yes</button>
                 <button onClick={handleNo}>No</button>

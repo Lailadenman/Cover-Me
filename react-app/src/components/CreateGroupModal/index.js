@@ -44,11 +44,11 @@ function CreateGroupModal() {
         <div className="new-group">
             <h3>Create Your Group</h3>
             <form action="/posts/new" method="POST" enctype="multipart/form-data" onSubmit={handleSubmit}>
-                {errors && (<ul>
+                {errors && errors.length ? (<ul>
                     {errors.map((error, idx) => (
                         <li key={idx}>{error}</li>
                     ))}
-                </ul>)}
+                </ul>) : ""}
                 <div className="lab">
                     <label>
                         Group Name:

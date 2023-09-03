@@ -7,9 +7,20 @@ form {
 }
 
 .new-group {
-    padding: 10px;
+    /* padding: 10px; */
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    padding-bottom: 40px;
 }
 
 h3 {
     text-align: center;
 }
+
+/* .group-form {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    padding-bottom: 40px;
+} */
