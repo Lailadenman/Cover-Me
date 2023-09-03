@@ -31,7 +31,7 @@ function ProfilePage() {
     let roomId = chatRoom?.id
 
     if (chatRoom && chatRoom.Message == "no rooms found") {
-        console.log("they have never talked");
+        // console.log("they have never talked");
         haveChatted = false
         // setIsReady(true)
     } else {
@@ -50,7 +50,7 @@ function ProfilePage() {
 
     // console.log(test);
 
-    console.log("first isNew", isNew);
+    // console.log("first isNew", isNew);
 
     // useEffect(() => {
     //     setIsNew(!haveChatted)
@@ -59,17 +59,17 @@ function ProfilePage() {
     useEffect(() => {
         if (chatRoom) {
             if(chatRoom.Message == "no rooms found") {
-                console.log("chatRoom doesn't exist");
+                // console.log("chatRoom doesn't exist");
                 setIsNew(true)
             } else {
-                console.log("chatRoom exists");
+                // console.log("chatRoom exists");
                 setIsNew(false)
             }
 
         }
     }, [chatRoom])
 
-    console.log("they've talked ", isNew);
+    // console.log("they've talked ", isNew);
 
     // useEffect(() => {
     //     dispatch(getUserInfo(id))
@@ -98,8 +98,8 @@ function ProfilePage() {
 
     let cName = isNew ? "chat-sect hidden" : "chat-sect"
 
-    console.log(isNew);
-    console.log("current class is ", cName);
+    // console.log(isNew);
+    // console.log("current class is ", cName);
 
     return (
         <>

@@ -16,22 +16,22 @@ function SearchResults() {
     const sessionUser = useSelector(state => state?.session?.user)
     const { input } = useParams()
 
-    console.log(input);
+    // console.log(input);
 
     if (!sessionUser) {
         history.push('/')
     }
 
     useEffect(async () => {
-        console.log(input);
+        // console.log(input);
         const serRes = await dispatch(searchGroupByName(input))
         setIsLoaded(true)
 
-        console.log(serRes);
+        // console.log(serRes);
     }, [dispatch])
 
     const groups = useSelector(state => state?.groups)
-    console.log(groups && groups);
+    // console.log(groups && groups);
 
     const groupsArr = isLoaded ? groups && Object.values(groups?.searchRes) : []
     // // console.log(groups && groupsArr);

@@ -45,8 +45,8 @@ export const newChatRoom = (user_id, receiver_id) => async (dispatch) => {
 
 export const getRoomId = (rId) => async (dispatch) => {
     const res = await fetch(`/api/users/room/${rId}`)
-    console.log("id tester thunk hit");
-    console.log(rId);
+    // console.log("id tester thunk hit");
+    // console.log(rId);
     // console.log(res.url);
 
     if (res.ok) {
@@ -115,8 +115,8 @@ export const getRoomMessages = (room_id) => async (dispatch) => {
 }
 
 export const newPrivChat = (user_id, room_id, message) => async (dispatch) => {
-    console.log("new message sent");
-    console.log(room_id);
+    // console.log("new message sent");
+    // console.log(room_id);
     const res = await fetch(`/api/messages/${user_id}`, {
         method: "POST",
         headers: {
@@ -130,7 +130,7 @@ export const newPrivChat = (user_id, room_id, message) => async (dispatch) => {
 
     if (res.ok) {
         const message = await res.json()
-        console.log("new message saved");
+        // console.log("new message saved");
         dispatch(getRoomId(room_id))
     }
 }
@@ -143,7 +143,7 @@ export default function roomReducer(state = initialState, action) {
         case GET_ROOM:
             newState = { ...initialState }
 
-            console.log("GET_ROOM load checker", action.room);
+            // console.log("GET_ROOM load checker", action.room);
 
             newState["room"] = action.room
 

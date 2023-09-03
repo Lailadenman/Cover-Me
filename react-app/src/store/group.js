@@ -82,13 +82,13 @@ export const getGroupDetails = (id) => async (dispatch) => {
     // console.log("~~~~~~~~~~~~~~~", id);
     const res = await fetch(`/api/groups/${id}`)
     // console.log(res.url);
-    console.log("getGroupDetails HIT");
+    // console.log("getGroupDetails HIT");
 
     if (res.ok) {
         const group = await res.json()
         // console.log("@@@@@@@@@@@res.ok", group)
         // // console.log("=================", group.members);
-        console.log("getGroupDetails success");
+        // console.log("getGroupDetails success");
 
         dispatch(loadGroupDetails(group))
     }
@@ -168,20 +168,20 @@ export const deleteRequest = (id, gId) => async (dispatch) => {
         method: 'DELETE'
     })
 
-    console.log('deleteReq hit');
+    // console.log('deleteReq hit');
 
     if (res.ok) {
         const group = await res.json()
         // // console.log("@@@@@@@@@@@res.ok", group)
 
-        console.log('deleteReq success');
+        // console.log('deleteReq success');
 
         getGroupDetails(gId)
     }
 }
 
 export const acceptRequest = (id, uId, gId) => async (dispatch) => {
-    console.log("hit acceptReq");
+    // console.log("hit acceptReq");
     const res = await fetch(`/api/groupmembers/${id}`, {
         method: "POST",
         headers: {
@@ -192,7 +192,7 @@ export const acceptRequest = (id, uId, gId) => async (dispatch) => {
     if (res.ok) {
         const newMem = await res.json()
 
-        console.log("here's our new member");
+        // console.log("here's our new member");
         getGroupDetails(gId)
     }
 }
@@ -236,7 +236,7 @@ export const newChat = (user_id, group_id, message) => async (dispatch) => {
 }
 
 export const searchGroupByName = (keyword) => async (dispatch) => {
-    console.log("search thunk hit");
+    // console.log("search thunk hit");
     const res = await fetch("/api/groups/search", {
         method: "POST",
         headers: {
@@ -250,7 +250,7 @@ export const searchGroupByName = (keyword) => async (dispatch) => {
     if (res.ok) {
         const results = await res.json()
 
-        console.log("search went through", results);
+        // console.log("search went through", results);
 
         dispatch(searchGroup(results))
 
