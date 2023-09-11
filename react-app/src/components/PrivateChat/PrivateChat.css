@@ -11,6 +11,30 @@
     /* border: 1px solid rgb(248, 5, 5); */
 }
 
+.priv-chat-form {
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+}
+
+.priv-chat-input {
+    margin: 5px;
+    width: 500px;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 30px;
+}
+
+.priv-chat-send {
+    margin-right: 0px;
+    margin-left: 0px;
+    height: 37px;
+}
+
+.priv-chat-title {
+    margin-bottom: 10px;
+}
+
 .button-sect {
     /* position: absolute;
     bottom: 10px; */
@@ -33,7 +57,7 @@
     /* position: absolute;
     top: 10px; */
     /* border: 1px solid black; */
-    margin: 0px;
+    /* margin: 0px; */
 }
 
 .send-button {

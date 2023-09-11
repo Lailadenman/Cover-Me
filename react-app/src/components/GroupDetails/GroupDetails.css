@@ -100,6 +100,24 @@
     padding: 5px;
 }
 
+.member-dropdown-content {
+    height: 350px;
+    /* overflow-y: auto;
+    overflow-x: auto; */
+}
+
+.member-title {
+    /* margin: 5px; */
+    text-align: center;
+}
+
+.member-list {
+    height: 280px;
+    overflow-y: auto;
+    overflow-x: auto;
+    padding-left: 5px;
+}
+
 .show {
     display: block;
 }
@@ -122,14 +140,18 @@
     margin: 10px;
 }
 
-/* .member-list-link {
+.member-list-link {
     margin-top: 10px;
-    margin-bottom: 10px;
-} */
+    margin-bottom: 20px;
+}
 
 .request-list-link {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.no-requests {
+    text-align: center;
 }
 
 /* .group-header {

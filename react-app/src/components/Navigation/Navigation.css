@@ -12,6 +12,7 @@
   justify-content: space-around;
   align-items: center;
   list-style-type: none;
+  z-index: 0
 }
 
 .coverMeLogo {

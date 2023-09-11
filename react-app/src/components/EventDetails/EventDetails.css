@@ -2,6 +2,24 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: calc(100vh - 124px);
+}
+
+.event-all {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 1px solid black; */
+    width: 350px;
+    border-radius: 15px;
+    background-color: rgb(0,0,0,.35);
+    padding: 10px;
+    padding-top: 15px;
+    margin: 15px;
+}
+
+.event-title-h1 {
+    margin: 0px;
 }
 
 .back-button {

@@ -67,7 +67,7 @@ function PrivateChat({ rId }) {
         <div>
             <div className='chat-box'>
                 <div className='chat-header'>
-                    <h1 className='chat-title'>Chat</h1>
+                    <h1 className='chat-title priv-chat-title'>Chat</h1>
                 </div>
                 <div className='messages'>
                     {messages.map((message, ind) => (
@@ -75,12 +75,13 @@ function PrivateChat({ rId }) {
                     ))}
                 </div>
                 <div className='button-sect'>
-                    <form onSubmit={sendChat}>
+                    <form onSubmit={sendChat} className='priv-chat-form'>
                         <input
                             value={chatInput}
                             onChange={updateChatInput}
+                            className='priv-chat-input'
                         />
-                        <button className="send-button" type="submit">Send</button>
+                        <button className="send-button priv-chat-send" type="submit">Send</button>
                     </form>
                     {/* <button onClick={close}>Close Chat</button> */}
                 </div>

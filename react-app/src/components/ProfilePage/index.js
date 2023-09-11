@@ -58,7 +58,7 @@ function ProfilePage() {
 
     useEffect(() => {
         if (chatRoom) {
-            if(chatRoom.Message == "no rooms found") {
+            if (chatRoom.Message == "no rooms found") {
                 // console.log("chatRoom doesn't exist");
                 setIsNew(true)
             } else {
@@ -104,15 +104,20 @@ function ProfilePage() {
     return (
         <>
             {isLoaded && (<div className="prof-div">
-                {profUser && (<div className="user-info">
-                    <h1>Profile for {profUser && profUser?.firstName}</h1>
-                    <h2>Bio: {profUser && profUser?.bio}</h2>
-                    {/* <h3>{profUser && profUser?.bio}</h3> */}
-                </div>)}
-                {rRoom && (<div className={cName}>
-                    <PrivateChat rId={rRoom.id} />
-                </div>)}
-                {isNew ? (<button onClick={handleStart}>Start Conversation</button>) : ""}
+                <div className="prof-all">
+                    {/* <div>
+                    <button>Back to Group</button>
+                </div> */}
+                    {profUser && (<div className="user-info">
+                        <h1 className="prof-title">Profile for {profUser && profUser?.firstName}</h1>
+                        <h2>Bio: {profUser && profUser?.bio}</h2>
+                        {/* <h3>{profUser && profUser?.bio}</h3> */}
+                    </div>)}
+                    {rRoom && (<div className={cName}>
+                        <PrivateChat rId={rRoom.id} />
+                    </div>)}
+                    {isNew ? (<button onClick={handleStart}>Start Conversation</button>) : ""}
+                </div>
             </div>)}
         </>
     )

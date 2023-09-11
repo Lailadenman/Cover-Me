@@ -211,7 +211,7 @@ function GroupDetails() {
                                     {/* Group info drop down */}
                                     <div className='group-info-dropdown dropdown'>
                                         <button className='dropdown-button' onClick={openMenu}>
-                                            Group info <i class="fa-solid fa-caret-down"></i>
+                                            Group info {showMenu ? <i class="fa-solid fa-caret-up"></i> : <i class="fa-solid fa-caret-down"></i>}
                                         </button>
                                         <div className={ulClassName} ref={ulRef}>
                                             <h1 className='title group-title'>About This Group</h1>
@@ -221,7 +221,7 @@ function GroupDetails() {
                                     </div>
                                     {isMember && (<div className='chat-dropdown dropdown'>
                                         <button className='dropdown-button' onClick={openChatMenu}>
-                                            Messages <i class="fa-solid fa-caret-down"></i>
+                                            Messages {showChatMenu ? "" : <i class="fa-solid fa-caret-down"></i>}
                                         </button>
                                         <div className={chatClassName} ref={ulRef}>
                                             <Chat gId={group.id} cName={isMember ? "chat-area" : "hidden"} close={closeChatMenu} />
@@ -232,28 +232,30 @@ function GroupDetails() {
                                     {/* members drop down */}
                                     <div className='member-list-dropdown dropdown'>
                                         <button className='dropdown-button' onClick={openMemberMenu}>
-                                            Members <i class="fa-solid fa-caret-down"></i>
+                                            Members {showMemberMenu ? <i class="fa-solid fa-caret-up"></i> : <i class="fa-solid fa-caret-down"></i>}
                                         </button>
                                         <div id='members' className={memberClassName} ref={ulRef}>
-                                            <h1 className='title'>List of Members</h1>
-                                            {members && membersArr.map((member) => {
-                                                return (
-                                                    <div id='member-link-div'>
-                                                        <h4 className='member-list-link'><NavLink exact to={`/profile/${member?.user?.id}`} id="member-link">{member?.user?.firstName} {member?.user?.lastName}</NavLink></h4>
-                                                    </div>
-                                                )
-                                            })}
+                                            <h1 className='title member-title'>List of Members</h1>
+                                            <div className='member-list'>
+                                                {members && membersArr.map((member) => {
+                                                    return (
+                                                        <div id='member-link-div'>
+                                                            <h4 className='member-list-link'><NavLink exact to={`/profile/${member?.user?.id}`} id="member-link">{member?.user?.firstName} {member?.user?.lastName}</NavLink></h4>
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
                                         </div>
                                     </div>
 
                                     {/* requests drop down */}
                                     {isOwner && (<div className='requests-dropdown dropdown'>
                                         <button className='dropdown-button' onClick={openRequestMenu}>
-                                            Requests <i class="fa-solid fa-caret-down"></i>
+                                            Requests {showRequestMenu ? <i class="fa-solid fa-caret-up"></i> : <i class="fa-solid fa-caret-down"></i>}
                                         </button>
                                         <div className={requestClassName} ref={ulRef}>
                                             <h3 className='title request-title'>List of Requests</h3>
-                                            {requests && requestsArr.map((request) => {
+                                            {requests && requestsArr.length ? requestsArr.map((request) => {
                                                 return (
                                                     <div>
                                                         <h4 className='request-list-link'>{request?.user?.firstName} {request?.user?.lastName}</h4>
@@ -269,7 +271,7 @@ function GroupDetails() {
                                                         />
                                                     </div>
                                                 )
-                                            })}
+                                            }) : <p className='no-requests'>No Request!</p>}
                                         </div>
                                     </div>)}
                                 </div>

@@ -53,32 +53,34 @@ function EventDetails() {
         <button className="back-button" onClick={handleBack}>Back to your group</button>
         {isLoaded && event && (
             <div className="event-details">
-                <h1>Event Details</h1>
-                <div className="event-info">
-                    <h2>Poster: {event?.owner?.firstName} {event?.owner?.lastName}</h2>
-                    <h3>Start Time: {`${startDate} ${start}`}</h3>
-                    <h3>End Time: {`${endDate} ${end}`}</h3>
-                    <h3>Notes: {event?.description}</h3>
-                    <h3>Covered: {event?.isCovered ? "Yes" : "No"}</h3>
-                    {event?.isCovered && (<h3>Covered By: {event?.coveredBy.firstName} {event?.coveredBy.lastName}</h3>)}
-                </div>
-                <div className={event.owner_id === user ? "event-buttons" : "hidden"}>
-                    <OpenModalButton
-                        buttonText={"Edit Event"}
-                        // onItemClick={onClick}
-                        modalComponent={<EditEventForm eId={eId} gId={gId} eDescription={event?.description} eStart_date={event?.start_date} eEnd_date={event?.end_date} />}
-                    />
-                    <OpenModalButton
-                        buttonText={"Delete Event"}
-                        // onItemClick={onClick}
-                        modalComponent={<DeleteEventModal id={event?.id} gId={gId} />}
-                    />
-                </div>
-                <div className={event.owner_id === user ? "hidden" : "cover-button"}>
-                    <OpenModalButton
-                        buttonText={"Cover Shift"}
-                        modalComponent={<CoverShiftModal startDate={startDate} endDate={endDate} startTime={start} endTime={end} />}
-                    />
+                <div className="event-all">
+                    <h1 className="event-title-h1">Event Details</h1>
+                    <div className="event-info">
+                        <h2>Poster: {event?.owner?.firstName} {event?.owner?.lastName}</h2>
+                        <h3>Start Time: {`${startDate} ${start}`}</h3>
+                        <h3>End Time: {`${endDate} ${end}`}</h3>
+                        <h3>Notes: {event?.description}</h3>
+                        <h3>Covered: {event?.isCovered ? "Yes" : "No"}</h3>
+                        {event?.isCovered && (<h3>Covered By: {event?.coveredBy.firstName} {event?.coveredBy.lastName}</h3>)}
+                    </div>
+                    <div className={event.owner_id === user ? "event-buttons" : "hidden"}>
+                        <OpenModalButton
+                            buttonText={"Edit Event"}
+                            // onItemClick={onClick}
+                            modalComponent={<EditEventForm eId={eId} gId={gId} eDescription={event?.description} eStart_date={event?.start_date} eEnd_date={event?.end_date} />}
+                        />
+                        <OpenModalButton
+                            buttonText={"Delete Event"}
+                            // onItemClick={onClick}
+                            modalComponent={<DeleteEventModal id={event?.id} gId={gId} />}
+                        />
+                    </div>
+                    <div className={event.owner_id === user ? "hidden" : "cover-button"}>
+                        <OpenModalButton
+                            buttonText={"Cover Shift"}
+                            modalComponent={<CoverShiftModal startDate={startDate} endDate={endDate} startTime={start} endTime={end} />}
+                        />
+                    </div>
                 </div>
             </div>
         )}
