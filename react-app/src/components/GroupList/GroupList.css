@@ -3,7 +3,8 @@
     flex-direction: column;
     align-items: center;
     margin: 0;
-    height: calc(100vh - 124px);
+    min-height: 100vh;
+    /* height: calc(100vh - 124px); */
     /* height: 100vh; */
     /* width: 100%; */
     /* height: auto 0; */
