@@ -14,6 +14,7 @@ import JoinGroupModal from '../JoinGroupModal';
 import Chat from '../Chat';
 import "./GroupDetails.css"
 import { joinRequest } from "../../store/group";
+import NonMember from '../NonMember';
 
 function GroupDetails() {
     const today = new Date()
@@ -32,7 +33,7 @@ function GroupDetails() {
         dispatch(getGroupDetails(id))
         dispatch(getEvents(id))
         setIsLoaded(true)
-    }, [dispatch])
+    }, [dispatch, getGroupDetails])
 
     const sessionUser = useSelector(state => state?.session?.user)
     const user = useSelector(state => state?.session?.user?.id)
@@ -199,7 +200,7 @@ function GroupDetails() {
 
     return (
         <div className='group-details-page'>
-            <div className='all'>
+            <div className={'all'}>
                 {/* <div className='group-header' style={{backgroundImage: `url(${banner})`}}><h1>{isLoaded && group && (group?.name)}</h1></div> */}
                 <h1 className='details-header'>{isLoaded && group && (group?.name)}</h1>
                 {isMember ? (<div className='group-details'>
@@ -311,13 +312,7 @@ function GroupDetails() {
                             </div>
                         </>
                     )}
-                </div>) : (<div>
-                    <h2>Owner: {group?.owner}</h2>
-                    <h2>{group?.description}</h2>
-                    {isRequested ? (<p>Your request to join has already been send</p>) : (<div id='joinButton' className={!isMember ? "" : "hidden"}>
-                        <button onClick={onJoin}>Join</button>
-                    </div>)}
-                </div>)}
+                </div>) : (<NonMember group={group} isRequested={isRequested} isMember={isMember} onJoin={onJoin}/>)}
             </div>
         </div>
     )
