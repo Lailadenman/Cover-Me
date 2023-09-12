@@ -15,9 +15,9 @@ function RequestModal({ id, gId, uId, action }) {
 
             dispatch(getGroupDetails(gId))
 
-            history.push(`/groups/${gId}`)
-
             closeModal()
+
+            history.push(`/groups/${gId}`)
         } else {
             dispatch(deleteRequest(id, gId))
 
