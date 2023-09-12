@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 // import { useSelector } from 'react-redux';
-import { getGroupDetails } from '../../store/group';
+import { acceptRequest, deleteRequest, getGroupDetails } from '../../store/group';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
 import Calendar from '../Calendar';
@@ -33,7 +33,7 @@ function GroupDetails() {
         dispatch(getGroupDetails(id))
         dispatch(getEvents(id))
         setIsLoaded(true)
-    }, [dispatch, getGroupDetails])
+    }, [dispatch, acceptRequest, deleteRequest])
 
     const sessionUser = useSelector(state => state?.session?.user)
     const user = useSelector(state => state?.session?.user?.id)
