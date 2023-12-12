@@ -51,22 +51,26 @@ function GroupDetails() {
 
     // // console.log(group && group?.name);
 
+    console.log("today", month, year);
+
     const handlePastMonth = () => {
         if (month === 0) {
             setYear(year - 1)
-            setMonth(12)
+            setMonth(11)
         } else {
             setMonth(month - 1)
         }
+        console.log("past", month, year);
     }
 
     const handleNextMonth = () => {
-        if (month === 12) {
+        if (month === 11) {
             setYear(year + 1)
             setMonth(0)
         } else {
             setMonth(month + 1)
         }
+        console.log("next", month, year);
     }
 
     const onClick = () => {
